@@ -2301,10 +2301,14 @@
           <label for="co-notes">Notes (facultatif)</label>
           <textarea id="co-notes" placeholder="Préférences, instructions..." rows="2"></textarea>
         </div>
-        <button type="submit" class="cart-checkout-btn" style="margin-top:8px;">
+        <button type="submit" class="cart-checkout-btn" id="checkoutSubmitBtn" style="margin-top:8px;">
           Confirmer ma commande
         </button>
-        <p style="font-size:11px;color:var(--text-soft);text-align:center;margin-top:14px;line-height:1.5;">
+        <a id="waContinueLink" href="#" target="_blank" rel="noopener" class="cart-checkout-btn" style="margin-top:8px;display:none;background:#25D366;color:white;text-decoration:none;align-items:center;justify-content:center;gap:10px;">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span id="waContinueLabel">Continuer sur WhatsApp</span>
+        </a>
+        <p id="checkoutFooterText" style="font-size:11px;color:var(--text-soft);text-align:center;margin-top:14px;line-height:1.5;">
           Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.
         </p>
       </form>
@@ -3018,31 +3022,49 @@
     lines.push('', 'Merci de me confirmer la commande et m\'envoyer les modalités de paiement Mobile Money.');
 
     const text = encodeURIComponent(lines.join('\n'));
+    const waUrl = 'https://wa.me/2250777362923?text=' + text;
 
-    // ───── 3. État succès visuel ─────
+    // ───── 3. État succès : on transforme le submit en confirmation + on révèle un VRAI lien WhatsApp ─────
+    //         (le lien <a> est cliqué par l'utilisateur → contourne le popup blocker iOS Safari)
     submitBtn.style.opacity = '1';
     submitBtn.style.background = '#16a34a';
     submitBtn.style.color = 'white';
+    submitBtn.style.cursor = 'default';
     submitBtn.innerHTML = orderId
       ? `✓ Enregistrée · ${orderId}`
       : '✓ Commande prête';
+    submitBtn.style.display = 'none';
 
-    // ───── 4. Ouverture WhatsApp + reset ─────
-    setTimeout(() => {
-      window.open('https://wa.me/2250777362923?text=' + text, '_blank');
+    const waLink = document.getElementById('waContinueLink');
+    const waLabel = document.getElementById('waContinueLabel');
+    const footerText = document.getElementById('checkoutFooterText');
+    waLink.href = waUrl;
+    waLabel.textContent = orderId
+      ? `Continuer sur WhatsApp · ${orderId}`
+      : 'Continuer sur WhatsApp';
+    waLink.style.display = 'flex';
+    if (footerText) footerText.innerHTML = '✓ Commande enregistrée. Cliquez ci-dessus pour envoyer le récapitulatif sur WhatsApp.';
+
+    // ───── 4. Reset uniquement quand l'utilisateur clique le lien WhatsApp ─────
+    waLink.onclick = () => {
       setTimeout(() => {
         cart = [];
         saveCart();
         hideCheckout();
         closeCart();
         checkoutForm.reset();
+        // Réinitialise les boutons pour la prochaine commande
         submitBtn.disabled = false;
+        submitBtn.style.display = '';
         submitBtn.innerHTML = originalHTML;
         submitBtn.style.background = originalBg;
         submitBtn.style.color = '';
-        submitBtn.style.opacity = '';
+        submitBtn.style.cursor = '';
+        waLink.style.display = 'none';
+        if (footerText) footerText.innerHTML = 'Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.';
       }, 1500);
-    }, 1200);
+    };
+
   });
 
   // ESC to close
