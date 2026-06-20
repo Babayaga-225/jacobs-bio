@@ -1,0 +1,3056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacob's Bio Cosmétiques — Sublimez vos formes, affirmez votre confiance</title>
+<meta name="description" content="Marque ivoirienne de cosmétiques 100% naturels, née à Bouaké. Suppositoires Bobaraba, sirops, crèmes et savons inspirés du savoir-faire local.">
+<meta property="og:title" content="Jacob's Bio Cosmétiques">
+<meta property="og:description" content="Sublimez vos formes, affirmez votre confiance. Cosmétiques 100% naturels, Made in Bouaké.">
+<meta property="og:image" content="assets/logo_embleme_blanc.png">
+<link rel="icon" type="image/png" href="assets/logo_embleme_blanc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Or riche, calibré sur la bannière premium */
+    --gold: #D4A744;
+    --gold-light: #ECC764;
+    --gold-bright: #F2D680;
+    --gold-deep: #A68035;
+    --gold-bronze: #8B6A2A;
+    --gold-soft: rgba(212, 167, 68, 0.16);
+    --gold-gradient: linear-gradient(135deg, #ECC764 0%, #D4A744 50%, #A68035 100%);
+    /* Noir chaud (warm black, ton bannière) */
+    --black: #0A0805;
+    --black-warm: #14100A;
+    --black-elev: #1C160E;
+    /* Cream légèrement plus chaud pour harmoniser */
+    --cream: #FAF6EC;
+    --cream-warm: #F4EFE3;
+    --ivory: #FFFCF4;
+    --text: #1A1410;
+    --text-soft: #4A413A;
+    --border: rgba(10, 8, 5, 0.09);
+    --border-dark: rgba(245, 242, 232, 0.10);
+    --whatsapp: #25D366;
+    --telegram: #229ED9;
+    --instagram: #E1306C;
+    --tiktok: #000000;
+    --facebook: #1877F2;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html { overflow-x: hidden; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.55;
+    font-weight: 400;
+    overflow-x: hidden;
+    max-width: 100vw;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .grain {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 200;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  /* ─────────── NAV ─────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 50px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(11, 11, 11, 0.62);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid rgba(201, 162, 75, 0.10);
+    transition: background 0.5s var(--ease), padding 0.4s var(--ease), border-color 0.4s var(--ease);
+  }
+  nav.scrolled {
+    background: rgba(11, 11, 11, 0.86);
+    padding: 14px 50px;
+    border-bottom-color: rgba(201, 162, 75, 0.22);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; }
+  .nav-logo img { height: 44px; width: auto; transition: height 0.4s var(--ease); }
+  nav.scrolled .nav-logo img { height: 36px; }
+  .nav-logo-text {
+    font-family: var(--display);
+    font-size: 17px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cream);
+  }
+  .nav-logo-text em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    margin-left: 4px;
+  }
+  .nav-links { display: flex; gap: 38px; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 242, 237, 0.7);
+    transition: color 0.3s var(--ease);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -6px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.4s var(--ease);
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px;
+    background: var(--whatsapp);
+    color: white !important;
+    font-weight: 500;
+    letter-spacing: 0.1em !important;
+    border-radius: 999px;
+    transition: all 0.3s var(--ease);
+  }
+  .nav-cta:hover { background: #1ebd5a; transform: translateY(-1px); }
+  .nav-cta::after { display: none !important; }
+  .nav-cta svg { width: 16px; height: 16px; fill: currentColor; }
+
+  .burger { display: none; cursor: pointer; padding: 10px; }
+  .burger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--cream); margin: 5px 0;
+    transition: all 0.3s var(--ease);
+  }
+
+  /* ─────────── HERO (commerce style — gradient title + 4 categories) ─────────── */
+  .hero {
+    position: relative;
+    width: 100%;
+    padding: 120px 24px 80px;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1380px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+  .hero-card {
+    background:
+      linear-gradient(135deg, rgba(212, 167, 68, 0.08) 0%, rgba(236, 199, 100, 0.04) 100%),
+      var(--cream-warm);
+    border-radius: 28px;
+    padding: 110px 40px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 167, 68, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 30px 80px -40px rgba(212, 167, 68, 0.18);
+  }
+  .hero-card::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(236, 199, 100, 0.18) 0%, transparent 45%),
+      radial-gradient(circle at 80% 80%, rgba(212, 167, 68, 0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-bottom: 36px; position: relative; z-index: 2;
+    justify-content: center;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(40px, 6.2vw, 96px); line-height: 1;
+    letter-spacing: -0.025em; margin: 0 auto 32px;
+    max-width: 14ch; position: relative; z-index: 2;
+  }
+  .hero-title .grad {
+    background: linear-gradient(135deg, #ECC764 0%, #D4A744 45%, #8B6A2A 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-style: italic; font-weight: 500;
+    display: inline-block;
+  }
+  .hero-title .solid { color: var(--text); display: inline-block; }
+  .hero-sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--text-soft);
+    max-width: 52ch; margin: 0 auto 44px;
+    line-height: 1.65; position: relative; z-index: 2;
+  }
+  .hero-cta-row {
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+    position: relative; z-index: 2;
+  }
+
+  /* Grid des 4 catégories sous la card hero */
+  .hero-cats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .hero-cat {
+    position: relative;
+    background:
+      linear-gradient(160deg, rgba(255, 252, 244, 0.95) 0%, rgba(244, 239, 227, 0.85) 100%);
+    border: 1px solid rgba(11, 8, 5, 0.06);
+    border-radius: 28px;
+    padding: 28px 22px 0;
+    min-height: 320px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    text-decoration: none;
+    display: block;
+  }
+  .hero-cat:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 24px 50px -20px rgba(212, 167, 68, 0.30),
+      0 0 0 1px rgba(212, 167, 68, 0.30);
+  }
+  .hero-cat::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 65%, rgba(212, 167, 68, 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-cat-title {
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(22px, 1.8vw, 30px); line-height: 1.1;
+    color: var(--gold-deep);
+    text-align: center; letter-spacing: -0.015em;
+    position: relative; z-index: 2;
+  }
+  .hero-cat-title em {
+    font-style: italic; color: var(--gold);
+  }
+  .hero-cat-img {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 78px 30px 70px;
+    z-index: 1;
+  }
+  .hero-cat-img img {
+    max-width: 80%; max-height: 76%;
+    width: auto; height: auto;
+    object-fit: contain;
+    opacity: 0.95;
+    transition: transform 0.6s var(--ease);
+    filter: drop-shadow(0 14px 24px rgba(11, 8, 5, 0.22));
+  }
+  .hero-cat:hover .hero-cat-img img {
+    transform: scale(1.10) rotate(-2deg);
+  }
+  .hero-cat-corner {
+    position: absolute; bottom: 0; right: 0;
+    width: 78px; height: 78px;
+    background: var(--cream);
+    border-top-left-radius: 24px;
+    border-top: 1px solid rgba(11, 8, 5, 0.06);
+    border-left: 1px solid rgba(11, 8, 5, 0.06);
+    display: grid; place-items: center;
+    z-index: 3;
+  }
+  .hero-cat-corner-btn {
+    width: 46px; height: 46px;
+    border-radius: 999px;
+    background: var(--cream-warm);
+    color: var(--text);
+    display: grid; place-items: center;
+    transition: all 0.4s var(--ease);
+    box-shadow: 0 4px 12px -4px rgba(0,0,0,0.15);
+  }
+  .hero-cat:hover .hero-cat-corner-btn {
+    background: var(--gold-gradient);
+    color: var(--black);
+    transform: scale(1.10);
+    box-shadow: 0 8px 20px -4px rgba(212, 167, 68, 0.5);
+  }
+  .hero-cat-corner-btn svg {
+    width: 20px; height: 20px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* ─────────── ANIMATIONS HERO-CATS ─────────── */
+  /* Couche 1 : entrée staggered à l'arrivée */
+  .hero-cat {
+    animation: catEnter 1.1s var(--ease) backwards;
+  }
+  .hero-cat:nth-child(1) { animation-delay: 0.2s; }
+  .hero-cat:nth-child(2) { animation-delay: 0.32s; }
+  .hero-cat:nth-child(3) { animation-delay: 0.44s; }
+  .hero-cat:nth-child(4) { animation-delay: 0.56s; }
+  @keyframes catEnter {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Couche 2 : flottement continu subtil — déphasé par card */
+  .hero-cat-img img {
+    animation: catFloat 6s ease-in-out infinite;
+  }
+  .hero-cat:nth-child(1) .hero-cat-img img { animation-delay: 0s; }
+  .hero-cat:nth-child(2) .hero-cat-img img { animation-delay: -1.5s; }
+  .hero-cat:nth-child(3) .hero-cat-img img { animation-delay: -3s; }
+  .hero-cat:nth-child(4) .hero-cat-img img { animation-delay: -4.5s; }
+  @keyframes catFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0.5deg); }
+  }
+
+  /* Couche 3 : halo doré qui pulse derrière chaque carte */
+  .hero-cat::after {
+    content: ''; position: absolute;
+    inset: 35% 15% 25% 15%;
+    background: radial-gradient(circle, rgba(212, 167, 68, 0.35) 0%, transparent 70%);
+    filter: blur(30px);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    animation: catGlow 8s ease-in-out infinite;
+  }
+  .hero-cat:nth-child(1)::after { animation-delay: 0s; }
+  .hero-cat:nth-child(2)::after { animation-delay: -2s; }
+  .hero-cat:nth-child(3)::after { animation-delay: -4s; }
+  .hero-cat:nth-child(4)::after { animation-delay: -6s; }
+  @keyframes catGlow {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  /* Couche 4 : shimmer doré qui traverse le titre */
+  .hero-cat-title {
+    background: linear-gradient(110deg,
+      var(--gold-deep) 0%,
+      var(--gold-deep) 38%,
+      var(--gold-bright) 50%,
+      var(--gold-deep) 62%,
+      var(--gold-deep) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: catShimmer 5.5s linear infinite;
+  }
+  .hero-cat:nth-child(1) .hero-cat-title { animation-delay: 0s; }
+  .hero-cat:nth-child(2) .hero-cat-title { animation-delay: -1.4s; }
+  .hero-cat:nth-child(3) .hero-cat-title { animation-delay: -2.8s; }
+  .hero-cat:nth-child(4) .hero-cat-title { animation-delay: -4.2s; }
+  @keyframes catShimmer {
+    0% { background-position: 200% 50%; }
+    100% { background-position: -100% 50%; }
+  }
+
+  /* Couche 5 : ring animé sur le corner button (idle) */
+  .hero-cat-corner-btn::before {
+    content: ''; position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    border: 1.5px solid var(--gold);
+    opacity: 0;
+    animation: catRingPulse 3s ease-out infinite;
+  }
+  .hero-cat:nth-child(1) .hero-cat-corner-btn::before { animation-delay: 0s; }
+  .hero-cat:nth-child(2) .hero-cat-corner-btn::before { animation-delay: 0.75s; }
+  .hero-cat:nth-child(3) .hero-cat-corner-btn::before { animation-delay: 1.5s; }
+  .hero-cat:nth-child(4) .hero-cat-corner-btn::before { animation-delay: 2.25s; }
+  @keyframes catRingPulse {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .hero-cat-corner-btn { position: relative; }
+
+  /* Hover : on stoppe le flottement, on garde la dynamique du hover */
+  .hero-cat:hover .hero-cat-img img { animation-play-state: paused; }
+  .hero-cat:hover::after { animation-play-state: paused; opacity: 0.6; }
+
+  /* Respect prefers-reduced-motion (perf + accessibilité) */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cat,
+    .hero-cat-img img,
+    .hero-cat::after,
+    .hero-cat-title,
+    .hero-cat-corner-btn::before {
+      animation: none !important;
+    }
+    .hero-cat-title {
+      color: var(--gold-deep);
+      -webkit-text-fill-color: var(--gold-deep);
+    }
+  }
+
+  /* Bandeau trust sous le hero */
+  .hero-trust {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 56px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(11, 8, 5, 0.08);
+  }
+  .hero-trust-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .hero-trust-num {
+    font-family: var(--display); font-size: 32px;
+    color: var(--gold-deep); font-weight: 500; line-height: 1;
+  }
+  .hero-trust-label {
+    font-size: 10px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--text-soft);
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 32px;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: 999px; cursor: pointer; border: 1px solid transparent;
+    transition: all 0.4s var(--ease); white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--gold-gradient); color: var(--black);
+    border-color: var(--gold-light);
+    box-shadow: inset 0 1px 0 rgba(255, 235, 180, 0.4);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    border-color: var(--gold-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -10px rgba(212, 167, 68, 0.6), inset 0 1px 0 rgba(255, 235, 180, 0.6);
+  }
+  .btn-whatsapp { background: var(--whatsapp); color: white; border-color: var(--whatsapp); }
+  .btn-whatsapp:hover {
+    background: #1ebd5a; border-color: #1ebd5a;
+    transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(37, 211, 102, 0.5);
+  }
+  .btn-ghost { background: transparent; color: var(--cream); border-color: rgba(245, 242, 237, 0.3); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .btn .arrow { width: 18px; height: 1px; background: currentColor; position: relative; transition: width 0.4s var(--ease); }
+  .btn .arrow::after {
+    content: ''; position: absolute; right: 0; top: -3px;
+    width: 7px; height: 7px;
+    border-right: 1px solid currentColor; border-top: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+  .btn:hover .arrow { width: 28px; }
+  .btn svg.btn-icon { width: 18px; height: 18px; fill: currentColor; }
+
+  .hero-bottom {
+    position: absolute; bottom: 40px; left: 0; right: 0; z-index: 2;
+    padding: 0 50px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    color: rgba(245, 242, 237, 0.55);
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  .hero-meta { display: flex; gap: 30px; }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+  .hero-scroll {
+    display: flex; align-items: center; gap: 10px;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .hero-scroll-line {
+    width: 1px; height: 40px; background: var(--gold);
+    animation: scrollPulse 2.5s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* ─────────── TÉMOIGNAGES (cartes empilées) ─────────── */
+  .testimonials {
+    background: var(--cream-warm);
+    padding: 160px 50px;
+    overflow: hidden;
+  }
+  .testimonials-head { text-align: center; margin-bottom: 90px; }
+  .testimonials-head .eyebrow { justify-content: center; }
+  .testimonials-head .eyebrow::before { display: none; }
+  .testimonials-head h2 {
+    margin: 0 auto;
+    max-width: 22ch;
+  }
+  .testimonials-lead {
+    font-size: 17px; color: var(--text-soft);
+    margin: 28px auto 0; max-width: 56ch; line-height: 1.7;
+  }
+  .testi-stage {
+    position: relative;
+    width: 100%; max-width: 460px;
+    height: 380px;
+    margin: 0 auto;
+    user-select: none;
+  }
+  .testi-card {
+    position: absolute; inset: 0;
+    background: var(--ivory);
+    border-radius: 22px;
+    padding: 38px 34px 34px;
+    box-shadow:
+      0 24px 60px -20px rgba(11, 8, 5, 0.18),
+      0 0 0 1px rgba(11, 8, 5, 0.04),
+      inset 0 1px 0 rgba(236, 199, 100, 0.30);
+    display: flex; flex-direction: column;
+    align-items: center; gap: 18px;
+    cursor: grab;
+    will-change: transform, opacity;
+    transition:
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .testi-card.dragging { cursor: grabbing; transition: none; }
+  .testi-card.swipe-out-right { transform: translateX(140%) rotate(20deg) !important; opacity: 0 !important; }
+  .testi-card.swipe-out-left { transform: translateX(-140%) rotate(-20deg) !important; opacity: 0 !important; }
+  .testi-card[data-pos="0"] { z-index: 3; transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+  .testi-card[data-pos="1"] { z-index: 2; transform: translate(0, 14px) rotate(-2.5deg) scale(0.96); opacity: 0.7; pointer-events: none; }
+  .testi-card[data-pos="2"] { z-index: 1; transform: translate(0, 28px) rotate(-5deg) scale(0.92); opacity: 0.35; pointer-events: none; }
+  .testi-card[data-pos="hidden"] { z-index: 0; opacity: 0; pointer-events: none; transform: translate(0, 36px) rotate(-7deg) scale(0.88); }
+
+  .testi-arrows {
+    position: absolute; inset: 14px 14px auto 14px;
+    display: flex; justify-content: space-between;
+    pointer-events: none;
+  }
+  .testi-arrow {
+    background: rgba(212, 167, 68, 0.10);
+    border: 1px solid rgba(212, 167, 68, 0.20);
+    color: var(--gold-deep);
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border-radius: 999px; cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s var(--ease);
+    font-size: 16px; line-height: 1;
+  }
+  .testi-arrow:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: scale(1.08);
+  }
+
+  .testi-avatar {
+    width: 68px; height: 68px;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    background: var(--gold-gradient);
+    color: var(--black);
+    font-family: var(--display);
+    font-size: 24px; font-weight: 600;
+    letter-spacing: 0.04em;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 235, 180, 0.5),
+      0 6px 16px -6px rgba(212, 167, 68, 0.45);
+    margin-top: 8px;
+  }
+  .testi-name {
+    font-family: var(--display);
+    font-size: 22px; font-weight: 500;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+  .testi-meta {
+    font-size: 10px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-top: -8px;
+  }
+  .testi-stars {
+    display: flex; gap: 3px;
+    color: var(--gold); font-size: 14px;
+    margin-top: -4px;
+  }
+  .testi-text {
+    text-align: center; font-size: 15px;
+    line-height: 1.6; color: var(--text-soft);
+    max-width: 36ch;
+  }
+  .testi-text::before { content: '\201C'; color: var(--gold); font-size: 24px; margin-right: 2px; font-family: var(--display); }
+  .testi-text::after { content: '\201D'; color: var(--gold); font-size: 24px; margin-left: 2px; font-family: var(--display); }
+  .testi-dots {
+    position: absolute; left: 0; right: 0;
+    bottom: -40px;
+    display: flex; justify-content: center; gap: 10px;
+  }
+  .testi-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: rgba(11, 8, 5, 0.18);
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+  }
+  .testi-dot.active {
+    background: var(--gold);
+    width: 28px;
+    box-shadow: 0 0 0 4px rgba(212, 167, 68, 0.16);
+  }
+  @media (max-width: 640px) {
+    .testimonials { padding: 110px 24px; overflow: hidden; }
+    .testi-stage { height: 420px; max-width: 100%; }
+    .testi-card { padding: 32px 26px 28px; }
+    .testi-card[data-pos="1"] { transform: translate(0, 12px) rotate(-1.5deg) scale(0.96); }
+    .testi-card[data-pos="2"] { transform: translate(0, 24px) rotate(-3deg) scale(0.92); }
+    .testi-text { font-size: 14px; }
+    .contact-channel-value { font-size: 19px; }
+  }
+
+  /* ─────────── MARQUEE ─────────── */
+  .marquee {
+    overflow: hidden; background: var(--black);
+    color: var(--gold-light); padding: 22px 0;
+    border-top: 1px solid rgba(236, 199, 100, 0.25);
+    border-bottom: 1px solid rgba(236, 199, 100, 0.25);
+  }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 38s linear infinite;
+    white-space: nowrap;
+    font-family: var(--display);
+    font-size: 32px; font-style: italic;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 60px; }
+  .marquee-track span::after {
+    content: ''; display: inline-block;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─────────── SECTIONS BASE ─────────── */
+  section { position: relative; padding: 140px 50px; }
+  .container { max-width: 1400px; margin: 0 auto; }
+  .section-head { margin-bottom: 80px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--gold-deep); margin-bottom: 24px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  h2 {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(40px, 5.4vw, 86px); line-height: 0.95;
+    letter-spacing: -0.022em; color: var(--text); max-width: 18ch;
+  }
+  h2 em { font-style: italic; color: var(--gold-deep); font-weight: 500; }
+  .lead {
+    font-size: 17px; line-height: 1.7;
+    color: var(--text-soft); max-width: 56ch; margin-top: 28px;
+  }
+
+  /* ─────────── MANIFESTO ─────────── */
+  .manifesto { padding: 180px 50px; background: var(--cream-warm); text-align: center; }
+  .manifesto-text {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(28px, 3.6vw, 52px); line-height: 1.25;
+    letter-spacing: -0.012em; color: var(--text);
+    max-width: 22ch; margin: 0 auto;
+  }
+  .manifesto-text em { font-style: italic; color: var(--gold-deep); }
+  .manifesto-signature {
+    margin-top: 60px;
+    font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* ─────────── STORY ─────────── */
+  .story { background: var(--cream); overflow: hidden; }
+  .story-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 100px; align-items: center;
+  }
+  .story-visual {
+    position: relative; aspect-ratio: 4 / 5;
+    background: var(--cream-warm); border-radius: 8px; overflow: hidden;
+    box-shadow:
+      0 30px 70px -25px rgba(11, 8, 5, 0.30),
+      0 0 0 1px rgba(212, 167, 68, 0.18);
+  }
+  .story-visual img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center 28%;
+    transition: transform 1.4s var(--ease);
+  }
+  .story-visual:hover img { transform: scale(1.04); }
+  .story-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(11, 8, 5, 0.55) 100%);
+    pointer-events: none;
+  }
+  .story-visual-tag {
+    position: absolute; bottom: 28px; left: 28px; z-index: 2;
+    font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--gold-bright);
+    display: flex; align-items: center; gap: 14px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  }
+  .story-visual-tag::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold-bright); }
+  .story-content p { font-size: 17px; line-height: 1.8; color: var(--text-soft); margin-bottom: 22px; max-width: 52ch; }
+  .story-content p strong { color: var(--text); font-weight: 500; }
+  .story-quote {
+    font-family: var(--display); font-size: 26px; font-style: italic;
+    line-height: 1.4; color: var(--text);
+    padding-left: 28px; border-left: 2px solid var(--gold);
+    margin: 40px 0;
+  }
+  .story-signature {
+    font-family: var(--display); font-size: 28px;
+    font-style: italic; color: var(--gold-deep); margin-top: 30px;
+  }
+
+  /* ─────────── COLLECTIONS ─────────── */
+  .collections { background: var(--black); color: var(--cream); }
+  .collections h2 { color: var(--cream); }
+  .collections .eyebrow { color: var(--gold); }
+  .collections-grid {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    gap: 16px; margin-top: 80px;
+  }
+  .col-card {
+    position: relative; overflow: hidden;
+    background: var(--black-elev); cursor: pointer;
+    transition: transform 0.5s var(--ease);
+  }
+  .col-card:hover { transform: translateY(-4px); }
+  .col-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1s var(--ease);
+    filter: brightness(0.85) saturate(0.9);
+  }
+  .col-card:hover img { transform: scale(1.06); filter: brightness(0.95) saturate(1); }
+  .col-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(11,11,11,0.92) 100%); z-index: 1;
+  }
+  .col-card-body { position: absolute; bottom: 30px; left: 30px; right: 30px; z-index: 2; }
+  .col-card-num { font-family: var(--display); font-size: 13px; font-style: italic; color: var(--gold); margin-bottom: 6px; }
+  .col-card-title {
+    font-family: var(--display); font-size: 28px; font-weight: 500;
+    letter-spacing: -0.015em; color: var(--cream); margin-bottom: 4px;
+  }
+  .col-card-count { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(245,242,237,0.5); }
+  .col-1 { grid-column: span 7; aspect-ratio: 16/10; }
+  .col-2 { grid-column: span 5; aspect-ratio: 16/10; }
+  .col-3 { grid-column: span 4; aspect-ratio: 4/5; }
+  .col-4 { grid-column: span 4; aspect-ratio: 4/5; }
+  .col-5 { grid-column: span 4; aspect-ratio: 4/5; }
+  .col-6 { grid-column: span 12; aspect-ratio: 16/5; }
+
+  /* ─────────── PRODUITS ─────────── */
+  .products { background: var(--cream); }
+  .products-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 60px; margin-bottom: 70px; }
+  .products-head .lead { margin-top: 0; max-width: 36ch; }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+  .prod-card {
+    background: var(--ivory); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    transition: all 0.5s var(--ease); cursor: pointer; position: relative;
+  }
+  .prod-card:hover {
+    transform: translateY(-6px); border-color: var(--gold);
+    box-shadow: 0 30px 60px -20px rgba(11,11,11,0.18);
+  }
+  .prod-img {
+    aspect-ratio: 1; overflow: hidden;
+    background: var(--cream-warm); position: relative;
+  }
+  .prod-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .prod-card:hover .prod-img img { transform: scale(1.08); }
+  .prod-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--gold); color: var(--black);
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 999px; z-index: 1; font-weight: 500;
+  }
+  .prod-body { padding: 24px 22px 28px; }
+  .prod-cat { font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 8px; }
+  .prod-title {
+    font-family: var(--display); font-size: 21px; font-weight: 500;
+    letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin-bottom: 14px;
+  }
+  .prod-price { font-family: var(--display); font-size: 19px; font-style: italic; color: var(--gold-deep); }
+  .prod-price small {
+    font-style: normal; font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-soft); margin-left: 4px;
+  }
+  .products-cta-row { margin-top: 60px; text-align: center; }
+
+  /* ─────────── PROMESSE ─────────── */
+  .promesse { background: var(--cream-warm); }
+  .promesse-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; margin-top: 80px; }
+  .promesse-num {
+    font-family: var(--display); font-size: 60px; font-style: italic; font-weight: 500;
+    color: var(--gold); line-height: 1; margin-bottom: 24px;
+  }
+  .promesse-title { font-family: var(--display); font-size: 26px; font-weight: 500; letter-spacing: -0.012em; color: var(--text); margin-bottom: 14px; }
+  .promesse-desc { font-size: 15px; line-height: 1.7; color: var(--text-soft); }
+
+  /* ─────────── CTA HUGE ─────────── */
+  .cta-huge {
+    position: relative; padding: 200px 50px;
+    background: var(--black); color: var(--cream);
+    overflow: hidden; text-align: center;
+  }
+  .cta-huge::before {
+    content: ''; position: absolute; top: -50%; left: 50%;
+    width: 1200px; height: 1200px;
+    background: radial-gradient(circle, rgba(236, 199, 100, 0.32) 0%, transparent 60%);
+    transform: translateX(-50%); filter: blur(40px); pointer-events: none;
+  }
+  .cta-huge .eyebrow { color: var(--gold); justify-content: center; }
+  .cta-huge .eyebrow::before { background: var(--gold); }
+  .cta-huge-title {
+    font-family: var(--display); font-size: clamp(48px, 8vw, 130px); font-weight: 400;
+    line-height: 0.95; letter-spacing: -0.025em; color: var(--cream);
+    margin: 0 auto 18px; max-width: 18ch; position: relative;
+  }
+  .cta-huge-title em { font-style: italic; color: var(--gold); font-weight: 500; }
+  .cta-huge-sub {
+    font-family: var(--display); font-size: clamp(20px, 2.4vw, 28px);
+    font-style: italic; color: rgba(245,242,237,0.7); margin-bottom: 60px; position: relative;
+  }
+  .cta-huge-row {
+    position: relative;
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+  }
+  .cta-huge-cta {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 22px 44px; background: var(--whatsapp); color: white;
+    font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase;
+    font-weight: 500; border-radius: 999px;
+    transition: all 0.4s var(--ease);
+  }
+  .cta-huge-cta:hover {
+    background: #1ebd5a; transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 24px 50px -10px rgba(37,211,102,0.55);
+  }
+  .cta-huge-cta svg { width: 22px; height: 22px; fill: currentColor; }
+  .cta-huge-cta.alt { background: transparent; color: var(--cream); border: 1px solid rgba(245,242,237,0.3); }
+  .cta-huge-cta.alt:hover { border-color: var(--gold); color: var(--gold); background: transparent; box-shadow: none; }
+
+  /* ─────────── CONTACT ─────────── */
+  .contact { background: var(--cream); padding: 140px 50px; }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.3fr;
+    gap: 100px; align-items: start;
+  }
+  .contact-info { position: sticky; top: 120px; }
+  .contact-channels {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .contact-channel {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.3s var(--ease);
+  }
+  .contact-channel:hover { padding-left: 14px; }
+  .contact-channel-label {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-deep);
+  }
+  .contact-channel-value {
+    font-family: var(--display); font-size: 26px; font-weight: 500; color: var(--text);
+    transition: color 0.3s var(--ease);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .contact-channel:hover .contact-channel-value { color: var(--gold-deep); }
+
+  /* Social row */
+  .social-row {
+    margin-top: 50px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    color: var(--text);
+    transition: all 0.3s var(--ease);
+  }
+  .social-btn svg { width: 18px; height: 18px; }
+  .social-btn:hover { transform: translateY(-2px); }
+  .social-btn.whatsapp:hover { background: var(--whatsapp); color: white; border-color: var(--whatsapp); box-shadow: 0 12px 28px -8px rgba(37,211,102,0.4); }
+  .social-btn.telegram:hover { background: var(--telegram); color: white; border-color: var(--telegram); box-shadow: 0 12px 28px -8px rgba(34,158,217,0.4); }
+  .social-btn.instagram:hover { background: var(--instagram); color: white; border-color: var(--instagram); box-shadow: 0 12px 28px -8px rgba(225,48,108,0.4); }
+  .social-btn.tiktok:hover { background: var(--tiktok); color: white; border-color: var(--tiktok); box-shadow: 0 12px 28px -8px rgba(0,0,0,0.4); }
+  .social-btn.facebook:hover { background: var(--facebook); color: white; border-color: var(--facebook); box-shadow: 0 12px 28px -8px rgba(24,119,242,0.4); }
+  .social-btn.whatsapp svg { fill: var(--whatsapp); }
+  .social-btn.telegram svg { fill: var(--telegram); }
+  .social-btn.instagram svg { fill: var(--instagram); }
+  .social-btn.tiktok svg { fill: var(--tiktok); }
+  .social-btn.facebook svg { fill: var(--facebook); }
+  .social-btn:hover svg { fill: white; }
+
+  /* Contact form */
+  .contact-form {
+    background: var(--ivory);
+    padding: 50px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px -30px rgba(11,11,11,0.12);
+  }
+  .form-head {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-title {
+    font-family: var(--display); font-size: 28px; font-weight: 500;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .form-sub {
+    font-size: 14px; color: var(--text-soft);
+  }
+  .form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    margin-bottom: 18px;
+  }
+  .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .form-row .form-group { margin-bottom: 0; }
+  .form-group label {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 500;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    font-family: var(--sans); font-size: 15px;
+    padding: 14px 18px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    outline: none;
+    width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold); background: var(--ivory);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; font-family: var(--sans); }
+  .form-submit {
+    width: 100%; justify-content: center; margin-top: 8px;
+    padding: 18px 32px;
+  }
+  .form-note {
+    font-size: 12px; color: var(--text-soft); text-align: center;
+    margin-top: 16px;
+  }
+  .form-note svg { width: 14px; height: 14px; vertical-align: -2px; fill: var(--whatsapp); }
+
+  /* ─────────── FOOTER ─────────── */
+  footer { background: var(--black); color: rgba(245,242,237,0.7); padding: 80px 50px 40px; }
+  .foot-main {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 50px; border-bottom: 1px solid rgba(245,242,237,0.08);
+  }
+  .foot-brand img { height: 60px; margin-bottom: 22px; }
+  .foot-tag {
+    font-family: var(--display); font-size: 20px; font-style: italic;
+    color: var(--gold); max-width: 26ch; margin-bottom: 28px;
+  }
+  .foot-social {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .foot-social-btn {
+    width: 42px; height: 42px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(245,242,237,0.06);
+    border: 1px solid rgba(245,242,237,0.1);
+    border-radius: 50%;
+    color: rgba(245,242,237,0.7);
+    transition: all 0.3s var(--ease);
+  }
+  .foot-social-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .foot-social-btn:hover { transform: translateY(-3px); color: white; }
+  .foot-social-btn.whatsapp:hover { background: var(--whatsapp); border-color: var(--whatsapp); }
+  .foot-social-btn.telegram:hover { background: var(--telegram); border-color: var(--telegram); }
+  .foot-social-btn.instagram:hover { background: var(--instagram); border-color: var(--instagram); }
+  .foot-social-btn.tiktok:hover { background: var(--tiktok); border-color: var(--tiktok); }
+  .foot-social-btn.facebook:hover { background: var(--facebook); border-color: var(--facebook); }
+
+  .foot-col h4 {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px; font-weight: 500;
+  }
+  .foot-col ul { list-style: none; }
+  .foot-col li { margin-bottom: 14px; }
+  .foot-col a { font-size: 14px; color: rgba(245,242,237,0.65); transition: color 0.3s var(--ease); }
+  .foot-col a:hover { color: var(--gold); }
+  .foot-bar {
+    padding-top: 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,242,237,0.45);
+  }
+  .foot-bar .mycomm { color: var(--gold); }
+
+  /* ─────────── CART ─────────── */
+  .nav-cart {
+    position: relative;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(245,242,237,0.08);
+    border: 1px solid rgba(245,242,237,0.15);
+    color: var(--cream);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.3s var(--ease);
+  }
+  .nav-cart:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .nav-cart svg { width: 18px; height: 18px; fill: currentColor; }
+  .nav-cart .cart-count {
+    position: absolute;
+    top: -4px; right: -4px;
+    min-width: 20px; height: 20px;
+    background: var(--gold-bright);
+    color: var(--black);
+    border-radius: 999px;
+    font-size: 11px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 6px;
+    border: 2px solid var(--black);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s var(--ease);
+  }
+  .nav-cart.has-items .cart-count { opacity: 1; transform: scale(1); }
+
+  /* Product add-to-cart */
+  .prod-card { cursor: default; }
+  .prod-add {
+    width: 100%;
+    margin-top: 18px;
+    padding: 13px 16px;
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1px solid var(--black);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .prod-add:hover {
+    background: var(--gold-gradient);
+    color: var(--black);
+    border-color: var(--gold);
+    box-shadow: inset 0 1px 0 rgba(255,235,180,0.4);
+  }
+  .prod-add svg { width: 14px; height: 14px; fill: currentColor; }
+  .prod-add.added {
+    background: var(--gold-gradient);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  /* Cart drawer */
+  .cart-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,8,5,0.55);
+    z-index: 998;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 440px; max-width: 100vw;
+    background: var(--cream);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.5s var(--ease);
+    display: flex; flex-direction: column;
+    box-shadow: -30px 0 60px -10px rgba(0,0,0,0.3);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-header {
+    padding: 28px 30px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .cart-header h3 {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+  }
+  .cart-close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s var(--ease);
+  }
+  .cart-close:hover { background: var(--text); color: var(--cream); border-color: var(--text); }
+
+  .cart-body {
+    flex: 1; overflow-y: auto;
+    padding: 20px 30px;
+  }
+  .cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-soft);
+  }
+  .cart-empty .icon {
+    font-family: var(--display);
+    font-size: 60px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .cart-empty p { font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cart-item-img {
+    width: 70px; height: 70px;
+    background: var(--cream-warm);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-item-info { display: flex; flex-direction: column; justify-content: space-between; }
+  .cart-item-name {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .cart-item-cat {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+  }
+  .cart-item-controls {
+    display: inline-flex; align-items: center; gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    align-self: flex-start;
+  }
+  .cart-qty-btn {
+    width: 28px; height: 28px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 14px; line-height: 1;
+    transition: all 0.2s var(--ease);
+  }
+  .cart-qty-btn:hover { background: var(--gold); color: var(--black); }
+  .cart-qty {
+    min-width: 28px; text-align: center;
+    font-size: 13px; font-weight: 500;
+    color: var(--text);
+  }
+  .cart-item-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+  .cart-item-price {
+    font-family: var(--display);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--gold-deep);
+    white-space: nowrap;
+  }
+  .cart-item-remove {
+    background: transparent;
+    border: none;
+    color: var(--text-soft);
+    cursor: pointer;
+    font-size: 11px;
+    text-decoration: underline;
+    transition: color 0.2s var(--ease);
+  }
+  .cart-item-remove:hover { color: #c53030; }
+
+  .cart-footer {
+    padding: 22px 30px 30px;
+    border-top: 1px solid var(--border);
+    background: var(--cream-warm);
+  }
+  .cart-total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 18px;
+  }
+  .cart-total-label {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+  .cart-total-value {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--gold-deep);
+  }
+  .cart-checkout-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--gold-gradient);
+    color: var(--black);
+    border: 1px solid var(--gold-light);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255,235,180,0.4);
+    transition: all 0.3s var(--ease);
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .cart-checkout-btn:hover {
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px -8px rgba(212,167,68,0.5), inset 0 1px 0 rgba(255,235,180,0.6);
+  }
+
+  /* Checkout view (in drawer) */
+  .cart-drawer.checkout-mode .cart-body .cart-items-view { display: none; }
+  .cart-drawer.checkout-mode .checkout-view { display: block; }
+  .cart-drawer:not(.checkout-mode) .checkout-view { display: none; }
+  .checkout-view {
+    padding: 0;
+  }
+  .checkout-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: none;
+    color: var(--text-soft);
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding: 0;
+  }
+  .checkout-back:hover { color: var(--gold-deep); }
+  .checkout-summary {
+    background: var(--cream-warm);
+    padding: 16px 18px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  .checkout-summary-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-soft);
+  }
+  .checkout-summary-row.total {
+    font-family: var(--display);
+    font-size: 18px;
+    color: var(--text);
+    font-style: italic;
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .checkout-form-group {
+    margin-bottom: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .checkout-form-group label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+  .checkout-form-group input,
+  .checkout-form-group select,
+  .checkout-form-group textarea {
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 12px 14px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s var(--ease);
+  }
+  .checkout-form-group input:focus,
+  .checkout-form-group select:focus,
+  .checkout-form-group textarea:focus { border-color: var(--gold); }
+  .checkout-form-group textarea { resize: vertical; min-height: 70px; }
+
+  /* ─────────── FICHE PRODUIT (modale premium) ─────────── */
+  .pdp-overlay {
+    position: fixed; inset: 0; z-index: 110;
+    background: rgba(11, 8, 5, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+  .pdp-overlay.open { opacity: 1; pointer-events: auto; }
+  .pdp {
+    position: fixed; inset: 0; z-index: 120;
+    display: grid; place-items: center;
+    padding: 28px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s var(--ease);
+  }
+  .pdp.open { opacity: 1; pointer-events: auto; }
+  .pdp-card {
+    background: var(--ivory);
+    border-radius: 10px;
+    width: 100%; max-width: 1020px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.4s var(--ease);
+    box-shadow:
+      0 40px 100px -20px rgba(11, 8, 5, 0.55),
+      0 0 0 1px rgba(212, 167, 68, 0.18),
+      inset 0 1px 0 rgba(255, 235, 180, 0.30);
+    position: relative;
+  }
+  .pdp.open .pdp-card { transform: translateY(0) scale(1); }
+  .pdp-close {
+    position: absolute; top: 18px; right: 18px; z-index: 5;
+    width: 40px; height: 40px;
+    background: rgba(250, 246, 236, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    display: grid; place-items: center;
+    cursor: pointer; border: 1px solid rgba(212, 167, 68, 0.25);
+    transition: all 0.3s var(--ease);
+  }
+  .pdp-close:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: rotate(90deg);
+  }
+  .pdp-close svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .pdp-close:hover svg { stroke: var(--black); }
+  .pdp-img {
+    background: var(--cream-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .pdp-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pdp-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(11, 8, 5, 0.20) 100%);
+    pointer-events: none;
+  }
+  .pdp-img-badge {
+    position: absolute; top: 20px; left: 20px; z-index: 2;
+    background: var(--gold-gradient);
+    color: var(--black);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    box-shadow:
+      0 8px 20px -6px rgba(212, 167, 68, 0.45),
+      inset 0 1px 0 rgba(255, 235, 180, 0.5);
+  }
+  .pdp-img-tag {
+    position: absolute; bottom: 22px; left: 22px; z-index: 2;
+    color: var(--gold-light);
+    font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  }
+  .pdp-img-tag::before {
+    content: ''; display: block; width: 22px; height: 1px; background: var(--gold-light);
+  }
+  .pdp-body {
+    padding: 50px 44px;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+  }
+  .pdp-cat {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-bottom: 18px;
+  }
+  .pdp-cat::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+  }
+  .pdp-name {
+    font-family: var(--display);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 400; letter-spacing: -0.02em;
+    line-height: 1.05; color: var(--text);
+    margin-bottom: 8px;
+  }
+  .pdp-format {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 17px; color: var(--text-soft);
+    margin-bottom: 26px;
+  }
+  .pdp-price {
+    font-family: var(--display);
+    font-size: 34px; font-weight: 500;
+    color: var(--gold-deep);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .pdp-price small {
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 500;
+    color: var(--text-soft);
+    margin-left: 8px;
+    letter-spacing: 0.08em;
+  }
+  .pdp-divider {
+    height: 1px; background: var(--border);
+    margin: 4px 0 26px;
+  }
+  .pdp-section-title {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 16px;
+  }
+  .pdp-benefits {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 26px;
+  }
+  .pdp-benefit {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 15px; color: var(--text);
+    line-height: 1.45;
+  }
+  .pdp-benefit-check {
+    flex-shrink: 0; width: 22px; height: 22px;
+    border-radius: 999px;
+    background: var(--gold-soft);
+    color: var(--gold-deep);
+    display: grid; place-items: center;
+    margin-top: 1px;
+  }
+  .pdp-benefit-check svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .pdp-usage {
+    background: var(--cream-warm);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--text);
+    margin-bottom: 32px;
+    display: flex; align-items: flex-start; gap: 12px;
+    line-height: 1.5;
+    border-left: 2px solid var(--gold);
+  }
+  .pdp-usage::before {
+    content: ''; flex-shrink: 0;
+    width: 18px; height: 18px;
+    background: var(--gold);
+    border-radius: 999px;
+    margin-top: 2px;
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z'/%3E%3C/svg%3E");
+  }
+  .pdp-actions {
+    display: flex; gap: 12px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  .pdp-actions .btn { flex: 1; justify-content: center; }
+  .pdp-actions .btn-whatsapp { flex: 0 0 auto; padding: 16px 24px; }
+  .pdp-actions .btn-whatsapp span { display: none; }
+  .pdp-actions .btn-whatsapp svg { width: 22px; height: 22px; margin: 0; }
+
+  @media (max-width: 880px) {
+    .pdp { padding: 0; align-items: flex-end; }
+    .pdp-card {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+      max-height: 94vh;
+      border-radius: 18px 18px 0 0;
+      transform: translateY(100%);
+    }
+    .pdp.open .pdp-card { transform: translateY(0); }
+    .pdp-img { aspect-ratio: 4 / 3; }
+    .pdp-body { padding: 36px 28px 32px; }
+  }
+
+  /* ─────────── WHATSAPP FLOAT (pill expansible) ─────────── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px;
+    height: 62px;
+    background: var(--whatsapp);
+    border-radius: 999px;
+    z-index: 95;
+    display: inline-flex; align-items: center;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 18px 40px -8px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0);
+    overflow: hidden;
+    transition: background 0.3s var(--ease), box-shadow 0.4s var(--ease), transform 0.3s var(--ease);
+  }
+  .wa-float .wa-icon {
+    flex-shrink: 0;
+    width: 62px; height: 62px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .wa-float .wa-icon svg { width: 30px; height: 30px; fill: white; }
+  .wa-float .wa-label {
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.04em;
+    color: white;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: max-width 0.45s var(--ease), opacity 0.3s var(--ease), padding 0.45s var(--ease);
+  }
+  .wa-float:hover {
+    background: #1ebd5a;
+    transform: translateY(-2px);
+    box-shadow: 0 24px 50px -10px rgba(37, 211, 102, 0.55);
+  }
+  .wa-float:hover .wa-label {
+    max-width: 220px;
+    opacity: 1;
+    padding: 0 22px 0 0;
+  }
+  .wa-float::before {
+    content: ''; position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    z-index: -1;
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+    animation: waPulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes waPulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+    70% { box-shadow: 0 0 0 22px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+  @media (max-width: 640px) {
+    .wa-float { bottom: 20px; right: 20px; height: 56px; }
+    .wa-float .wa-icon { width: 56px; height: 56px; }
+    .wa-float .wa-icon svg { width: 26px; height: 26px; }
+  }
+
+  /* ─────────── REVEALS ─────────── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-up { opacity: 0; transform: translateY(20px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .reveal-up.in { opacity: 1; transform: translateY(0); }
+
+  /* ─────────── RESPONSIVE ─────────── */
+  @media (max-width: 1100px) {
+    .story-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+    .contact-info { position: static; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .promesse-grid { grid-template-columns: repeat(2, 1fr); gap: 50px 40px; }
+    .collections-grid { grid-template-columns: 1fr 1fr; }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6 { grid-column: span 1; aspect-ratio: 4/5; }
+    .foot-main { grid-template-columns: 1fr; gap: 40px; }
+    nav { padding: 22px 28px; }
+    nav.scrolled { padding: 14px 28px; }
+    .nav-links { display: none; }
+    .burger { display: block; }
+    .hero { padding: 100px 18px 60px; }
+    .hero-card { padding: 80px 28px 70px; border-radius: 22px; }
+    .hero-cats { gap: 14px; }
+    section { padding: 100px 28px; }
+    .manifesto { padding: 120px 28px; }
+    .contact { padding: 120px 28px; }
+    .promesse, .collections, .products, .testimonials, .story { padding: 110px 28px; }
+    .cta-huge { padding: 140px 28px; }
+    .contact-form { padding: 30px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 980px) {
+    .hero-cats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 90px 14px 50px; }
+    .hero-card { padding: 60px 22px 56px; }
+    .hero-title { font-size: clamp(36px, 11vw, 58px); }
+    .hero-cats { grid-template-columns: 1fr; }
+    .hero-cat { min-height: 280px; }
+    .hero-trust { gap: 24px; margin-top: 40px; padding-top: 32px; }
+    .hero-trust-num { font-size: 26px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .promesse-grid { grid-template-columns: 1fr; gap: 40px; }
+    .collections-grid { grid-template-columns: 1fr; }
+    .products-head { flex-direction: column; align-items: flex-start; gap: 30px; }
+    h2 { font-size: clamp(34px, 9vw, 56px) !important; }
+    .hero-cta-row, .cta-huge-row { flex-direction: column; align-items: stretch; }
+    .btn, .cta-huge-cta { justify-content: center; }
+    .marquee-track { font-size: 22px; gap: 40px; }
+    .marquee-track span { gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="assets/logo_embleme_noir.png" alt="Jacob's Bio Cosmétique">
+    <span class="nav-logo-text">Jacob's Bio <em>Cosmétique</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#manifeste">Manifeste</a></li>
+    <li><a href="#histoire">L'histoire</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#temoignages">Témoignages</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <button class="nav-cart" id="navCart" aria-label="Mon panier">
+        <svg viewBox="0 0 24 24"><path d="M7 4h-2l-2 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49a1.003 1.003 0 0 0-.88-1.48h-14.21l-.94-2zm-1 16c0 1.1.89 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm12 0c0 1.1.89 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </li>
+  </ul>
+  <div class="burger" aria-label="Menu"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════ HERO (commerce style — gradient + grille catégories) ═══════════════ -->
+<section class="hero" id="hero" aria-label="Jacob's Bio Cosmétiques — Sublimez vos formes, affirmez votre confiance">
+  <div class="hero-inner">
+    <div class="hero-card reveal">
+      <div class="hero-eyebrow">Cosmétiques naturels · Made in Bouaké</div>
+      <h1 class="hero-title">
+        <span class="grad">Sublimez vos formes,</span><br>
+        <span class="solid">affirmez votre confiance.</span>
+      </h1>
+      <p class="hero-sub">Soins 100% naturels, fabriqués à Bouaké. Pensés pour les femmes ivoiriennes qui veulent des produits sérieux et des résultats visibles.</p>
+      <div class="hero-cta-row">
+        <a href="#produits" class="btn btn-primary">
+          Découvrir la boutique <span class="arrow"></span>
+        </a>
+        <a href="https://wa.me/2250777362923?text=Bonjour%2C%20je%20veux%20commander%20chez%20Jacob%27s%20Bio." target="_blank" rel="noopener" class="btn btn-ghost" style="color:var(--text);border-color:var(--border);">
+          <svg class="btn-icon" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-cats">
+      <a href="#produits" class="hero-cat" data-cat="Suppositoires">
+        <div class="hero-cat-title">Suppositoires<br><em>Bobaraba</em></div>
+        <div class="hero-cat-img"><img src="assets/photos/02_suppositoire-bobaraba-250g.jpeg" alt="Suppositoires Bobaraba"></div>
+        <div class="hero-cat-corner"><span class="hero-cat-corner-btn">
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </span></div>
+      </a>
+      <a href="#produits" class="hero-cat" data-cat="Sirops">
+        <div class="hero-cat-title">Sirops<br><em>& Bien-être</em></div>
+        <div class="hero-cat-img"><img src="assets/photos/04_sirop-sublime-courbes.jpeg" alt="Sirops naturels"></div>
+        <div class="hero-cat-corner"><span class="hero-cat-corner-btn">
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </span></div>
+      </a>
+      <a href="#produits" class="hero-cat" data-cat="Crèmes">
+        <div class="hero-cat-title">Crèmes<br><em>& Huiles</em></div>
+        <div class="hero-cat-img"><img src="assets/photos/05_creme-vitesse-300g.jpeg" alt="Crèmes et huiles"></div>
+        <div class="hero-cat-corner"><span class="hero-cat-corner-btn">
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </span></div>
+      </a>
+      <a href="#produits" class="hero-cat" data-cat="Savons">
+        <div class="hero-cat-title">Savons<br><em>artisanaux</em></div>
+        <div class="hero-cat-img"><img src="assets/photos/08_savon-noir-magic-black.jpeg" alt="Savons artisanaux"></div>
+        <div class="hero-cat-corner"><span class="hero-cat-corner-btn">
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </span></div>
+      </a>
+    </div>
+
+    <div class="hero-trust reveal">
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">500+</div>
+        <div class="hero-trust-label">Clientes</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">18</div>
+        <div class="hero-trust-label">Produits naturels</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">24h</div>
+        <div class="hero-trust-label">Livraison Bouaké</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">100%</div>
+        <div class="hero-trust-label">Made in Bouaké</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MARQUEE ═══════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Suppositoires Bobaraba</span><span>Sirops naturels</span><span>Crèmes &amp; Huiles</span><span>Savons artisanaux</span><span>Soins ancestraux</span><span>Kits complets</span>
+    <span>Suppositoires Bobaraba</span><span>Sirops naturels</span><span>Crèmes &amp; Huiles</span><span>Savons artisanaux</span><span>Soins ancestraux</span><span>Kits complets</span>
+  </div>
+</div>
+
+<!-- ═══════════════ MANIFESTO ═══════════════ -->
+<section class="manifesto" id="manifeste">
+  <div class="container">
+    <p class="manifesto-text reveal">
+      Une marque locale. Des recettes qu'on a apprises de nos mères. Pas de chimie, pas de promesse creuse. Juste <em>ce qui marche</em>, depuis longtemps.
+    </p>
+    <div class="manifesto-signature reveal">Notre engagement</div>
+  </div>
+</section>
+
+<!-- ═══════════════ STORY ═══════════════ -->
+<section class="story" id="histoire">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <img src="assets/photos/marie-jacob-portrait.jpg" alt="Marie-Jacob, fondatrice de Jacob's Bio Cosmétiques">
+        <div class="story-visual-tag">Marie-Jacob · Fondatrice</div>
+      </div>
+      <div class="story-content reveal-up">
+        <div class="eyebrow">L'histoire</div>
+        <h2>Une marque <em>née</em> à Bouaké.</h2>
+        <p style="margin-top:40px"><strong>Je m'appelle Marie-Jacob.</strong> J'ai monté Jacob's Bio à Bouaké parce que je cherchais des cosmétiques qui me ressemblent. Des produits faits pour mon corps et ma peau, sans chimie cachée derrière les étiquettes.</p>
+        <p>Tout est fabriqué à la main, dans notre atelier. Chaque produit suit une recette que j'ai apprise et améliorée au fil des années. Certaines viennent de ma mère. D'autres de femmes du marché qui partagent leurs secrets quand on prend le temps de les écouter.</p>
+        <div class="story-quote">
+          « Si un savon est éclaircissant, on le marque. S'il ne l'est pas, on le marque aussi. Vous achetez exactement ce qui est annoncé. »
+        </div>
+        <p>On vous livre partout en Côte d'Ivoire. Bouaké en 24h, Yamoussoukro en 24-48h, Abidjan en deux à trois jours. Une question avant d'acheter ou un doute après usage ? Écrivez sur WhatsApp. On répond vite et on prend le temps d'expliquer.</p>
+        <div class="story-signature">Marie-Jacob</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ COLLECTIONS ═══════════════ -->
+<section class="collections" id="collections">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">6 collections</div>
+      <h2>Nos <em>gammes</em>.</h2>
+      <p class="lead">Du soin quotidien aux kits complets. Chaque gamme répond à un besoin précis.</p>
+    </div>
+    <div class="collections-grid">
+      <a class="col-card col-1 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Kits%20complets." target="_blank" rel="noopener">
+        <img src="assets/photos/18_kit-botchor-premium.jpeg" alt="Kits complets">
+        <div class="col-card-body">
+          <div class="col-card-num">01</div>
+          <div class="col-card-title">Kits complets</div>
+          <div class="col-card-count">7 produits · à partir de 11 500 FCFA</div>
+        </div>
+      </a>
+      <a class="col-card col-2 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Suppositoires%20Bobaraba." target="_blank" rel="noopener">
+        <img src="assets/photos/02_suppositoire-bobaraba-250g.jpeg" alt="Suppositoires Bobaraba">
+        <div class="col-card-body">
+          <div class="col-card-num">02</div>
+          <div class="col-card-title">Suppositoires Bobaraba</div>
+          <div class="col-card-count">2 produits · à partir de 5 000 FCFA</div>
+        </div>
+      </a>
+      <a class="col-card col-3 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Sirops%20naturels." target="_blank" rel="noopener">
+        <img src="assets/photos/04_sirop-sublime-courbes.jpeg" alt="Sirops">
+        <div class="col-card-body">
+          <div class="col-card-num">03</div>
+          <div class="col-card-title">Sirops naturels</div>
+          <div class="col-card-count">2 produits · 10 000 FCFA</div>
+        </div>
+      </a>
+      <a class="col-card col-4 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Cr%C3%A8mes%20et%20Huiles." target="_blank" rel="noopener">
+        <img src="assets/photos/05_creme-vitesse-300g.jpeg" alt="Crèmes &amp; Huiles">
+        <div class="col-card-body">
+          <div class="col-card-num">04</div>
+          <div class="col-card-title">Crèmes &amp; Huiles</div>
+          <div class="col-card-count">3 produits · dès 2 000 FCFA</div>
+        </div>
+      </a>
+      <a class="col-card col-5 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Savons%20naturels." target="_blank" rel="noopener">
+        <img src="assets/photos/08_savon-noir-magic-black.jpeg" alt="Savons">
+        <div class="col-card-body">
+          <div class="col-card-num">05</div>
+          <div class="col-card-title">Savons naturels</div>
+          <div class="col-card-count">3 produits · dès 5 000 FCFA</div>
+        </div>
+      </a>
+      <a class="col-card col-6 reveal" href="javascript:void(0)" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});return false;" data-cat="les%20Soins%20naturels%20(Caolins)." target="_blank" rel="noopener">
+        <img src="assets/photos/11_caolins.jpeg" alt="Soins naturels">
+        <div class="col-card-body">
+          <div class="col-card-num">06</div>
+          <div class="col-card-title">Soins naturels</div>
+          <div class="col-card-count">1 produit · 3 000 FCFA · Caolins</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRODUITS PHARES ═══════════════ -->
+<section class="products" id="produits">
+  <div class="container">
+    <div class="products-head">
+      <div class="reveal">
+        <div class="eyebrow">Sélection</div>
+        <h2>Les <em>incontournables</em>.</h2>
+      </div>
+      <p class="lead reveal">Tout le catalogue, les plus demandés en premier.</p>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card reveal" data-id="suppo-150" data-name="Suppositoire Bobaraba 150g" data-cat="Suppositoires" data-price="5000" data-image="assets/photos/01_suppositoire-bobaraba-150g.jpeg">
+        <div class="prod-img"><span class="prod-badge">Bestseller</span><img src="assets/photos/01_suppositoire-bobaraba-150g.jpeg" alt="Suppositoire Bobaraba 150g"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Suppositoires</div>
+          <div class="prod-title">Suppositoire Bobaraba 150g</div>
+          <div class="prod-price">5 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="sirop-shape" data-name="Sirop Shape Plus+ 300ml" data-cat="Sirops" data-price="10000" data-image="assets/photos/03_sirop-shape-plus.jpeg">
+        <div class="prod-img"><img src="assets/photos/03_sirop-shape-plus.jpeg" alt="Sirop Shape Plus+"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Sirops</div>
+          <div class="prod-title">Sirop Shape Plus+ 300ml</div>
+          <div class="prod-price">10 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="creme-vitesse-300" data-name="Crème Vitesse 300g" data-cat="Crèmes" data-price="10000" data-image="assets/photos/05_creme-vitesse-300g.jpeg">
+        <div class="prod-img"><img src="assets/photos/05_creme-vitesse-300g.jpeg" alt="Crème Vitesse"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Crèmes</div>
+          <div class="prod-title">Crème Vitesse 300g</div>
+          <div class="prod-price">10 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="huile-raff" data-name="Huile Raffermissante" data-cat="Huiles" data-price="2000" data-image="assets/photos/07_huile-raffermissante.jpeg">
+        <div class="prod-img"><img src="assets/photos/07_huile-raffermissante.jpeg" alt="Huile Raffermissante"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Huiles</div>
+          <div class="prod-title">Huile Raffermissante</div>
+          <div class="prod-price">2 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="savon-noir" data-name="Savon Noir Magic Black" data-cat="Savons" data-price="8000" data-image="assets/photos/08_savon-noir-magic-black.jpeg">
+        <div class="prod-img"><img src="assets/photos/08_savon-noir-magic-black.jpeg" alt="Savon Noir Magic Black"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Savons</div>
+          <div class="prod-title">Savon Noir Magic Black</div>
+          <div class="prod-price">8 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="savon-mangue" data-name="Savon Teint Clair Mangue" data-cat="Savons" data-price="6000" data-image="assets/photos/10_savon-teint-clair-mangue.jpeg">
+        <div class="prod-img"><img src="assets/photos/10_savon-teint-clair-mangue.jpeg" alt="Savon Beurre de Mangue"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Savons</div>
+          <div class="prod-title">Savon Teint Clair Mangue</div>
+          <div class="prod-price">6 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-botchor-moyen" data-name="Kit Botchor Moyen" data-cat="Kits" data-price="17000" data-image="assets/photos/15_kit-botchor-moyen.jpeg">
+        <div class="prod-img"><span class="prod-badge">Populaire</span><img src="assets/photos/15_kit-botchor-moyen.jpeg" alt="Kit Botchor Moyen"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Botchor Moyen</div>
+          <div class="prod-price">17 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-botchor-premium" data-name="Kit Botchor Premium" data-cat="Kits" data-price="21000" data-image="assets/photos/18_kit-botchor-premium.jpeg">
+        <div class="prod-img"><span class="prod-badge">Premium</span><img src="assets/photos/18_kit-botchor-premium.jpeg" alt="Kit Botchor Premium"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Botchor Premium</div>
+          <div class="prod-price">21 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="suppo-250" data-name="Suppositoire Bobaraba 250g" data-cat="Suppositoires" data-price="10000" data-image="assets/photos/02_suppositoire-bobaraba-250g.jpeg">
+        <div class="prod-img"><span class="prod-badge">Cure complète</span><img src="assets/photos/02_suppositoire-bobaraba-250g.jpeg" alt="Suppositoire Bobaraba 250g"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Suppositoires</div>
+          <div class="prod-title">Suppositoire Bobaraba 250g</div>
+          <div class="prod-price">10 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="sirop-sublime" data-name="Sirop Sublime Courbes" data-cat="Sirops" data-price="10000" data-image="assets/photos/04_sirop-sublime-courbes.jpeg">
+        <div class="prod-img"><span class="prod-badge">Nouveau</span><img src="assets/photos/04_sirop-sublime-courbes.jpeg" alt="Sirop Sublime Courbes"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Sirops</div>
+          <div class="prod-title">Sirop Sublime Courbes</div>
+          <div class="prod-price">10 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="creme-vitesse-150" data-name="Crème Vitesse 150g" data-cat="Crèmes" data-price="6000" data-image="assets/photos/06_creme-vitesse-150g.jpeg">
+        <div class="prod-img"><img src="assets/photos/06_creme-vitesse-150g.jpeg" alt="Crème Vitesse 150g"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Crèmes</div>
+          <div class="prod-title">Crème Vitesse 150g</div>
+          <div class="prod-price">6 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="savon-collagene" data-name="Savon au Collagène" data-cat="Savons" data-price="5000" data-image="assets/photos/09_savon-collagene.jpeg">
+        <div class="prod-img"><img src="assets/photos/09_savon-collagene.jpeg" alt="Savon au Collagène"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Savons</div>
+          <div class="prod-title">Savon au Collagène</div>
+          <div class="prod-price">5 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="caolins" data-name="Caolins" data-cat="Soins" data-price="3000" data-image="assets/photos/11_caolins.jpeg">
+        <div class="prod-img"><img src="assets/photos/11_caolins.jpeg" alt="Caolins grossissant naturel"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Soins naturels</div>
+          <div class="prod-title">Caolins · Grossissant</div>
+          <div class="prod-price">3 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-fessiers" data-name="Kit Fessiers" data-cat="Kits" data-price="11500" data-image="assets/photos/12_kit-fessiers.jpeg">
+        <div class="prod-img"><span class="prod-badge">Kit complet</span><img src="assets/photos/12_kit-fessiers.jpeg" alt="Kit Fessiers"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Fessiers</div>
+          <div class="prod-price">11 500<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-raffermissant" data-name="Kit Raffermissant" data-cat="Kits" data-price="11500" data-image="assets/photos/13_kit-raffermissant.jpeg">
+        <div class="prod-img"><img src="assets/photos/13_kit-raffermissant.jpeg" alt="Kit Raffermissant"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Raffermissant</div>
+          <div class="prod-price">11 500<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="mini-kit-botchor" data-name="Mini Kit Botchor" data-cat="Kits" data-price="12000" data-image="assets/photos/14_mini-kit-botchor.jpeg">
+        <div class="prod-img"><img src="assets/photos/14_mini-kit-botchor.jpeg" alt="Mini Kit Botchor"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Mini Kit Botchor</div>
+          <div class="prod-price">12 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-vitesse-mini" data-name="Kit Vitesse Mini" data-cat="Kits" data-price="17000" data-image="assets/photos/16_kit-vitesse-mini.jpeg">
+        <div class="prod-img"><img src="assets/photos/16_kit-vitesse-mini.jpeg" alt="Kit Vitesse Mini"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Vitesse Mini</div>
+          <div class="prod-price">17 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-id="kit-vitesse" data-name="Kit Vitesse" data-cat="Kits" data-price="21000" data-image="assets/photos/17_kit-vitesse.jpeg">
+        <div class="prod-img"><span class="prod-badge">Résultats rapides</span><img src="assets/photos/17_kit-vitesse.jpeg" alt="Kit Vitesse"></div>
+        <div class="prod-body">
+          <div class="prod-cat">Kits</div>
+          <div class="prod-title">Kit Vitesse</div>
+          <div class="prod-price">21 000<small>FCFA</small></div>
+          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+    <div class="products-cta-row reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <button type="button" class="btn btn-primary" onclick="document.getElementById('navCart').click()">
+        Voir mon panier <span class="arrow"></span>
+      </button>
+      <a href="https://wa.me/2250777362923?text=Bonjour%2C%20j%27ai%20une%20question%20sur%20vos%20produits." target="_blank" rel="noopener" class="btn btn-ghost" style="color:var(--text);border-color:var(--border);">
+        Besoin de conseil ?
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROMESSE ═══════════════ -->
+<section class="promesse">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Notre engagement</div>
+      <h2>Quatre <em>promesses</em> qu'on tient.</h2>
+    </div>
+    <div class="promesse-grid">
+      <div class="promesse-item reveal-up">
+        <div class="promesse-num">01</div>
+        <div class="promesse-title">100% Naturel</div>
+        <div class="promesse-desc">Pas de chimie dans nos formules. Que des plantes, des huiles et des recettes héritées.</div>
+      </div>
+      <div class="promesse-item reveal-up">
+        <div class="promesse-num">02</div>
+        <div class="promesse-title">Fabriqué à Bouaké</div>
+        <div class="promesse-desc">Tout est conditionné dans notre atelier. En commandant, vous faites vivre une marque ivoirienne.</div>
+      </div>
+      <div class="promesse-item reveal-up">
+        <div class="promesse-num">03</div>
+        <div class="promesse-title">WhatsApp direct</div>
+        <div class="promesse-desc">On répond vite. Vous payez en Wave, Orange Money, MTN ou Moov, comme vous voulez.</div>
+      </div>
+      <div class="promesse-item reveal-up">
+        <div class="promesse-num">04</div>
+        <div class="promesse-title">Livré partout en CI</div>
+        <div class="promesse-desc">Bouaké en 24h, Yamoussoukro en 24-48h, Abidjan en deux à trois jours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TÉMOIGNAGES ═══════════════ -->
+<section class="testimonials" id="temoignages" aria-label="Témoignages clientes">
+  <div class="container">
+    <div class="testimonials-head reveal">
+      <div class="eyebrow">Elles en parlent</div>
+      <h2>Ce que disent nos <em>clientes</em>.</h2>
+      <p class="testimonials-lead">Des centaines de femmes ivoiriennes nous font confiance. Voilà ce qu'elles en disent.</p>
+    </div>
+
+    <div class="testi-stage reveal" id="testiStage" aria-roledescription="carrousel">
+      <!-- Cartes injectées par JS -->
+      <div class="testi-dots" id="testiDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA HUGE ═══════════════ -->
+<section class="cta-huge">
+  <div class="eyebrow">Commandez directement ici</div>
+  <h2 class="cta-huge-title">Choisissez. <em>On livre.</em></h2>
+  <p class="cta-huge-sub">Paiement à la livraison ou Mobile Money. On livre partout en Côte d'Ivoire.</p>
+  <div class="cta-huge-row">
+    <a href="#produits" class="cta-huge-cta">
+      Choisir mes produits <span class="arrow"></span>
+    </a>
+    <a href="#contact" class="cta-huge-cta alt">
+      Une question ?
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Nous joindre</div>
+        <h2>Une <em>question ?</em></h2>
+        <p class="lead">Le plus rapide, c'est WhatsApp. On répond du lundi au samedi, entre 8h et 18h. Souvent dans l'heure.</p>
+
+        <div class="contact-channels">
+          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener" class="contact-channel">
+            <span class="contact-channel-label">WhatsApp Business · Le plus rapide</span>
+            <span class="contact-channel-value">+225 0777362923</span>
+          </a>
+          <a href="mailto:jacobsbiocosmetik@gmail.com" class="contact-channel">
+            <span class="contact-channel-label">Email</span>
+            <span class="contact-channel-value">jacobsbiocosmetik@gmail.com</span>
+          </a>
+          <div class="contact-channel">
+            <span class="contact-channel-label">Atelier &amp; livraison</span>
+            <span class="contact-channel-value">Bouaké · Abidjan</span>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener" class="social-btn whatsapp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 00-8.6 15l-1.4 5 5.1-1.3A10 10 0 1012 2z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://t.me/+HYEmOrW-8owyYmU0" target="_blank" rel="noopener" class="social-btn telegram" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.94c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            <span>Telegram</span>
+          </a>
+          <a href="https://www.instagram.com/jacobs.bio" target="_blank" rel="noopener" class="social-btn instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 1.17.05 1.81.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.81-.42 2.23a3.7 3.7 0 01-.9 1.38 3.7 3.7 0 01-1.38.9c-.42.17-1.06.37-2.23.42-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.81-.25-2.23-.42a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.17-.42-.37-1.06-.42-2.23C2.16 15.58 2.16 15.2 2.16 12s0-3.58.07-4.85c.05-1.17.25-1.81.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.42 2.16 8.8 2.16 12 2.16zM12 0C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.85 5.85 0 00-2.13 1.38A5.85 5.85 0 00.63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.85 5.85 0 001.38 2.13 5.85 5.85 0 002.13 1.38c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.85 5.85 0 002.13-1.38 5.85 5.85 0 001.38-2.13c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.85 5.85 0 00-1.38-2.13A5.85 5.85 0 0019.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-11.85a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.tiktok.com/@jacobs.bio" target="_blank" rel="noopener" class="social-btn tiktok" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.74 20.87a6.33 6.33 0 0010.86-4.43V7.61a8.16 8.16 0 004.77 1.52V5.69a4.85 4.85 0 01-1.78-.96z"/></svg>
+            <span>TikTok</span>
+          </a>
+          <a href="https://www.facebook.com/share/1BwVXMpBJE/?mibextid=wwXIfr" target="_blank" rel="noopener" class="social-btn facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.07A12 12 0 1010.13 24v-8.43H7.08V12.07h3.05V9.43c0-3.01 1.79-4.66 4.53-4.66 1.31 0 2.69.23 2.69.23v2.95h-1.51c-1.49 0-1.96.93-1.96 1.88v2.25h3.32l-.53 3.5h-2.79V24A12 12 0 0024 12.07z"/></svg>
+            <span>Facebook</span>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form reveal-up" id="contactForm">
+        <div class="form-head">
+          <div class="form-title">Envoyer un message</div>
+          <div class="form-sub">Votre message s'ouvrira directement dans WhatsApp, prêt à envoyer.</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-name">Votre nom *</label>
+            <input type="text" id="cf-name" placeholder="Aïcha N'Guessan" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-phone">Téléphone</label>
+            <input type="tel" id="cf-phone" placeholder="+225 ...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cf-type">Type de demande</label>
+          <select id="cf-type">
+            <option>Conseil produit</option>
+            <option>Passer commande</option>
+            <option>Suivi de livraison</option>
+            <option>Question générale</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cf-message">Votre message *</label>
+          <textarea id="cf-message" rows="4" placeholder="Bonjour, je voudrais en savoir plus sur..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-whatsapp form-submit">
+          <svg class="btn-icon" viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 00-8.6 15l-1.4 5 5.1-1.3A10 10 0 1012 2z"/></svg>
+          Envoyer sur WhatsApp
+        </button>
+
+        <p class="form-note">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15l-1.4 5 5.1-1.3A10 10 0 1012 2z"/></svg>
+          Votre message s'ouvrira dans WhatsApp prêt à envoyer.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="foot-main">
+      <div class="foot-brand">
+        <img src="assets/logo_embleme_noir.png" alt="Jacob's Bio Cosmétiques">
+        <div class="foot-tag">Sublimez vos formes, affirmez votre confiance.</div>
+        <div class="foot-social">
+          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener" class="foot-social-btn whatsapp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 00-8.6 15l-1.4 5 5.1-1.3A10 10 0 1012 2z"/></svg>
+          </a>
+          <a href="https://t.me/+HYEmOrW-8owyYmU0" target="_blank" rel="noopener" class="foot-social-btn telegram" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.94c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/jacobs.bio" target="_blank" rel="noopener" class="foot-social-btn instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 1.17.05 1.81.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.81-.42 2.23a3.7 3.7 0 01-.9 1.38 3.7 3.7 0 01-1.38.9c-.42.17-1.06.37-2.23.42-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.81-.25-2.23-.42a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.17-.42-.37-1.06-.42-2.23C2.16 15.58 2.16 15.2 2.16 12s0-3.58.07-4.85c.05-1.17.25-1.81.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.42 2.16 8.8 2.16 12 2.16zM12 0C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.85 5.85 0 00-2.13 1.38A5.85 5.85 0 00.63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.85 5.85 0 001.38 2.13 5.85 5.85 0 002.13 1.38c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.85 5.85 0 002.13-1.38 5.85 5.85 0 001.38-2.13c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.85 5.85 0 00-1.38-2.13A5.85 5.85 0 0019.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-11.85a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@jacobs.bio" target="_blank" rel="noopener" class="foot-social-btn tiktok" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.74 20.87a6.33 6.33 0 0010.86-4.43V7.61a8.16 8.16 0 004.77 1.52V5.69a4.85 4.85 0 01-1.78-.96z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1BwVXMpBJE/?mibextid=wwXIfr" target="_blank" rel="noopener" class="foot-social-btn facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.07A12 12 0 1010.13 24v-8.43H7.08V12.07h3.05V9.43c0-3.01 1.79-4.66 4.53-4.66 1.31 0 2.69.23 2.69.23v2.95h-1.51c-1.49 0-1.96.93-1.96 1.88v2.25h3.32l-.53 3.5h-2.79V24A12 12 0 0024 12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>La marque</h4>
+        <ul>
+          <li><a href="#histoire">L'histoire</a></li>
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#produits">Produits</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Nous joindre</h4>
+        <ul>
+          <li><a href="https://wa.me/2250777362923" target="_blank" rel="noopener">WhatsApp +225 0777362923</a></li>
+          <li><a href="https://t.me/+HYEmOrW-8owyYmU0" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="mailto:jacobsbiocosmetik@gmail.com">jacobsbiocosmetik@gmail.com</a></li>
+          <li><span>Bouaké · Abidjan</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 Jacob's Bio Cosmétiques. Tous droits réservés.</span>
+      <span class="mycomm">Site réalisé par MyComm Platform</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ PANIER ═══════════════ -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-header">
+    <h3 id="cartTitle">Mon panier</h3>
+    <button class="cart-close" id="cartClose" aria-label="Fermer">&times;</button>
+  </div>
+  <div class="cart-body">
+    <div class="cart-items-view">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="icon">∅</div>
+        <p>Votre panier est vide pour le moment.<br>Ajoutez vos produits préférés.</p>
+        <button class="btn btn-primary" onclick="document.getElementById('cartClose').click(); setTimeout(()=>document.getElementById('produits').scrollIntoView({behavior:'smooth'}),300);" style="padding:14px 24px;font-size:11px;">Voir les produits</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+    </div>
+    <div class="checkout-view">
+      <button class="checkout-back" id="checkoutBack" type="button">&larr; Retour au panier</button>
+      <div class="checkout-summary" id="checkoutSummary"></div>
+      <form id="checkoutForm">
+        <div class="checkout-form-group">
+          <label for="co-name">Votre nom *</label>
+          <input type="text" id="co-name" placeholder="Aïcha Koné" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="co-phone">Téléphone *</label>
+          <input type="tel" id="co-phone" placeholder="+225 ..." required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="co-email">Adresse e-mail *</label>
+          <input type="email" id="co-email" placeholder="exemple@mail.com" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="co-city">Ville de livraison *</label>
+          <select id="co-city" required>
+            <option value="">— Choisir une ville —</option>
+            <option value="Bouaké">Bouaké · dès 700 FCFA · 24h</option>
+            <option value="Yamoussoukro">Yamoussoukro · 1 500 FCFA · 24-48h</option>
+            <option value="Abidjan">Abidjan · 2 500 FCFA · 2-3 jours</option>
+            <option value="Autre">Autre ville en CI · dès 2 500 FCFA · 3-6 jours</option>
+          </select>
+        </div>
+        <div class="checkout-form-group">
+          <label for="co-address">Adresse précise / Quartier *</label>
+          <textarea id="co-address" placeholder="Ex. Rue 12, quartier Kennedy, près de la pharmacie..." required rows="2"></textarea>
+        </div>
+        <div class="checkout-form-group">
+          <label for="co-notes">Notes (facultatif)</label>
+          <textarea id="co-notes" placeholder="Préférences, instructions..." rows="2"></textarea>
+        </div>
+        <button type="submit" class="cart-checkout-btn" style="margin-top:8px;">
+          Confirmer ma commande
+        </button>
+        <p style="font-size:11px;color:var(--text-soft);text-align:center;margin-top:14px;line-height:1.5;">
+          Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.
+        </p>
+      </form>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-total">
+      <span class="cart-total-label">Sous-total</span>
+      <span class="cart-total-value" id="cartTotal">0 FCFA</span>
+    </div>
+    <button class="cart-checkout-btn" id="cartCheckoutBtn">
+      Passer commande <span class="arrow" style="background:currentColor;"></span>
+    </button>
+  </div>
+</aside>
+
+<!-- ═══════════════ FICHE PRODUIT (modale) ═══════════════ -->
+<div class="pdp-overlay" id="pdpOverlay" aria-hidden="true"></div>
+<div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-labelledby="pdpName" aria-hidden="true">
+  <div class="pdp-card">
+    <button class="pdp-close" id="pdpClose" aria-label="Fermer la fiche produit">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="pdp-img">
+      <span class="pdp-img-badge" id="pdpBadge"></span>
+      <span class="pdp-img-tag">Jacob's Bio · Bouaké</span>
+      <img id="pdpImg" src="" alt="" width="600" height="750" loading="lazy" decoding="async">
+    </div>
+    <div class="pdp-body">
+      <div class="pdp-cat" id="pdpCat"></div>
+      <h2 class="pdp-name" id="pdpName"></h2>
+      <div class="pdp-format" id="pdpFormat"></div>
+      <div class="pdp-price" id="pdpPrice"></div>
+      <div class="pdp-divider"></div>
+      <div class="pdp-section-title">Bienfaits</div>
+      <ul class="pdp-benefits" id="pdpBenefits"></ul>
+      <div class="pdp-usage" id="pdpUsage"></div>
+      <div class="pdp-actions">
+        <button class="btn btn-primary" id="pdpAdd">
+          Ajouter au panier <span class="arrow"></span>
+        </button>
+        <a href="#" class="btn btn-whatsapp" id="pdpWa" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" fill="currentColor"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WHATSAPP FLOAT ═══════════════ -->
+<a href="https://wa.me/2250777362923?text=Bonjour%20Jacob%27s%20Bio%20!" target="_blank" rel="noopener" class="wa-float" aria-label="Discuter sur WhatsApp">
+  <span class="wa-icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01zM12.04 20.15h-.01a8.06 8.06 0 0 1-4.11-1.13l-.29-.17-3.05.8.81-2.97-.19-.31a8.13 8.13 0 0 1-1.26-4.36c0-4.49 3.65-8.14 8.14-8.14 2.17 0 4.22.85 5.76 2.39a8.09 8.09 0 0 1 2.39 5.76c-.01 4.49-3.66 8.13-8.14 8.13zm4.47-6.1c-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.21-1.43-1.35-1.67-.14-.24-.01-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z" fill="currentColor"/>
+    </svg>
+  </span>
+  <span class="wa-label">Discuter avec nous</span>
+</a>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal animations
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal, .reveal-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom < 0 || (rect.top < window.innerHeight && rect.bottom > 0)) {
+      el.classList.add('in');
+    } else {
+      io.observe(el);
+    }
+  });
+  // Filet de sécurité : si IO casse, on force tout à visible après 3s
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in), .reveal-up:not(.in)').forEach(el => el.classList.add('in'));
+  }, 3000);
+
+  // GSAP parallax
+  gsap.registerPlugin(ScrollTrigger);
+  // Hero anims : on délègue à la classe .reveal-up + IntersectionObserver (plus fiable que GSAP from)
+  // Pour deep link (hash), on force la visibilité immédiate
+  if (location.hash && location.hash !== '#hero' && location.hash !== '#') {
+    document.querySelectorAll('.hero-card, .hero-cat, .hero-trust-item, .reveal, .reveal-up').forEach(el => {
+      el.classList.add('in');
+    });
+  }
+  // Anim entrée hero-card (sans .reveal-up sur les enfants → animation directe via opacity transition)
+  gsap.fromTo('.hero-eyebrow, .hero-title, .hero-sub, .hero-cta-row', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.08, ease: 'power3.out', clearProps: 'all' });
+  gsap.to('.story-visual img', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.story', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  // ─── Carrousel témoignages (cartes empilées, swipe, dots) ───
+  const TESTIMONIALS = [
+    {
+      initials: 'PK',
+      name: 'Phanie K.',
+      meta: 'Bouaké · Kit Vitesse',
+      text: 'Sans te mentir, vos produits sont très bons. Ça grossit les fesses très bien, mais faut être patiente, c\'est naturel. J\'ai commencé il y a pas longtemps et déjà, les gens parlent sur mes fesses. Mon chéri m\'a même dit : « Tchiéé bb, tes fesses ont poussé hein, et c\'est mou comme ça 😂 ». J\'ai pris le suppo, la crème et l\'huile. Merci 🙏'
+    },
+    {
+      initials: 'AK',
+      name: 'Awa K.',
+      meta: 'Bouaké · Suppositoire Bobaraba',
+      text: 'Bonjour ma grande, tes suppo sont très bons. Mes menstrues venaient chaque deux semaines, et ça venait très fort, ça me donnait des maux de ventre, tout ça là. Le jour où j\'ai utilisé, ça a arrêté tout d\'un coup 💪'
+    },
+    {
+      initials: 'KB',
+      name: 'Kouassi B.',
+      meta: 'Côte d\'Ivoire · Detox',
+      text: 'Je devais témoigner depuis la semaine dernière, mais j\'ai attendu le jour de mon anniversaire pour te dire merci, merci infiniment. Ton produit a vraiment nettoyé jusqu\'à diminuer mon ventre qui était dur, gros, ballonné. Que Dieu remplisse ton travail de bénédictions 🙏'
+    },
+    {
+      initials: 'MT',
+      name: 'Marina T.',
+      meta: 'Abidjan · Suppositoire',
+      text: 'Tes suppo sont super bons ! J\'étais constipée. Quand j\'ai mis le suppo le soir au coucher, je t\'assure que le matin je suis allée très bien à la selle, sans problème. Depuis que j\'utilise, je ne suis plus jamais constipée.'
+    },
+    {
+      initials: 'SA',
+      name: 'Safira A.',
+      meta: 'Revendeuse · Côte d\'Ivoire',
+      text: 'Je fais le retour : ma cliente est très satisfaite, elle dit que tu vends de très bons produits. Elle voit le résultat de jour en jour, et elle viendra commander encore. Elle demande aussi si tu vends des produits pour les seins.'
+    }
+  ];
+
+  (function initTestimonials() {
+    const stage = document.getElementById('testiStage');
+    const dotsBox = document.getElementById('testiDots');
+    if (!stage || !dotsBox) return;
+    const N = TESTIMONIALS.length;
+    let current = 0;
+
+    // Cartes
+    TESTIMONIALS.forEach((t, i) => {
+      const card = document.createElement('div');
+      card.className = 'testi-card';
+      card.dataset.index = i;
+      card.innerHTML = `
+        <div class="testi-arrows" aria-hidden="true">
+          <button class="testi-arrow testi-prev" type="button" aria-label="Précédent">&larr;</button>
+          <button class="testi-arrow testi-next" type="button" aria-label="Suivant">&rarr;</button>
+        </div>
+        <div class="testi-avatar" aria-hidden="true">${t.initials}</div>
+        <div class="testi-name">${t.name}</div>
+        <div class="testi-meta">${t.meta}</div>
+        <div class="testi-stars" aria-label="5 étoiles">★ ★ ★ ★ ★</div>
+        <div class="testi-text">${t.text}</div>
+      `;
+      stage.insertBefore(card, dotsBox);
+    });
+
+    // Dots
+    for (let i = 0; i < N; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Témoignage ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsBox.appendChild(dot);
+    }
+
+    const cards = stage.querySelectorAll('.testi-card');
+    const dots  = dotsBox.querySelectorAll('.testi-dot');
+
+    function render() {
+      cards.forEach((c, i) => {
+        const offset = (i - current + N) % N;
+        let pos = 'hidden';
+        if (offset === 0) pos = '0';
+        else if (offset === 1) pos = '1';
+        else if (offset === 2 && N > 2) pos = '2';
+        c.dataset.pos = pos;
+        c.classList.remove('swipe-out-right', 'swipe-out-left', 'dragging');
+        c.style.transform = '';
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function next() {
+      const top = stage.querySelector('.testi-card[data-pos="0"]');
+      if (top) top.classList.add('swipe-out-right');
+      setTimeout(() => { current = (current + 1) % N; render(); }, 350);
+    }
+    function prev() {
+      const top = stage.querySelector('.testi-card[data-pos="0"]');
+      if (top) top.classList.add('swipe-out-left');
+      setTimeout(() => { current = (current - 1 + N) % N; render(); }, 350);
+    }
+    function goTo(i) {
+      if (i === current) return;
+      const top = stage.querySelector('.testi-card[data-pos="0"]');
+      if (top) top.classList.add(i > current ? 'swipe-out-right' : 'swipe-out-left');
+      setTimeout(() => { current = i; render(); }, 350);
+    }
+
+    // Arrows (délégué)
+    stage.addEventListener('click', (e) => {
+      if (e.target.closest('.testi-next')) { e.stopPropagation(); next(); }
+      else if (e.target.closest('.testi-prev')) { e.stopPropagation(); prev(); }
+    });
+
+    // Drag / swipe (pointer events)
+    let dragStartX = 0, dragging = false, activeCard = null;
+    stage.addEventListener('pointerdown', (e) => {
+      const top = stage.querySelector('.testi-card[data-pos="0"]');
+      if (!top || !top.contains(e.target)) return;
+      if (e.target.closest('.testi-arrow')) return;
+      dragging = true; activeCard = top;
+      dragStartX = e.clientX;
+      top.classList.add('dragging');
+      top.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!dragging || !activeCard) return;
+      const dx = e.clientX - dragStartX;
+      activeCard.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`;
+    });
+    stage.addEventListener('pointerup', (e) => {
+      if (!dragging || !activeCard) return;
+      const dx = e.clientX - dragStartX;
+      activeCard.classList.remove('dragging');
+      if (dx > 100) { activeCard.classList.add('swipe-out-right'); setTimeout(() => { current = (current + 1) % N; render(); }, 350); }
+      else if (dx < -100) { activeCard.classList.add('swipe-out-left'); setTimeout(() => { current = (current - 1 + N) % N; render(); }, 350); }
+      else { activeCard.style.transform = ''; }
+      dragging = false; activeCard = null;
+    });
+
+    // Auto-play (pause au hover)
+    let autoplay = setInterval(next, 7000);
+    stage.addEventListener('pointerenter', () => clearInterval(autoplay));
+    stage.addEventListener('pointerleave', () => { autoplay = setInterval(next, 7000); });
+
+    render();
+  })();
+
+  // Burger menu (mobile)
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const showing = navLinks.style.display === 'flex';
+    navLinks.style.display = showing ? '' : 'flex';
+    if (!showing) {
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '100%';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.background = 'rgba(11,11,11,0.95)';
+      navLinks.style.padding = '30px';
+      navLinks.style.gap = '24px';
+    }
+  });
+
+  // Contact form → WhatsApp
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    const type = document.getElementById('cf-type').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    const lines = [
+      'Bonjour Jacob\'s Bio !',
+      '',
+      'Nom : ' + name,
+    ];
+    if (phone) lines.push('Téléphone : ' + phone);
+    lines.push('Type : ' + type, '', 'Message :', message);
+
+    const text = encodeURIComponent(lines.join('\n'));
+    const url = 'https://wa.me/2250777362923?text=' + text;
+    window.open(url, '_blank');
+  });
+
+  /* ═══════════════ PANIER ═══════════════ */
+  const CART_KEY = 'jacobsbio_cart_v1';
+  const SHIPPING = { 'Bouaké': 700, 'Yamoussoukro': 1500, 'Abidjan': 2500, 'Autre': 2500 };
+  const FREE_SHIPPING_THRESHOLD = 20000;
+  /* CRM Backend (Google Apps Script Web App) */
+  const CRM_API_URL = 'https://script.google.com/macros/s/AKfycbzhIM4WNYJNnqr3XamM0bDoWi_Ze-zIDJI4S2mm097S58m_Osn4YzY97A41-Q-nerQN/exec';
+  const CRM_SECRET  = 'jbc_2026_K9pX2vQ7';
+
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
+
+  const fmtPrice = (n) => n.toLocaleString('fr-FR').replace(/,/g, ' ') + ' FCFA';
+
+  const $ = (id) => document.getElementById(id);
+  const navCart = $('navCart');
+  const cartCount = $('cartCount');
+  const cartDrawer = $('cartDrawer');
+  const cartOverlay = $('cartOverlay');
+  const cartClose = $('cartClose');
+  const cartItemsEl = $('cartItems');
+  const cartEmpty = $('cartEmpty');
+  const cartTotal = $('cartTotal');
+  const cartFooter = $('cartFooter');
+  const cartCheckoutBtn = $('cartCheckoutBtn');
+  const checkoutBack = $('checkoutBack');
+  const checkoutSummary = $('checkoutSummary');
+  const checkoutForm = $('checkoutForm');
+  const cartTitle = $('cartTitle');
+
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    renderCart();
+  }
+
+  function addItem(p) {
+    const existing = cart.find(i => i.id === p.id);
+    if (existing) existing.qty++;
+    else cart.push({ ...p, qty: 1 });
+    saveCart();
+    openCart();
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty = Math.max(0, item.qty + delta);
+    if (item.qty === 0) cart = cart.filter(i => i.id !== id);
+    saveCart();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    saveCart();
+  }
+
+  function getSubtotal() {
+    return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function renderCart() {
+    const total = getSubtotal();
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+
+    cartCount.textContent = count;
+    navCart.classList.toggle('has-items', count > 0);
+
+    if (cart.length === 0) {
+      cartEmpty.style.display = 'block';
+      cartItemsEl.style.display = 'none';
+      cartFooter.style.display = 'none';
+    } else {
+      cartEmpty.style.display = 'none';
+      cartItemsEl.style.display = 'block';
+      cartFooter.style.display = 'block';
+      cartItemsEl.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-img"><img src="${item.image}" alt="${item.name}"></div>
+          <div class="cart-item-info">
+            <div>
+              <div class="cart-item-cat">${item.cat}</div>
+              <div class="cart-item-name">${item.name}</div>
+            </div>
+            <div class="cart-item-controls">
+              <button class="cart-qty-btn" data-action="dec" data-id="${item.id}">−</button>
+              <span class="cart-qty">${item.qty}</span>
+              <button class="cart-qty-btn" data-action="inc" data-id="${item.id}">+</button>
+            </div>
+          </div>
+          <div class="cart-item-right">
+            <div class="cart-item-price">${fmtPrice(item.price * item.qty)}</div>
+            <button class="cart-item-remove" data-action="del" data-id="${item.id}">Retirer</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    cartTotal.textContent = fmtPrice(total);
+  }
+
+  function openCart() {
+    cartDrawer.classList.add('open');
+    cartDrawer.classList.remove('checkout-mode');
+    cartOverlay.classList.add('open');
+    cartTitle.textContent = 'Mon panier';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    cartDrawer.classList.remove('open', 'checkout-mode');
+    cartOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showCheckout() {
+    cartDrawer.classList.add('checkout-mode');
+    cartTitle.textContent = 'Vos coordonnées';
+    // Build summary
+    const subtotal = getSubtotal();
+    let lines = cart.map(i => `<div class="checkout-summary-row"><span>${i.name} ×${i.qty}</span><span>${fmtPrice(i.price * i.qty)}</span></div>`);
+    lines.push(`<div class="checkout-summary-row total"><span>Sous-total</span><span>${fmtPrice(subtotal)}</span></div>`);
+    if (subtotal < FREE_SHIPPING_THRESHOLD) {
+      lines.push(`<div class="checkout-summary-row" style="font-size:11px;color:var(--gold-deep);margin-top:6px;">+${fmtPrice(FREE_SHIPPING_THRESHOLD - subtotal)} pour la livraison offerte</div>`);
+    } else {
+      lines.push(`<div class="checkout-summary-row" style="font-size:11px;color:var(--gold-deep);margin-top:6px;">Livraison offerte ✓</div>`);
+    }
+    checkoutSummary.innerHTML = lines.join('');
+  }
+
+  function hideCheckout() {
+    cartDrawer.classList.remove('checkout-mode');
+    cartTitle.textContent = 'Mon panier';
+  }
+
+  // Event listeners
+  document.querySelectorAll('.prod-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const card = btn.closest('.prod-card');
+      const p = {
+        id: card.dataset.id,
+        name: card.dataset.name,
+        cat: card.dataset.cat,
+        price: parseInt(card.dataset.price),
+        image: card.dataset.image
+      };
+      addItem(p);
+      // Flash button
+      btn.classList.add('added');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="fill:currentColor;width:14px;height:14px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ajouté';
+      setTimeout(() => {
+        btn.classList.remove('added');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier';
+      }, 1600);
+    });
+  });
+
+  // ─── Fiche produit (modale catalogue) ───
+  const PRODUCT_DETAILS = {
+    'suppo-150': {
+      format: '150g — 30 grains', badge: 'Bestseller',
+      benefits: ['Dégraisse le ventre', 'Régularise les règles', 'Soigne le bobodouman', 'Aide contre l\'infertilité'],
+      usage: 'Cure recommandée : traitement de 2 semaines'
+    },
+    'sirop-shape': {
+      format: '300ml — Sirop naturel', badge: '+15% prise de poids',
+      benefits: ['Grossit les fesses', 'Développe le bassin', 'Remplit les creux', '+15% de prise de poids'],
+      usage: 'Posologie : 2 cuillères à soupe matin et soir'
+    },
+    'creme-vitesse-300': {
+      format: '300g — Crème naturelle', badge: 'Format complet',
+      benefits: ['Donne du volume', 'Nourrit intensément', 'Galbe les fesses', 'Galbe les seins'],
+      usage: 'Application matin et soir sur zones ciblées'
+    },
+    'huile-raff': {
+      format: 'Flacon pompe — Soin ciblé', badge: 'Soin ciblé',
+      benefits: ['Raffermit la peau', 'Améliore l\'élasticité', 'Nourrit en profondeur', 'Galbe les zones ciblées'],
+      usage: 'Massage matin et soir sur les zones à raffermir'
+    },
+    'savon-noir': {
+      format: 'Magic Black — 550g', badge: 'Top vente',
+      benefits: ['Action éclaircissante', 'Élimine les vergetures noires', 'Traite les masques de grossesse', 'Pour peaux non sensibles'],
+      usage: 'Appliquer 5 minutes, frotter avec un gant de crin, rincer'
+    },
+    'savon-mangue': {
+      format: 'Beurre de Mangue — 550g', badge: 'Dès 18 ans',
+      benefits: ['Éclaircit naturellement', 'Action antiseptique', 'Uniformise le teint', 'Traite les vergetures'],
+      usage: 'Corps matin et soir. À ne pas appliquer sur le visage.'
+    },
+    'kit-botchor-moyen': {
+      format: 'Petite crème + Huile + Grande suppo', badge: 'Populaire',
+      benefits: ['Grande boîte suppositoire', 'Crème naturelle', 'Huile complémentaire', 'Action renforcée'],
+      usage: 'Kit 3 produits. Résultats optimaux sur 1 mois.'
+    },
+    'kit-botchor-premium': {
+      format: 'Grande crème + Huile + Grande suppo', badge: 'Premium',
+      benefits: ['Grande crème Vitesse', 'Grande boîte suppositoire', 'Huile complémentaire', 'Résultats maximaux'],
+      usage: 'Kit 3 grands formats. Gamme complète Botchor.'
+    },
+    'suppo-250': {
+      format: '250g — 65 grains', badge: 'Cure complète',
+      benefits: ['Dégraisse le ventre', 'Régularise les règles', 'Soigne le bobodouman', 'Aide contre l\'infertilité'],
+      usage: 'Cure recommandée : traitement d\'1 mois et 5 jours'
+    },
+    'sirop-sublime': {
+      format: '500ml — 100% Végétal', badge: 'Nouveau',
+      benefits: ['Grossit les fesses', 'Développe les hanches', 'Développe le bassin', 'Remplit les creux'],
+      usage: 'Posologie : 2 cuillères à soupe matin et soir'
+    },
+    'creme-vitesse-150': {
+      format: '150g — Format découverte', badge: 'Format découverte',
+      benefits: ['Donne du volume', 'Nourrit intensément', 'Galbe les fesses', 'Galbe les seins'],
+      usage: 'Application matin et soir sur zones ciblées'
+    },
+    'savon-collagene': {
+      format: '550g — Dès 5 ans', badge: 'Non éclaircissant',
+      benefits: ['Non éclaircissant', 'Effet gommant', 'Élimine les mauvaises odeurs', 'Peau rafraîchie et jeune'],
+      usage: 'Matin et soir, corps et visage.'
+    },
+    'caolins': {
+      format: 'Produit naturel — Usage externe', badge: 'Grossissant naturel',
+      benefits: ['Grossit les fesses', 'Grossit les seins', 'Développe les mollets', 'Volume « 3ème pied »'],
+      usage: 'Usage externe selon les recommandations Jacob\'s Bio'
+    },
+    'kit-fessiers': {
+      format: 'Suppositoire 250g + Huile Raffermissante', badge: 'Kit complet',
+      benefits: ['Sublimation des fessiers', 'Action ciblée hanches', 'Formule traditionnelle', 'Huile complémentaire'],
+      usage: 'Traitement complet sur 1 mois (interne + externe)'
+    },
+    'kit-raffermissant': {
+      format: 'Crème Vitesse + Huile Raffermissante', badge: 'Seins & Peau',
+      benefits: ['Raffermit les seins', 'Effet lourd et galbé', 'Améliore l\'élasticité', 'Nourrit intensément'],
+      usage: 'Application matin et soir, crème puis huile.'
+    },
+    'mini-kit-botchor': {
+      format: 'Petite crème + Petite suppo + Huile', badge: 'Entrée de gamme',
+      benefits: ['Crème naturelle', 'Suppositoire traditionnel', 'Huile complémentaire', 'Résultats visibles'],
+      usage: 'Kit 3 produits. Usage interne et externe au quotidien.'
+    },
+    'kit-vitesse-mini': {
+      format: 'Sirop + Petite suppo + Huile', badge: 'Action double',
+      benefits: ['Sirop Sublime Courbes 500ml', 'Petite boîte suppositoire', 'Huile complémentaire', 'Action interne + externe'],
+      usage: 'Kit 3 produits. Action combinée matin et soir.'
+    },
+    'kit-vitesse': {
+      format: 'Grande suppo + Huile + Sirop', badge: 'Résultats rapides',
+      benefits: ['Sirop Sublime Courbes 500ml', 'Grande boîte suppositoire', 'Huile complémentaire', 'Fesses · Bassin · Creux'],
+      usage: 'Kit 3 produits. Résultats rapides en 1 mois.'
+    }
+  };
+
+  const pdp = document.getElementById('pdp');
+  const pdpOverlay = document.getElementById('pdpOverlay');
+  let currentPdpProduct = null;
+
+  function openPdp(p) {
+    const d = PRODUCT_DETAILS[p.id] || { format: '', badge: p.cat, benefits: [], usage: '' };
+    document.getElementById('pdpImg').src = p.image;
+    document.getElementById('pdpImg').alt = p.name;
+    document.getElementById('pdpBadge').textContent = d.badge;
+    document.getElementById('pdpCat').textContent = p.cat;
+    document.getElementById('pdpName').textContent = p.name;
+    document.getElementById('pdpFormat').textContent = d.format;
+    document.getElementById('pdpPrice').innerHTML = (+p.price).toLocaleString('fr-FR').replace(/,/g, ' ') + ' <small>FCFA</small>';
+
+    const ul = document.getElementById('pdpBenefits');
+    ul.innerHTML = d.benefits.map(b => `
+      <li class="pdp-benefit">
+        <span class="pdp-benefit-check"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span>
+        <span>${b}</span>
+      </li>`).join('');
+    document.getElementById('pdpUsage').innerHTML = `<span>${d.usage}</span>`;
+
+    const waMsg = encodeURIComponent(`Bonjour Jacob's Bio !\n\nJe suis intéressée par : ${p.name} (${(+p.price).toLocaleString('fr-FR').replace(/,/g, ' ')} FCFA).\n\nPouvez-vous me donner plus d'informations ?`);
+    document.getElementById('pdpWa').href = `https://wa.me/2250777362923?text=${waMsg}`;
+
+    currentPdpProduct = p;
+    pdp.classList.add('open');
+    pdpOverlay.classList.add('open');
+    pdp.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePdp() {
+    pdp.classList.remove('open');
+    pdpOverlay.classList.remove('open');
+    pdp.setAttribute('aria-hidden', 'true');
+    if (!cartDrawer.classList.contains('open')) document.body.style.overflow = '';
+    currentPdpProduct = null;
+  }
+
+  document.getElementById('pdpClose').addEventListener('click', closePdp);
+  pdpOverlay.addEventListener('click', closePdp);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && pdp.classList.contains('open')) closePdp();
+  });
+  document.getElementById('pdpAdd').addEventListener('click', () => {
+    if (!currentPdpProduct) return;
+    addItem(currentPdpProduct);
+    closePdp();
+  });
+
+  // Clic sur la card (hors bouton + ou .prod-add) ouvre la modale
+  document.querySelectorAll('.prod-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.prod-add')) return;
+      const p = {
+        id: card.dataset.id,
+        name: card.dataset.name,
+        cat: card.dataset.cat,
+        price: parseInt(card.dataset.price),
+        image: card.dataset.image
+      };
+      openPdp(p);
+    });
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.style.cursor = 'pointer';
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const p = {
+          id: card.dataset.id,
+          name: card.dataset.name,
+          cat: card.dataset.cat,
+          price: parseInt(card.dataset.price),
+          image: card.dataset.image
+        };
+        openPdp(p);
+      }
+    });
+  });
+
+  navCart.addEventListener('click', openCart);
+  cartClose.addEventListener('click', closeCart);
+  cartOverlay.addEventListener('click', closeCart);
+
+  cartItemsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const action = btn.dataset.action;
+    if (action === 'inc') changeQty(id, 1);
+    else if (action === 'dec') changeQty(id, -1);
+    else if (action === 'del') removeItem(id);
+  });
+
+  cartCheckoutBtn.addEventListener('click', showCheckout);
+  checkoutBack.addEventListener('click', hideCheckout);
+
+  checkoutForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+    const originalHTML = submitBtn.innerHTML;
+    const originalBg = submitBtn.style.background;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Enregistrement…';
+    submitBtn.style.opacity = '0.7';
+
+    const name = $('co-name').value.trim();
+    const phone = $('co-phone').value.trim();
+    const email = $('co-email').value.trim();
+    const city = $('co-city').value;
+    const address = $('co-address').value.trim();
+    const notes = $('co-notes').value.trim();
+
+    const subtotal = getSubtotal();
+    const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (SHIPPING[city] || 0);
+    const total = subtotal + shipping;
+
+    // ───── 1. Envoi au CRM (Google Sheet + email auto) ─────
+    let orderId = '';
+    let crmOK = false;
+    try {
+      const payload = {
+        secret: CRM_SECRET,
+        name, phone, email, city, address, notes,
+        items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price, cat: i.cat })),
+        subtotal, shipping, total,
+        payment: 'Mobile Money (à confirmer WhatsApp)',
+        source: 'Site vitrine'
+      };
+      const res = await fetch(CRM_API_URL, { method: 'POST', body: JSON.stringify(payload) });
+      const result = await res.json();
+      if (result.success) {
+        orderId = result.orderId || '';
+        crmOK = true;
+      } else {
+        console.warn('CRM responded with error:', result.error);
+      }
+    } catch (err) {
+      console.warn('CRM unreachable, fallback WhatsApp only:', err);
+    }
+
+    // ───── 2. Construction du message WhatsApp de confirmation ─────
+    const lines = [
+      'Bonjour Jacob\'s Bio,',
+      orderId
+        ? `Je viens de valider la commande ${orderId} sur le site.`
+        : 'Je viens de passer une commande sur le site.',
+      '',
+      '═══ ARTICLES ═══'
+    ];
+    cart.forEach(i => {
+      lines.push(`• ${i.name} ×${i.qty} = ${fmtPrice(i.price * i.qty)}`);
+    });
+    lines.push('', '═══ TOTAL ═══');
+    lines.push(`Sous-total : ${fmtPrice(subtotal)}`);
+    lines.push(`Livraison ${city} : ${shipping === 0 ? 'OFFERTE' : fmtPrice(shipping)}`);
+    lines.push(`Total à régler : ${fmtPrice(total)}`);
+    lines.push('', '═══ MES COORDONNÉES ═══');
+    lines.push(`Nom : ${name}`);
+    lines.push(`Téléphone : ${phone}`);
+    lines.push(`E-mail : ${email}`);
+    lines.push(`Ville : ${city}`);
+    lines.push(`Adresse : ${address}`);
+    if (notes) lines.push(`Notes : ${notes}`);
+    lines.push('', 'Merci de me confirmer la commande et m\'envoyer les modalités de paiement Mobile Money.');
+
+    const text = encodeURIComponent(lines.join('\n'));
+
+    // ───── 3. État succès visuel ─────
+    submitBtn.style.opacity = '1';
+    submitBtn.style.background = '#16a34a';
+    submitBtn.style.color = 'white';
+    submitBtn.innerHTML = orderId
+      ? `✓ Enregistrée · ${orderId}`
+      : '✓ Commande prête';
+
+    // ───── 4. Ouverture WhatsApp + reset ─────
+    setTimeout(() => {
+      window.open('https://wa.me/2250777362923?text=' + text, '_blank');
+      setTimeout(() => {
+        cart = [];
+        saveCart();
+        hideCheckout();
+        closeCart();
+        checkoutForm.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.style.background = originalBg;
+        submitBtn.style.color = '';
+        submitBtn.style.opacity = '';
+      }, 1500);
+    }, 1200);
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartDrawer.classList.contains('open')) closeCart();
+  });
+
+  renderCart();
+</script>
+</body>
+</html>

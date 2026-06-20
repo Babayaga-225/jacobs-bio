@@ -1,0 +1,102 @@
+═══════════════════════════════════════════════════════════════
+   JACOB'S BIO COSMÉTIQUES — SITE VITRINE
+   Version export Juin 2026
+═══════════════════════════════════════════════════════════════
+
+
+📁 CONTENU DU PACKAGE
+─────────────────────
+
+  index.html                              → Version A : Premium or/cream (validée)
+  index-clean.html                        → Version B : Minimaliste blanc/noir
+  index_v1_commerce_2026-06-17.html      → Sauvegarde de sécurité (version validée le 17/06/2026)
+  assets/                                 → Toutes les images, logos, photos
+    assets/photos/                        → 18 produits + portrait Marie-Jacob
+  LISEZ-MOI.txt                           → Ce fichier
+
+
+🚀 COMMENT VOIR LE SITE
+─────────────────────────
+
+  OPTION 1 — Le plus simple
+  ─────────────────────────
+  Double-clique sur "index.html" ou "index-clean.html"
+  → Ça ouvre directement dans ton navigateur (Chrome, Edge, Firefox)
+  → Internet nécessaire (pour les polices Google + animations)
+
+  OPTION 2 — Avec un serveur local (si l'option 1 marche pas bien)
+  ─────────────────────────────────────────────────────────────────
+  Ouvre PowerShell ou Terminal dans ce dossier et tape :
+
+    python -m http.server 8080
+
+  Puis ouvre dans le navigateur : http://localhost:8080/index.html
+
+
+🛒 LE SITE EST-IL CONNECTÉ AU CRM GOOGLE SHEETS ?
+─────────────────────────────────────────────────
+
+  OUI. Les commandes passées sur ces sites sont automatiquement
+  envoyées vers le Google Sheet "Jacob's Bio CRM"
+  (compte : anicettafotienkone@gmail.com).
+
+  Chaque commande génère un email de notification à :
+  jacobsbiocosmetik@gmail.com
+
+  Le bouton "Commander sur WhatsApp" ouvre une conversation
+  avec le numéro +225 0777362923.
+
+
+🔄 QUELLE VERSION UTILISER ?
+─────────────────────────────
+
+  index.html         — Pour le storytelling / Instagram / lancement
+                        → Cormorant + or + photos émotionnelles
+                        → 8 produits phares + Marie-Jacob portrait + témoignages
+                        → Animations premium
+
+  index-clean.html   — Pour les pubs Facebook / conversion directe
+                        → Inter + blanc/noir minimaliste
+                        → 18 produits catalogue complet
+                        → Path-to-product ultra direct
+
+
+🌐 PUBLIER SUR INTERNET
+─────────────────────────
+
+  Le site est statique → publiable gratuitement sur :
+
+  • Netlify Drop    https://app.netlify.com/drop      (glisse-dépose le dossier)
+  • Vercel          https://vercel.com/new
+  • GitHub Pages    push dans un repo public + enable Pages
+  • Cloudflare Pages https://pages.cloudflare.com
+
+  Une fois en ligne, tu peux y brancher un nom de domaine
+  (ex. jacobsbio.ci ou jacobsbiocosmetik.com).
+
+
+📝 MODIFIER LE CONTENU
+─────────────────────────
+
+  Le HTML est lisible avec un simple éditeur de texte (Notepad++,
+  Sublime Text, VS Code…). Cherche par mot-clé pour trouver
+  ce que tu veux modifier :
+
+  • Changer un prix         → cherche "FCFA"
+  • Changer un texte        → cherche le texte exact dans le fichier
+  • Changer une photo       → remplace dans assets/photos/ avec
+                              même nom de fichier
+  • Changer le WhatsApp     → cherche "0777362923"
+
+
+⚠️  RESTORER LA VERSION VALIDÉE
+─────────────────────────────────
+
+  Si tu casses index.html accidentellement, copie
+  "index_v1_commerce_2026-06-17.html" en "index.html" pour
+  restaurer la version validée le 17 juin 2026.
+
+
+───────────────────────────────────────────────────────────────
+   MyComm Platform · Tafotien Anicet · Bouaké · 2026
+───────────────────────────────────────────────────────────────
