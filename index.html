@@ -1529,6 +1529,8 @@
   @media (max-width: 880px) {
     .pdp { padding: 0; align-items: flex-end; }
     .pdp-card {
+      display: flex;
+      flex-direction: column;
       grid-template-columns: 1fr;
       max-width: 100%;
       max-height: 94vh;
@@ -1536,8 +1538,26 @@
       transform: translateY(100%);
     }
     .pdp.open .pdp-card { transform: translateY(0); }
-    .pdp-img { aspect-ratio: 4 / 3; }
-    .pdp-body { padding: 36px 28px 32px; }
+    .pdp-img { aspect-ratio: 4 / 3; flex-shrink: 0; }
+    .pdp-body {
+      padding: 28px 24px 32px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .pdp-actions {
+      position: sticky;
+      bottom: -32px;
+      background: var(--ivory);
+      padding: 14px 0 0;
+      margin: auto -24px -32px;
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-bottom: 16px;
+      border-top: 1px solid rgba(212, 167, 68, 0.18);
+      box-shadow: 0 -8px 20px -8px rgba(0,0,0,0.06);
+    }
   }
 
   /* ─────────── WHATSAPP FLOAT (pill expansible) ─────────── */
@@ -3024,47 +3044,53 @@
     const text = encodeURIComponent(lines.join('\n'));
     const waUrl = 'https://wa.me/2250777362923?text=' + text;
 
-    // ───── 3. État succès : on transforme le submit en confirmation + on révèle un VRAI lien WhatsApp ─────
-    //         (le lien <a> est cliqué par l'utilisateur → contourne le popup blocker iOS Safari)
-    submitBtn.style.opacity = '1';
-    submitBtn.style.background = '#16a34a';
-    submitBtn.style.color = 'white';
-    submitBtn.style.cursor = 'default';
-    submitBtn.innerHTML = orderId
-      ? `✓ Enregistrée · ${orderId}`
-      : '✓ Commande prête';
-    submitBtn.style.display = 'none';
-
     const waLink = document.getElementById('waContinueLink');
     const waLabel = document.getElementById('waContinueLabel');
     const footerText = document.getElementById('checkoutFooterText');
-    waLink.href = waUrl;
-    waLabel.textContent = orderId
-      ? `Continuer sur WhatsApp · ${orderId}`
-      : 'Continuer sur WhatsApp';
-    waLink.style.display = 'flex';
-    if (footerText) footerText.innerHTML = '✓ Commande enregistrée. Cliquez ci-dessus pour envoyer le récapitulatif sur WhatsApp.';
 
-    // ───── 4. Reset uniquement quand l'utilisateur clique le lien WhatsApp ─────
-    waLink.onclick = () => {
-      setTimeout(() => {
-        cart = [];
-        saveCart();
-        hideCheckout();
-        closeCart();
-        checkoutForm.reset();
-        // Réinitialise les boutons pour la prochaine commande
-        submitBtn.disabled = false;
-        submitBtn.style.display = '';
-        submitBtn.innerHTML = originalHTML;
-        submitBtn.style.background = originalBg;
-        submitBtn.style.color = '';
-        submitBtn.style.cursor = '';
-        waLink.style.display = 'none';
-        if (footerText) footerText.innerHTML = 'Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.';
-      }, 1500);
+    // Reset partagé
+    const resetCheckoutUI = () => {
+      cart = [];
+      saveCart();
+      hideCheckout();
+      closeCart();
+      checkoutForm.reset();
+      submitBtn.disabled = false;
+      submitBtn.style.display = '';
+      submitBtn.innerHTML = originalHTML;
+      submitBtn.style.background = originalBg;
+      submitBtn.style.color = '';
+      submitBtn.style.cursor = '';
+      submitBtn.style.opacity = '';
+      waLink.style.display = 'none';
+      if (footerText) footerText.innerHTML = 'Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.';
     };
 
+    // ───── 3. Tentative redirection AUTOMATIQUE (Android/Chrome marche, iOS Safari bloque) ─────
+    let autoOpened = false;
+    try {
+      const win = window.open(waUrl, '_blank');
+      if (win && !win.closed && typeof win.closed !== 'undefined') {
+        autoOpened = true;
+      }
+    } catch (e) { autoOpened = false; }
+
+    if (autoOpened) {
+      // Succès auto : feedback rapide + reset
+      submitBtn.style.opacity = '1';
+      submitBtn.style.background = '#16a34a';
+      submitBtn.style.color = 'white';
+      submitBtn.innerHTML = orderId ? `✓ Envoyée · ${orderId}` : '✓ Envoyée';
+      setTimeout(resetCheckoutUI, 1500);
+    } else {
+      // Bloqué (iOS Safari) → bouton manuel à toucher
+      submitBtn.style.display = 'none';
+      waLink.href = waUrl;
+      waLabel.textContent = orderId ? `Continuer sur WhatsApp · ${orderId}` : 'Continuer sur WhatsApp';
+      waLink.style.display = 'flex';
+      if (footerText) footerText.innerHTML = '✓ Commande enregistrée. Touchez le bouton vert pour envoyer le récap WhatsApp.';
+      waLink.onclick = () => setTimeout(resetCheckoutUI, 1500);
+    }
   });
 
   // ESC to close
