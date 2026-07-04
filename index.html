@@ -406,6 +406,185 @@
     }
   }
 
+  /* ─────────── BANDEAU ROTATIF NOUVEAUTÉS (dans le hero) ─────────── */
+  .new-arrivals {
+    margin: 34px 0 8px;
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(212, 167, 68, 0.10) 0%, rgba(11, 8, 5, 0.03) 100%),
+      var(--ivory);
+    border: 1px solid rgba(212, 167, 68, 0.30);
+    border-radius: 22px;
+    padding: 24px 32px;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 235, 180, 0.35),
+      0 10px 40px -20px rgba(212, 167, 68, 0.25);
+  }
+  .new-arrivals::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-bright), var(--gold), transparent);
+    animation: naSweep 3s ease-in-out infinite;
+  }
+  @keyframes naSweep {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .na-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .na-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .na-label::before {
+    content: ''; display: block;
+    width: 8px; height: 8px;
+    background: #dc2626;
+    border-radius: 999px;
+    animation: naPulse 1.4s ease-in-out infinite;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
+  }
+  @keyframes naPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.65; }
+  }
+  .na-see-all {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-deep);
+    text-decoration: none;
+    transition: gap 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .na-see-all:hover { gap: 14px; color: var(--text); }
+  .na-see-all svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .na-stage {
+    position: relative;
+    min-height: 130px;
+  }
+  .na-slide {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    gap: 26px;
+    align-items: center;
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none;
+    transform: translateX(20px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .na-slide.active {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(0);
+    position: relative;
+  }
+  .na-img {
+    aspect-ratio: 1;
+    background: var(--cream-warm);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -8px rgba(11, 8, 5, 0.25);
+  }
+  .na-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .na-slide.active:hover .na-img img { transform: scale(1.06); }
+  .na-content { display: flex; flex-direction: column; gap: 6px; }
+  .na-name {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.6vw, 30px);
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+  .na-tagline {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold-deep);
+    letter-spacing: 0.02em;
+  }
+  .na-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-soft);
+    max-width: 48ch;
+    margin-top: 4px;
+  }
+  .na-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px;
+    background: var(--gold-gradient);
+    color: var(--black);
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.3s var(--ease);
+    box-shadow: 0 8px 20px -6px rgba(212, 167, 68, 0.5);
+  }
+  .na-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -8px rgba(212, 167, 68, 0.65);
+  }
+  .na-cta svg { width: 14px; height: 14px; fill: currentColor; }
+
+  .na-controls {
+    display: flex; justify-content: center; align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .na-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: rgba(212, 167, 68, 0.30);
+    border: none; cursor: pointer;
+    transition: all 0.4s var(--ease);
+    padding: 0;
+  }
+  .na-dot.active {
+    background: var(--gold);
+    width: 28px;
+    box-shadow: 0 0 0 3px rgba(212, 167, 68, 0.16);
+  }
+  .na-progress {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(212, 167, 68, 0.15);
+    overflow: hidden;
+    border-radius: 0 0 22px 22px;
+  }
+  .na-progress-bar {
+    height: 100%;
+    background: var(--gold-gradient);
+    width: 0%;
+    transition: width 5s linear;
+  }
+  .na-progress-bar.filling { width: 100%; }
+
+  @media (max-width: 780px) {
+    .new-arrivals { padding: 20px 20px; margin: 24px 0 4px; }
+    .na-slide { grid-template-columns: 88px 1fr; gap: 16px; }
+    .na-cta { grid-column: 1 / -1; justify-content: center; margin-top: 4px; }
+    .na-name { font-size: 20px; }
+    .na-tagline { font-size: 13px; }
+    .na-desc { font-size: 13px; }
+    .na-see-all { display: none; }
+  }
+
   /* Bandeau trust sous le hero */
   .hero-trust {
     display: flex; justify-content: center; flex-wrap: wrap;
@@ -628,7 +807,7 @@
   }
   .marquee-track {
     display: flex; gap: 60px;
-    animation: marquee 22s linear infinite;
+    animation: marquee 16s linear infinite;
     white-space: nowrap;
     font-family: var(--display);
     font-size: 32px; font-style: italic;
@@ -1560,6 +1739,179 @@
     }
   }
 
+  /* ─────────── COMING SOON — 4 NOUVEAUX SAVONS ─────────── */
+  .coming-soon {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(212, 167, 68, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
+    padding: 130px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .coming-soon::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .cs-head { text-align: center; margin-bottom: 70px; }
+  .cs-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 8px 22px;
+    background: linear-gradient(135deg, rgba(212, 167, 68, 0.15), rgba(212, 167, 68, 0.06));
+    border: 1px solid rgba(212, 167, 68, 0.35);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 26px;
+  }
+  .cs-eyebrow::before, .cs-eyebrow::after {
+    content: ''; display: block;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 999px;
+    animation: csDot 2s ease-in-out infinite;
+  }
+  .cs-eyebrow::after { animation-delay: 1s; }
+  @keyframes csDot {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+  .cs-title {
+    font-family: var(--display);
+    font-size: clamp(38px, 5.4vw, 74px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 20ch;
+    margin-left: auto; margin-right: auto;
+  }
+  .cs-title em {
+    font-style: italic; color: var(--gold-deep);
+    font-weight: 500;
+  }
+  .cs-lead {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    max-width: 54ch;
+    margin: 0 auto;
+  }
+
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .cs-card {
+    position: relative;
+    background: var(--ivory);
+    border: 1px solid rgba(212, 167, 68, 0.20);
+    border-radius: 14px;
+    padding: 24px 20px 26px;
+    overflow: hidden;
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  }
+  .cs-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 30px 60px -20px rgba(212, 167, 68, 0.28),
+      0 0 0 1px rgba(212, 167, 68, 0.35);
+  }
+  .cs-badge {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: var(--gold-light);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    box-shadow: 0 6px 16px -4px rgba(0,0,0,0.35);
+  }
+  .cs-img {
+    aspect-ratio: 1;
+    background: var(--cream-warm);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    display: grid; place-items: center;
+    position: relative;
+  }
+  .cs-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+  .cs-card:hover .cs-img img { transform: scale(1.05); }
+  .cs-cat {
+    font-size: 11px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-bottom: 8px;
+  }
+  .cs-name {
+    font-family: var(--display);
+    font-size: 22px; font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+  .cs-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text-soft);
+  }
+  .cs-desc strong {
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+
+  .cs-cta-wrap {
+    text-align: center;
+    margin-top: 70px;
+  }
+  .cs-cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 18px 34px;
+    background: var(--black);
+    color: var(--gold-light);
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    transition: all 0.35s var(--ease);
+    border: 1px solid rgba(212, 167, 68, 0.4);
+  }
+  .cs-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -10px rgba(212, 167, 68, 0.55);
+  }
+  .cs-cta svg { width: 18px; height: 18px; fill: currentColor; }
+  .cs-cta-note {
+    display: block; margin-top: 14px;
+    font-family: var(--display); font-style: italic;
+    font-size: 15px; color: var(--text-soft);
+  }
+
+  @media (max-width: 1024px) {
+    .cs-grid { grid-template-columns: repeat(2, 1fr); }
+    .coming-soon { padding: 110px 28px; }
+  }
+  @media (max-width: 640px) {
+    .cs-grid { grid-template-columns: 1fr; gap: 18px; }
+    .coming-soon { padding: 90px 20px; }
+    .cs-card { padding: 20px 18px 22px; }
+  }
+
   /* ─────────── PROMO 50% CRÈMES ─────────── */
   /* Prix barré + nouveau prix sur les cartes */
   .prod-card.on-promo { position: relative; }
@@ -1664,14 +2016,14 @@
   }
   .promo-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 6px 14px;
+    padding: 8px 18px;
     background: linear-gradient(135deg, #ef4444, #dc2626);
     color: white;
     border-radius: 999px;
     font-family: var(--sans);
-    font-size: 11px; font-weight: 600;
+    font-size: 13px; font-weight: 700;
     letter-spacing: 0.24em; text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     box-shadow: 0 8px 20px -6px rgba(220, 38, 38, 0.5);
   }
   .promo-eyebrow::before {
@@ -1682,22 +2034,22 @@
   @keyframes promoBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   .promo-title {
     font-family: var(--display);
-    font-size: clamp(36px, 5vw, 52px);
+    font-size: clamp(44px, 6.5vw, 64px);
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
   .promo-title strong {
     color: #dc2626;
-    font-weight: 600;
+    font-weight: 700;
     font-style: italic;
   }
   .promo-sub {
     font-family: var(--display);
     font-style: italic;
-    font-size: 17px;
+    font-size: 20px;
     color: var(--text-soft);
     margin-bottom: 8px;
   }
@@ -1713,31 +2065,31 @@
   }
   .promo-product-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px dashed rgba(212, 167, 68, 0.25);
-    font-size: 15px;
+    font-size: 17px;
   }
   .promo-product-item:last-child { border-bottom: none; }
-  .promo-product-name { font-family: var(--display); color: var(--text); }
+  .promo-product-name { font-family: var(--display); color: var(--text); font-size: 18px; }
   .promo-product-prices {
-    display: flex; align-items: baseline; gap: 10px;
+    display: flex; align-items: baseline; gap: 12px;
     font-family: var(--sans);
   }
   .promo-product-old {
     text-decoration: line-through;
     color: var(--text-soft);
-    font-size: 13px;
-    opacity: 0.6;
+    font-size: 15px;
+    opacity: 0.65;
   }
   .promo-product-new {
-    font-weight: 600;
+    font-weight: 700;
     color: #dc2626;
-    font-size: 17px;
+    font-size: 21px;
   }
   .promo-dates {
     text-align: center;
-    margin-top: 18px;
-    font-size: 13px;
+    margin-top: 20px;
+    font-size: 15px;
     color: var(--text-soft);
   }
   .promo-dates strong {
@@ -1752,13 +2104,13 @@
   }
   .promo-cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-    padding: 16px 28px;
+    padding: 18px 32px;
     background: var(--gold-gradient);
     color: var(--black);
     border-radius: 999px;
     text-decoration: none;
     font-family: var(--sans);
-    font-size: 13px; font-weight: 600;
+    font-size: 15px; font-weight: 700;
     letter-spacing: 0.14em; text-transform: uppercase;
     border: none; cursor: pointer;
     transition: all 0.3s var(--ease);
@@ -1773,7 +2125,7 @@
     color: var(--text-soft);
     border: none; cursor: pointer;
     font-family: var(--sans);
-    font-size: 12px; letter-spacing: 0.14em;
+    font-size: 14px; letter-spacing: 0.14em;
     text-decoration: underline; text-underline-offset: 3px;
   }
   .promo-decline:hover { color: var(--text); }
@@ -1916,6 +2268,7 @@
     <li><a href="#histoire">L'histoire</a></li>
     <li><a href="#collections">Collections</a></li>
     <li><a href="#produits">Produits</a></li>
+    <li><a href="#bientot" style="color:var(--gold);">Bientôt</a></li>
     <li><a href="#temoignages">Témoignages</a></li>
     <li><a href="#contact">Contact</a></li>
     <li>
@@ -1978,6 +2331,62 @@
           <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
         </span></div>
       </a>
+    </div>
+
+    <!-- Bandeau rotatif nouveautés (4 nouveaux savons) -->
+    <div class="new-arrivals reveal" id="newArrivals" aria-label="Nouveaux savons à venir">
+      <div class="na-header">
+        <div class="na-label">Nouveaux arrivages · Bientôt disponible</div>
+        <a href="#bientot" class="na-see-all">Voir tous les nouveaux savons <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="na-stage" id="naStage">
+        <div class="na-slide active" data-index="0">
+          <div class="na-img"><img src="assets/photos/19_savon-aka-fassi.jpeg" alt="Savon à l'Aka Fassi" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-content">
+            <div class="na-name">Savon à l'Aka Fassi</div>
+            <div class="na-tagline">Éclat · Hydratation · Unification</div>
+            <div class="na-desc">Savon artisanal enrichi à l'Aka Fassi. Illumine le teint, adoucit la peau et redonne l'éclat naturel.</div>
+          </div>
+          <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="na-slide" data-index="1">
+          <div class="na-img"><img src="assets/photos/20_savon-nila.jpeg" alt="Savon au Nila" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-content">
+            <div class="na-name">Savon au Nila</div>
+            <div class="na-tagline">Éclat · Nettoyage · Unification</div>
+            <div class="na-desc">Poudre de Nila pour un teint unifié et purifié. Aide à réduire les taches et rend la peau douce et éclatante.</div>
+          </div>
+          <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="na-slide" data-index="2">
+          <div class="na-img"><img src="assets/photos/21_savon-curcuma-miel.jpeg" alt="Savon au Curcuma & Miel" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-content">
+            <div class="na-name">Savon au Curcuma &amp; Miel</div>
+            <div class="na-tagline">Éclat · Anti-taches · Nourrissant</div>
+            <div class="na-desc">Curcuma et miel naturel pour illuminer le teint et atténuer les taches. Antioxydant et purifiant.</div>
+          </div>
+          <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="na-slide" data-index="3">
+          <div class="na-img"><img src="assets/photos/22_savon-aloe-vera.jpeg" alt="Savon à l'Aloe Vera" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-content">
+            <div class="na-name">Savon à l'Aloe Vera</div>
+            <div class="na-tagline">Hydratation · Apaisant · Réparateur</div>
+            <div class="na-desc">Aloe Vera pour hydrater, apaiser et réparer. Idéal pour les peaux sensibles ou irritées.</div>
+          </div>
+          <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="na-controls" id="naDots">
+        <button class="na-dot active" data-index="0" aria-label="Savon Aka Fassi"></button>
+        <button class="na-dot" data-index="1" aria-label="Savon au Nila"></button>
+        <button class="na-dot" data-index="2" aria-label="Savon Curcuma & Miel"></button>
+        <button class="na-dot" data-index="3" aria-label="Savon Aloe Vera"></button>
+      </div>
+
+      <div class="na-progress"><div class="na-progress-bar" id="naProgress"></div></div>
     </div>
 
     <div class="hero-trust reveal">
@@ -2285,6 +2694,57 @@
         Besoin de conseil ?
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BIENTÔT · 4 NOUVEAUX SAVONS ═══════════════ -->
+<section class="coming-soon" id="bientot" aria-label="Nouvelle collection de savons artisanaux">
+  <div class="cs-head reveal">
+    <div class="cs-eyebrow">Bientôt disponible</div>
+    <h2 class="cs-title">Une nouvelle collection <em>éclat</em>.</h2>
+    <p class="cs-lead">Quatre savons artisanaux 100% naturels, formulés à Bouaké, arrivent dans quelques semaines. Ingrédients traditionnels, résultats visibles.</p>
+  </div>
+
+  <div class="cs-grid">
+    <article class="cs-card reveal-up">
+      <div class="cs-badge">Bientôt</div>
+      <div class="cs-img"><img src="assets/photos/19_savon-aka-fassi.jpeg" alt="Savon à l'Aka Fassi" loading="lazy" decoding="async" width="500" height="500"></div>
+      <div class="cs-cat">Éclat · Hydratation · Unification</div>
+      <h3 class="cs-name">Savon à l'Aka Fassi</h3>
+      <p class="cs-desc">Enrichi à l'<strong>Aka Fassi</strong>, il illumine le teint, adoucit la peau et lui redonne son éclat naturel. Convient à tous types de peaux.</p>
+    </article>
+
+    <article class="cs-card reveal-up">
+      <div class="cs-badge">Bientôt</div>
+      <div class="cs-img"><img src="assets/photos/20_savon-nila.jpeg" alt="Savon au Nila" loading="lazy" decoding="async" width="500" height="500"></div>
+      <div class="cs-cat">Éclat · Nettoyage · Unification</div>
+      <h3 class="cs-name">Savon au Nila</h3>
+      <p class="cs-desc">Poudre de <strong>Nila</strong> pour un teint unifié et purifié. Aide à réduire les taches et rend la peau douce et éclatante.</p>
+    </article>
+
+    <article class="cs-card reveal-up">
+      <div class="cs-badge">Bientôt</div>
+      <div class="cs-img"><img src="assets/photos/21_savon-curcuma-miel.jpeg" alt="Savon au Curcuma & Miel" loading="lazy" decoding="async" width="500" height="500"></div>
+      <div class="cs-cat">Éclat · Anti-taches · Nourrissant</div>
+      <h3 class="cs-name">Savon au Curcuma & Miel</h3>
+      <p class="cs-desc"><strong>Curcuma</strong> et <strong>miel naturel</strong> pour illuminer le teint et atténuer les taches. Antioxydant et purifiant.</p>
+    </article>
+
+    <article class="cs-card reveal-up">
+      <div class="cs-badge">Bientôt</div>
+      <div class="cs-img"><img src="assets/photos/22_savon-aloe-vera.jpeg" alt="Savon à l'Aloe Vera" loading="lazy" decoding="async" width="500" height="500"></div>
+      <div class="cs-cat">Hydratation · Apaisant · Réparateur</div>
+      <h3 class="cs-name">Savon à l'Aloe Vera</h3>
+      <p class="cs-desc"><strong>Aloe Vera</strong> pour hydrater, apaiser et réparer. Idéal pour les peaux sensibles ou irritées. Protège au quotidien.</p>
+    </article>
+  </div>
+
+  <div class="cs-cta-wrap reveal">
+    <a href="https://wa.me/2250777362923?text=Bonjour%20Jacob%27s%20Bio%20!%20Je%20veux%20%C3%AAtre%20pr%C3%A9venue%20d%C3%A8s%20que%20les%20nouveaux%20savons%20artisanaux%20sortent%20(Aka%20Fassi,%20Nila,%20Curcuma%20%26%20Miel,%20Aloe%20Vera)." target="_blank" rel="noopener" class="cs-cta">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+      Être prévenue à la sortie
+    </a>
+    <span class="cs-cta-note">Un message WhatsApp le jour où c'est disponible</span>
   </div>
 </section>
 
@@ -3044,6 +3504,50 @@
       }, 1600);
     });
   });
+
+  // ─── BANDEAU ROTATIF NOUVEAUX SAVONS (dans le hero) ───
+  (function initNewArrivals() {
+    const stage = document.getElementById('naStage');
+    const dotsBox = document.getElementById('naDots');
+    const progress = document.getElementById('naProgress');
+    if (!stage || !dotsBox) return;
+    const slides = stage.querySelectorAll('.na-slide');
+    const dots = dotsBox.querySelectorAll('.na-dot');
+    const N = slides.length;
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 5000;
+
+    function goTo(i) {
+      current = ((i % N) + N) % N;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      if (progress) {
+        progress.classList.remove('filling');
+        // eslint-disable-next-line no-unused-expressions
+        progress.offsetWidth; // reflow
+        progress.classList.add('filling');
+      }
+    }
+
+    function next() { goTo(current + 1); }
+    function start() { stop(); timer = setInterval(next, INTERVAL); progress?.classList.add('filling'); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } progress?.classList.remove('filling'); }
+
+    dots.forEach(d => d.addEventListener('click', () => {
+      goTo(parseInt(d.dataset.index));
+      start();
+    }));
+
+    // Pause au hover
+    const wrap = document.getElementById('newArrivals');
+    if (wrap) {
+      wrap.addEventListener('mouseenter', stop);
+      wrap.addEventListener('mouseleave', start);
+    }
+
+    start();
+  })();
 
   // ─── POP-UP PROMO 50% CRÈMES (semaine du 04 au 11 juillet 2026) ───
   (function initPromoPopup() {
