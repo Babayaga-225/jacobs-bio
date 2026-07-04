@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0805">
+<title>Reçu de commande · Jacob's Bio Cosmétique</title>
+<meta name="description" content="Reçu détaillé de votre commande Jacob's Bio Cosmétique.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo_embleme_blanc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap">
+<style>
+  :root {
+    --gold: #D4A744;
+    --gold-light: #ECC764;
+    --gold-bright: #F2D680;
+    --gold-deep: #A68035;
+    --gold-gradient: linear-gradient(135deg, #ECC764 0%, #D4A744 50%, #A68035 100%);
+    --gold-soft: rgba(212, 167, 68, 0.16);
+    --black: #0A0805;
+    --black-warm: #14100A;
+    --cream: #FAF6EC;
+    --cream-warm: #F4EFE3;
+    --ivory: #FFFCF4;
+    --text: #1A1410;
+    --text-soft: #4A413A;
+    --border: rgba(10, 8, 5, 0.09);
+    --whatsapp: #25D366;
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100vh; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding: 30px 20px;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, .btn { cursor: pointer; }
+
+  .grain {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 200;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .receipt {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--ivory);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 80px -20px rgba(11, 8, 5, 0.20),
+      0 0 0 1px rgba(212, 167, 68, 0.20),
+      inset 0 1px 0 rgba(255, 235, 180, 0.5);
+    position: relative;
+  }
+  .receipt::before, .receipt::after {
+    content: ''; position: absolute; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--gold-gradient);
+  }
+  .receipt::before { left: 0; }
+  .receipt::after { right: 0; }
+
+  header {
+    text-align: center;
+    padding: 50px 40px 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .brand img { width: 44px; height: 44px; }
+  .brand-name {
+    font-family: var(--display);
+    font-size: 26px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--black);
+  }
+  .brand-name em {
+    font-style: italic; color: var(--gold-deep);
+    font-weight: 400; letter-spacing: 0.14em;
+    margin-left: 6px;
+  }
+  .subtitle {
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-top: 4px;
+  }
+
+  .receipt-header {
+    text-align: center;
+    padding: 40px 40px 20px;
+    background: linear-gradient(180deg, var(--cream-warm) 0%, transparent 100%);
+  }
+  .receipt-eyebrow {
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+  .receipt-number {
+    font-family: var(--display);
+    font-size: clamp(38px, 6vw, 52px);
+    font-weight: 500; color: var(--gold-deep);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .receipt-date {
+    font-family: var(--display);
+    font-style: italic; font-size: 17px;
+    color: var(--text-soft);
+  }
+  .statut-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    margin-top: 14px;
+  }
+  .statut-nouveau { background: #FEF3C7; color: #B45309; }
+  .statut-confirmee { background: #DBEAFE; color: #1E40AF; }
+  .statut-expediee { background: #F3E8FF; color: #6B21A8; }
+  .statut-livree { background: #DCFCE7; color: #166534; }
+  .statut-annulee { background: #FEE2E2; color: #991B1B; }
+
+  .info {
+    padding: 30px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .info-item .label {
+    font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-bottom: 4px;
+  }
+  .info-item .value {
+    font-family: var(--display);
+    font-size: 18px; color: var(--text);
+    line-height: 1.3;
+  }
+
+  .articles {
+    padding: 30px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .articles-title {
+    font-size: 11px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--gold-deep);
+    margin-bottom: 18px;
+  }
+  .article {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 15px;
+  }
+  .article:last-child { border-bottom: none; }
+  .article-dot {
+    width: 6px; height: 6px; border-radius: 999px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .totals {
+    padding: 30px 40px;
+    background: var(--cream-warm);
+  }
+  .total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0;
+    font-size: 15px;
+  }
+  .total-row.big {
+    padding-top: 16px;
+    margin-top: 10px;
+    border-top: 2px solid var(--gold);
+    font-family: var(--display);
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 500;
+    color: var(--gold-deep);
+  }
+  .free {
+    color: var(--gold-deep); font-weight: 500;
+    font-family: var(--display); font-style: italic;
+  }
+
+  .thanks {
+    text-align: center;
+    padding: 40px;
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--text-soft);
+  }
+  .thanks-quote {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .thanks-signature {
+    font-size: 15px;
+    color: var(--gold-deep);
+  }
+
+  .actions {
+    padding: 20px 40px 40px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border: none;
+    transition: all 0.3s var(--ease);
+  }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .btn-primary {
+    background: var(--gold-gradient);
+    color: var(--black);
+    box-shadow: 0 10px 30px -8px rgba(212, 167, 68, 0.55);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px -8px rgba(212, 167, 68, 0.65);
+  }
+  .btn-whatsapp { background: var(--whatsapp); color: white; }
+  .btn-whatsapp:hover { background: #1ebd5a; transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--gold);
+  }
+  .btn-ghost:hover { background: var(--gold-soft); }
+
+  footer {
+    text-align: center;
+    padding: 30px 40px;
+    background: var(--black);
+    color: rgba(245, 242, 237, 0.7);
+    font-size: 12px; letter-spacing: 0.14em;
+  }
+  footer strong { color: var(--gold-light); font-weight: 500; }
+  footer a { color: var(--gold-light); }
+
+  /* Loading & Error states */
+  .state {
+    text-align: center;
+    padding: 100px 40px;
+  }
+  .state-icon {
+    font-size: 60px; margin-bottom: 20px;
+  }
+  .state h2 {
+    font-family: var(--display);
+    font-size: 28px; color: var(--gold-deep);
+    margin-bottom: 10px;
+  }
+  .state p {
+    color: var(--text-soft);
+    max-width: 400px; margin: 0 auto;
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--gold-soft);
+    border-top-color: var(--gold);
+    border-radius: 999px;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) {
+    body { padding: 16px 12px; }
+    .receipt::before, .receipt::after { width: 4px; }
+    header, .receipt-header, .info, .articles, .totals, .actions, footer {
+      padding-left: 24px; padding-right: 24px;
+    }
+    .info { grid-template-columns: 1fr; gap: 16px; }
+    .brand-name { font-size: 20px; letter-spacing: 0.18em; }
+    .receipt-number { font-size: 40px; }
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .receipt { box-shadow: none; }
+    .actions { display: none; }
+    footer { display: none; }
+    .grain { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<article class="receipt" id="receipt">
+  <div class="state" id="loading">
+    <div class="spinner"></div>
+    <h2>Chargement du reçu…</h2>
+    <p>Récupération de votre commande depuis nos serveurs.</p>
+  </div>
+</article>
+
+<script>
+  const CRM_API_URL = 'https://script.google.com/macros/s/AKfycbzhIM4WNYJNnqr3XamM0bDoWi_Ze-zIDJI4S2mm097S58m_Osn4YzY97A41-Q-nerQN/exec';
+
+  const fmt = n => (Number(n) || 0).toLocaleString('fr-FR').replace(/,/g, ' ') + ' FCFA';
+
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('id');
+
+  const container = document.getElementById('receipt');
+
+  if (!orderId) {
+    showError('Aucun numéro de commande', 'L\'URL doit contenir un ?id=JBC-XXXX.');
+  } else {
+    fetchReceipt(orderId);
+  }
+
+  async function fetchReceipt(id) {
+    try {
+      const res = await fetch(`${CRM_API_URL}?action=receipt&id=${encodeURIComponent(id)}`);
+      const data = await res.json();
+      if (!data.success) {
+        showError('Commande introuvable', 'Nous n\'avons pas trouvé de commande avec ce numéro dans notre système. Vérifiez le numéro ou contactez-nous sur WhatsApp.');
+        return;
+      }
+      renderReceipt(data);
+    } catch (err) {
+      showError('Erreur de connexion', 'Impossible de charger le reçu. Vérifiez votre connexion internet et réessayez.');
+      console.error(err);
+    }
+  }
+
+  function statutClass(statut) {
+    const s = String(statut).toLowerCase();
+    if (s.includes('nouveau')) return 'statut-nouveau';
+    if (s.includes('confirm')) return 'statut-confirmee';
+    if (s.includes('exped')) return 'statut-expediee';
+    if (s.includes('livr')) return 'statut-livree';
+    if (s.includes('annul')) return 'statut-annulee';
+    return 'statut-nouveau';
+  }
+
+  function renderReceipt(d) {
+    document.title = `Reçu ${d.id} · Jacob's Bio Cosmétique`;
+    const articlesHTML = (d.articles || []).map(a =>
+      `<div class="article"><div class="article-dot"></div><div>${escapeHtml(a)}</div></div>`
+    ).join('');
+
+    const waMsg = encodeURIComponent(
+      `Bonjour Jacob's Bio, j'ai une question au sujet de la commande ${d.id}.`
+    );
+
+    container.innerHTML = `
+      <header>
+        <div class="brand">
+          <img src="assets/logo_embleme_noir.png" alt="Jacob's Bio">
+          <div class="brand-name">Jacob's <em>Bio</em></div>
+        </div>
+        <div class="subtitle">Cosmétique · Made in Bouaké</div>
+      </header>
+
+      <div class="receipt-header">
+        <div class="receipt-eyebrow">Reçu de commande</div>
+        <div class="receipt-number">${escapeHtml(d.id)}</div>
+        <div class="receipt-date">${escapeHtml(d.date)}</div>
+        <div class="statut-badge ${statutClass(d.statut)}">${escapeHtml(d.statut || 'Nouveau')}</div>
+      </div>
+
+      <div class="info">
+        <div class="info-item">
+          <div class="label">Client</div>
+          <div class="value">${escapeHtml(d.nom || '—')}</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Téléphone</div>
+          <div class="value">${escapeHtml(d.phone || '—')}</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Ville</div>
+          <div class="value">${escapeHtml(d.ville || '—')}</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Paiement</div>
+          <div class="value">${escapeHtml(d.paiement || '—')}</div>
+        </div>
+        <div class="info-item" style="grid-column: 1 / -1;">
+          <div class="label">Adresse de livraison</div>
+          <div class="value">${escapeHtml(d.adresse || '—')}</div>
+        </div>
+      </div>
+
+      <div class="articles">
+        <div class="articles-title">Articles</div>
+        ${articlesHTML || '<div class="article">Aucun article renseigné.</div>'}
+      </div>
+
+      <div class="totals">
+        <div class="total-row">
+          <span>Sous-total</span><span>${fmt(d.subtotal)}</span>
+        </div>
+        <div class="total-row">
+          <span>Livraison ${escapeHtml(d.ville || '')}</span>
+          <span>${Number(d.shipping) === 0 ? '<span class="free">OFFERTE</span>' : fmt(d.shipping)}</span>
+        </div>
+        <div class="total-row big">
+          <span>TOTAL</span><span>${fmt(d.total)}</span>
+        </div>
+      </div>
+
+      <div class="thanks">
+        <div class="thanks-quote">« Merci pour votre confiance. »</div>
+        <div class="thanks-signature">— Marie-Jacob, Fondatrice</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="window.print()">
+          <svg viewBox="0 0 24 24"><path d="M18 3H6v4h12V3zm1 8.5c0-.83-.67-1.5-1.5-1.5S16 10.67 16 11.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zM16 19H8v-5h8v5zm4-11H4c-1.66 0-3 1.34-3 3v6h4v4h16v-4h4v-6c0-1.66-1.34-3-3-3z"/></svg>
+          Imprimer
+        </button>
+        <a class="btn btn-whatsapp" href="https://wa.me/2250777362923?text=${waMsg}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          Nous contacter
+        </a>
+        <a class="btn btn-ghost" href="index.html">
+          Retour à la boutique
+        </a>
+      </div>
+
+      <footer>
+        <div><strong>Jacob's Bio Cosmétique</strong> · Bouaké · Côte d'Ivoire</div>
+        <div style="margin-top:6px;">
+          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener">+225 07 77 36 29 23</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:jacobsbiocosmetik@gmail.com">jacobsbiocosmetik@gmail.com</a>
+        </div>
+        <div style="margin-top:10px; font-size:10px; opacity:0.6;">
+          Ce reçu tient lieu de preuve de commande.
+        </div>
+      </footer>
+    `;
+  }
+
+  function showError(title, msg) {
+    container.innerHTML = `
+      <div class="state">
+        <div class="state-icon">⚠️</div>
+        <h2>${title}</h2>
+        <p>${msg}</p>
+        <p style="margin-top:20px;">
+          <a href="index.html" style="color:#A68035; text-decoration:underline;">Retour à la boutique</a>
+        </p>
+      </div>
+    `;
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+</script>
+
+</body>
+</html>
