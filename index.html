@@ -628,7 +628,7 @@
   }
   .marquee-track {
     display: flex; gap: 60px;
-    animation: marquee 38s linear infinite;
+    animation: marquee 22s linear infinite;
     white-space: nowrap;
     font-family: var(--display);
     font-size: 32px; font-style: italic;
@@ -1560,6 +1560,232 @@
     }
   }
 
+  /* ─────────── PROMO 50% CRÈMES ─────────── */
+  /* Prix barré + nouveau prix sur les cartes */
+  .prod-card.on-promo { position: relative; }
+  .prod-card.on-promo .prod-price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .prod-card.on-promo .prod-price-old {
+    text-decoration: line-through;
+    color: var(--text-soft);
+    font-size: 0.7em;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .prod-card.on-promo .prod-price-new {
+    color: #dc2626;
+    font-weight: 500;
+  }
+  .prod-badge.promo-50 {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    letter-spacing: 0.1em;
+    box-shadow: 0 6px 16px -4px rgba(220, 38, 38, 0.5);
+    animation: promoPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes promoPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  /* Prix promo dans la modale */
+  .pdp-price.promo { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .pdp-price-old {
+    text-decoration: line-through;
+    color: var(--text-soft);
+    font-size: 22px;
+    opacity: 0.55;
+    font-weight: 400;
+  }
+  .pdp-price-badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em;
+    align-self: center;
+  }
+
+  /* Pop-up promo */
+  .promo-overlay {
+    position: fixed; inset: 0; z-index: 130;
+    background: rgba(11, 8, 5, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .promo-overlay.open { opacity: 1; pointer-events: auto; }
+  .promo-popup {
+    position: fixed; inset: 0; z-index: 140;
+    display: grid; place-items: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .promo-popup.open { opacity: 1; pointer-events: auto; }
+  .promo-card {
+    background: var(--ivory);
+    border-radius: 14px;
+    max-width: 520px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow:
+      0 40px 100px -20px rgba(11, 8, 5, 0.55),
+      0 0 0 1px rgba(212, 167, 68, 0.20);
+    transform: translateY(24px) scale(0.96);
+    transition: transform 0.5s var(--ease);
+    position: relative;
+  }
+  .promo-popup.open .promo-card { transform: translateY(0) scale(1); }
+  .promo-card::before, .promo-card::after {
+    content: ''; position: absolute; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--gold-gradient);
+  }
+  .promo-card::before { left: 0; }
+  .promo-card::after { right: 0; }
+  .promo-close {
+    position: absolute; top: 14px; right: 14px; z-index: 5;
+    width: 34px; height: 34px;
+    background: rgba(250, 246, 236, 0.9);
+    border: 1px solid rgba(212, 167, 68, 0.25);
+    border-radius: 999px;
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+  }
+  .promo-close:hover { background: var(--gold); transform: rotate(90deg); }
+  .promo-close svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .promo-header {
+    text-align: center;
+    padding: 44px 40px 22px;
+    background: linear-gradient(180deg, rgba(220, 38, 38, 0.08) 0%, transparent 100%);
+  }
+  .promo-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px -6px rgba(220, 38, 38, 0.5);
+  }
+  .promo-eyebrow::before {
+    content: ''; display: block;
+    width: 6px; height: 6px; border-radius: 999px;
+    background: white; animation: promoBlink 1.5s ease-in-out infinite;
+  }
+  @keyframes promoBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .promo-title {
+    font-family: var(--display);
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .promo-title strong {
+    color: #dc2626;
+    font-weight: 600;
+    font-style: italic;
+  }
+  .promo-sub {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+  .promo-body {
+    padding: 0 40px 30px;
+  }
+  .promo-products {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 22px;
+    background: var(--cream-warm);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .promo-product-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(212, 167, 68, 0.25);
+    font-size: 15px;
+  }
+  .promo-product-item:last-child { border-bottom: none; }
+  .promo-product-name { font-family: var(--display); color: var(--text); }
+  .promo-product-prices {
+    display: flex; align-items: baseline; gap: 10px;
+    font-family: var(--sans);
+  }
+  .promo-product-old {
+    text-decoration: line-through;
+    color: var(--text-soft);
+    font-size: 13px;
+    opacity: 0.6;
+  }
+  .promo-product-new {
+    font-weight: 600;
+    color: #dc2626;
+    font-size: 17px;
+  }
+  .promo-dates {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+  .promo-dates strong {
+    color: var(--gold-deep);
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .promo-actions {
+    padding: 0 40px 40px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .promo-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 16px 28px;
+    background: var(--gold-gradient);
+    color: var(--black);
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: all 0.3s var(--ease);
+    box-shadow: 0 10px 30px -8px rgba(212, 167, 68, 0.55);
+  }
+  .promo-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px -8px rgba(212, 167, 68, 0.65);
+  }
+  .promo-decline {
+    background: transparent;
+    color: var(--text-soft);
+    border: none; cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.14em;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .promo-decline:hover { color: var(--text); }
+
+  @media (max-width: 520px) {
+    .promo-header { padding: 32px 24px 16px; }
+    .promo-body { padding: 0 24px 22px; }
+    .promo-actions { padding: 0 24px 30px; }
+    .promo-title { font-size: 32px; }
+    .promo-products { padding: 16px; }
+  }
+
   /* ─────────── WHATSAPP FLOAT (pill expansible) ─────────── */
   .wa-float {
     position: fixed; bottom: 28px; right: 28px;
@@ -1906,12 +2132,12 @@
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="creme-vitesse-300" data-name="Crème Vitesse 300g" data-cat="Crèmes" data-price="10000" data-image="assets/photos/05_creme-vitesse-300g.jpeg">
-        <div class="prod-img"><img src="assets/photos/05_creme-vitesse-300g.jpeg" alt="Crème Vitesse"></div>
+      <div class="prod-card reveal on-promo" data-id="creme-vitesse-300" data-name="Crème Vitesse 300g" data-cat="Crèmes" data-price="5000" data-price-old="10000" data-image="assets/photos/05_creme-vitesse-300g.jpeg">
+        <div class="prod-img"><span class="prod-badge promo-50">-50%</span><img src="assets/photos/05_creme-vitesse-300g.jpeg" alt="Crème Vitesse"></div>
         <div class="prod-body">
           <div class="prod-cat">Crèmes</div>
           <div class="prod-title">Crème Vitesse 300g</div>
-          <div class="prod-price">10 000<small>FCFA</small></div>
+          <div class="prod-price"><span class="prod-price-old">10 000 FCFA</span><span class="prod-price-new">5 000<small>FCFA</small></span></div>
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
@@ -1978,12 +2204,12 @@
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="creme-vitesse-150" data-name="Crème Vitesse 150g" data-cat="Crèmes" data-price="6000" data-image="assets/photos/06_creme-vitesse-150g.jpeg">
-        <div class="prod-img"><img src="assets/photos/06_creme-vitesse-150g.jpeg" alt="Crème Vitesse 150g"></div>
+      <div class="prod-card reveal on-promo" data-id="creme-vitesse-150" data-name="Crème Vitesse 150g" data-cat="Crèmes" data-price="3000" data-price-old="6000" data-image="assets/photos/06_creme-vitesse-150g.jpeg">
+        <div class="prod-img"><span class="prod-badge promo-50">-50%</span><img src="assets/photos/06_creme-vitesse-150g.jpeg" alt="Crème Vitesse 150g"></div>
         <div class="prod-body">
           <div class="prod-cat">Crèmes</div>
           <div class="prod-title">Crème Vitesse 150g</div>
-          <div class="prod-price">6 000<small>FCFA</small></div>
+          <div class="prod-price"><span class="prod-price-old">6 000 FCFA</span><span class="prod-price-new">3 000<small>FCFA</small></span></div>
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
@@ -2375,6 +2601,47 @@
           <span>WhatsApp</span>
         </a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ POP-UP PROMO 50% CRÈMES ═══════════════ -->
+<div class="promo-overlay" id="promoOverlay" aria-hidden="true"></div>
+<div class="promo-popup" id="promoPopup" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-hidden="true">
+  <div class="promo-card">
+    <button class="promo-close" id="promoClose" aria-label="Fermer la popup">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="promo-header">
+      <div class="promo-eyebrow">Offre limitée</div>
+      <h2 class="promo-title" id="promoTitle"><strong>-50%</strong> sur toutes les Crèmes</h2>
+      <p class="promo-sub">Une semaine seulement. Ne laissez pas passer.</p>
+    </div>
+    <div class="promo-body">
+      <div class="promo-products">
+        <div class="promo-product-item">
+          <span class="promo-product-name">Crème Vitesse 300g</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">10 000 FCFA</span>
+            <span class="promo-product-new">5 000 FCFA</span>
+          </span>
+        </div>
+        <div class="promo-product-item">
+          <span class="promo-product-name">Crème Vitesse 150g</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">6 000 FCFA</span>
+            <span class="promo-product-new">3 000 FCFA</span>
+          </span>
+        </div>
+      </div>
+      <p class="promo-dates">Valable du <strong>4 juillet</strong> au <strong>11 juillet 2026</strong></p>
+    </div>
+    <div class="promo-actions">
+      <a href="#produits" class="promo-cta" id="promoCta">
+        Je découvre les offres
+        <span class="arrow"></span>
+      </a>
+      <button class="promo-decline" id="promoDecline" type="button">Non merci, je continue à parcourir</button>
     </div>
   </div>
 </div>
@@ -2778,6 +3045,50 @@
     });
   });
 
+  // ─── POP-UP PROMO 50% CRÈMES (semaine du 04 au 11 juillet 2026) ───
+  (function initPromoPopup() {
+    const PROMO_KEY = 'jbc_promo_cremes_2026_07';
+    const PROMO_END = new Date('2026-07-12T00:00:00');
+    if (new Date() >= PROMO_END) return; // La promo est terminée, on n'affiche rien
+
+    const overlay = document.getElementById('promoOverlay');
+    const popup = document.getElementById('promoPopup');
+    if (!overlay || !popup) return;
+
+    const closeBtn = document.getElementById('promoClose');
+    const declineBtn = document.getElementById('promoDecline');
+    const ctaBtn = document.getElementById('promoCta');
+
+    const alreadySeen = sessionStorage.getItem(PROMO_KEY);
+    if (alreadySeen) return;
+
+    // Affiche après 2 secondes (le temps de voir le hero)
+    setTimeout(() => {
+      overlay.classList.add('open');
+      popup.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }, 2000);
+
+    function closePromo(source) {
+      overlay.classList.remove('open');
+      popup.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      sessionStorage.setItem(PROMO_KEY, source || '1');
+    }
+
+    closeBtn.addEventListener('click', () => closePromo('close'));
+    declineBtn.addEventListener('click', () => closePromo('decline'));
+    overlay.addEventListener('click', () => closePromo('overlay'));
+    ctaBtn.addEventListener('click', () => closePromo('cta'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup.classList.contains('open')) closePromo('esc');
+    });
+  })();
+
   // ─── Fiche produit (modale catalogue) ───
   const PRODUCT_DETAILS = {
     'suppo-150': {
@@ -2884,7 +3195,16 @@
     document.getElementById('pdpCat').textContent = p.cat;
     document.getElementById('pdpName').textContent = p.name;
     document.getElementById('pdpFormat').textContent = d.format;
-    document.getElementById('pdpPrice').innerHTML = (+p.price).toLocaleString('fr-FR').replace(/,/g, ' ') + ' <small>FCFA</small>';
+    const pdpPrice = document.getElementById('pdpPrice');
+    const priceNew = (+p.price).toLocaleString('fr-FR').replace(/,/g, ' ');
+    const priceOld = p.priceOld ? (+p.priceOld).toLocaleString('fr-FR').replace(/,/g, ' ') : null;
+    if (priceOld) {
+      pdpPrice.classList.add('promo');
+      pdpPrice.innerHTML = `<span class="pdp-price-old">${priceOld} FCFA</span> ${priceNew} <small>FCFA</small> <span class="pdp-price-badge">-50%</span>`;
+    } else {
+      pdpPrice.classList.remove('promo');
+      pdpPrice.innerHTML = priceNew + ' <small>FCFA</small>';
+    }
 
     const ul = document.getElementById('pdpBenefits');
     ul.innerHTML = d.benefits.map(b => `
@@ -2924,17 +3244,20 @@
   });
 
   // Clic sur la card (hors bouton + ou .prod-add) ouvre la modale
+  function buildProductFromCard(card) {
+    return {
+      id: card.dataset.id,
+      name: card.dataset.name,
+      cat: card.dataset.cat,
+      price: parseInt(card.dataset.price),
+      priceOld: card.dataset.priceOld ? parseInt(card.dataset.priceOld) : null,
+      image: card.dataset.image
+    };
+  }
   document.querySelectorAll('.prod-card').forEach(card => {
     card.addEventListener('click', e => {
       if (e.target.closest('.prod-add')) return;
-      const p = {
-        id: card.dataset.id,
-        name: card.dataset.name,
-        cat: card.dataset.cat,
-        price: parseInt(card.dataset.price),
-        image: card.dataset.image
-      };
-      openPdp(p);
+      openPdp(buildProductFromCard(card));
     });
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
@@ -2942,14 +3265,7 @@
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        const p = {
-          id: card.dataset.id,
-          name: card.dataset.name,
-          cat: card.dataset.cat,
-          price: parseInt(card.dataset.price),
-          image: card.dataset.image
-        };
-        openPdp(p);
+        openPdp(buildProductFromCard(card));
       }
     });
   });
