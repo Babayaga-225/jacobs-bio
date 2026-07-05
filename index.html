@@ -470,21 +470,22 @@
   .na-stage {
     position: relative;
     min-height: 130px;
+    overflow: hidden;
+  }
+  .na-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
   .na-slide {
     display: grid;
     grid-template-columns: 130px 1fr auto;
     gap: 26px;
     align-items: center;
-    position: absolute; inset: 0;
-    opacity: 0; pointer-events: none;
-    transform: translateX(20px);
-    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-  }
-  .na-slide.active {
-    opacity: 1; pointer-events: auto;
-    transform: translateX(0);
-    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 4px 2px;
   }
   .na-img {
     aspect-ratio: 1;
@@ -2268,7 +2269,6 @@
     <li><a href="#histoire">L'histoire</a></li>
     <li><a href="#collections">Collections</a></li>
     <li><a href="#produits">Produits</a></li>
-    <li><a href="#bientot" style="color:var(--gold);">Bientôt</a></li>
     <li><a href="#temoignages">Témoignages</a></li>
     <li><a href="#contact">Contact</a></li>
     <li>
@@ -2341,8 +2341,9 @@
       </div>
 
       <div class="na-stage" id="naStage">
+       <div class="na-track" id="naTrack">
         <div class="na-slide active" data-index="0">
-          <div class="na-img"><img src="assets/photos/19_savon-aka-fassi.jpeg" alt="Savon à l'Aka Fassi" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-img"><img src="assets/photos/19_savon-aka-fassi.jpeg" alt="Savon à l'Aka Fassi" loading="eager" decoding="async" width="200" height="200"></div>
           <div class="na-content">
             <div class="na-name">Savon à l'Aka Fassi</div>
             <div class="na-tagline">Éclat · Hydratation · Unification</div>
@@ -2351,7 +2352,7 @@
           <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="na-slide" data-index="1">
-          <div class="na-img"><img src="assets/photos/20_savon-nila.jpeg" alt="Savon au Nila" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-img"><img src="assets/photos/20_savon-nila.jpeg" alt="Savon au Nila" loading="eager" decoding="async" width="200" height="200"></div>
           <div class="na-content">
             <div class="na-name">Savon au Nila</div>
             <div class="na-tagline">Éclat · Nettoyage · Unification</div>
@@ -2360,7 +2361,7 @@
           <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="na-slide" data-index="2">
-          <div class="na-img"><img src="assets/photos/21_savon-curcuma-miel.jpeg" alt="Savon au Curcuma & Miel" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-img"><img src="assets/photos/21_savon-curcuma-miel.jpeg" alt="Savon au Curcuma & Miel" loading="eager" decoding="async" width="200" height="200"></div>
           <div class="na-content">
             <div class="na-name">Savon au Curcuma &amp; Miel</div>
             <div class="na-tagline">Éclat · Anti-taches · Nourrissant</div>
@@ -2369,7 +2370,7 @@
           <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="na-slide" data-index="3">
-          <div class="na-img"><img src="assets/photos/22_savon-aloe-vera.jpeg" alt="Savon à l'Aloe Vera" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="na-img"><img src="assets/photos/22_savon-aloe-vera.jpeg" alt="Savon à l'Aloe Vera" loading="eager" decoding="async" width="200" height="200"></div>
           <div class="na-content">
             <div class="na-name">Savon à l'Aloe Vera</div>
             <div class="na-tagline">Hydratation · Apaisant · Réparateur</div>
@@ -2377,6 +2378,7 @@
           </div>
           <a href="#bientot" class="na-cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
+       </div>
       </div>
 
       <div class="na-controls" id="naDots">
@@ -3505,27 +3507,28 @@
     });
   });
 
-  // ─── BANDEAU ROTATIF NOUVEAUX SAVONS (dans le hero) ───
+  // ─── BANDEAU ROTATIF NOUVEAUX SAVONS (défilement horizontal) ───
   (function initNewArrivals() {
     const stage = document.getElementById('naStage');
+    const track = document.getElementById('naTrack');
     const dotsBox = document.getElementById('naDots');
     const progress = document.getElementById('naProgress');
-    if (!stage || !dotsBox) return;
-    const slides = stage.querySelectorAll('.na-slide');
+    if (!stage || !track || !dotsBox) return;
+    const slides = track.querySelectorAll('.na-slide');
     const dots = dotsBox.querySelectorAll('.na-dot');
     const N = slides.length;
     let current = 0;
     let timer = null;
-    const INTERVAL = 5000;
+    const INTERVAL = 4500;
 
     function goTo(i) {
       current = ((i % N) + N) % N;
-      slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+      track.style.transform = `translateX(-${current * 100}%)`;
       dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
       if (progress) {
         progress.classList.remove('filling');
-        // eslint-disable-next-line no-unused-expressions
-        progress.offsetWidth; // reflow
+        // reflow pour redéclencher l'animation
+        void progress.offsetWidth;
         progress.classList.add('filling');
       }
     }
