@@ -328,6 +328,7 @@
 
   const params = new URLSearchParams(window.location.search);
   const orderId = params.get('id');
+  const sigKey = params.get('k') || '';
 
   const container = document.getElementById('receipt');
 
@@ -339,7 +340,7 @@
 
   async function fetchReceipt(id) {
     try {
-      const res = await fetch(`${CRM_API_URL}?action=receipt&id=${encodeURIComponent(id)}`);
+      const res = await fetch(`${CRM_API_URL}?action=receipt&id=${encodeURIComponent(id)}${sigKey ? '&k=' + encodeURIComponent(sigKey) : ''}`);
       const data = await res.json();
       if (!data.success) {
         showError('Commande introuvable', 'Nous n\'avons pas trouvé de commande avec ce numéro dans notre système. Vérifiez le numéro ou contactez-nous sur WhatsApp.');
