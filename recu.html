@@ -396,7 +396,7 @@
         </div>
         <div class="info-item">
           <div class="label">Téléphone</div>
-          <div class="value">${escapeHtml(d.phone || '—')}</div>
+          <div class="value">${escapeHtml(fmtPhone(d.telephone || d.phone) || '—')}</div>
         </div>
         <div class="info-item">
           <div class="label">Ville</div>
@@ -419,11 +419,11 @@
 
       <div class="totals">
         <div class="total-row">
-          <span>Sous-total</span><span>${fmt(d.subtotal)}</span>
+          <span>Sous-total</span><span>${fmt(d.sousTotal != null ? d.sousTotal : d.subtotal)}</span>
         </div>
         <div class="total-row">
           <span>Livraison ${escapeHtml(d.ville || '')}</span>
-          <span>${Number(d.shipping) === 0 ? '<span class="free">OFFERTE</span>' : fmt(d.shipping)}</span>
+          <span>${Number(d.livraison != null ? d.livraison : d.shipping) === 0 ? '<span class="free">OFFERTE</span>' : fmt(d.livraison != null ? d.livraison : d.shipping)}</span>
         </div>
         <div class="total-row big">
           <span>TOTAL</span><span>${fmt(d.total)}</span>
@@ -456,7 +456,9 @@
       <footer>
         <div><strong>Jacob's Bio Cosmétique</strong> · Bouaké · Côte d'Ivoire</div>
         <div style="margin-top:6px;">
-          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener">+225 07 77 36 29 23</a>
+          <a href="https://wa.me/2250777362923" target="_blank" rel="noopener">WhatsApp +225 07 77 36 29 23</a>
+          &nbsp;·&nbsp;
+          <a href="tel:+2250714339564">Appel +225 07 14 33 95 64</a>
           &nbsp;·&nbsp;
           <a href="mailto:jacobsbiocosmetik@gmail.com">jacobsbiocosmetik@gmail.com</a>
         </div>
@@ -484,6 +486,20 @@
     return String(s || '').replace(/[&<>"']/g, c => ({
       '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
     }[c]));
+  }
+
+  // Formate un numéro ivoirien pour l'affichage.
+  // - Numéros masqués (•••••••00) : rendus tels quels
+  // - 9 chiffres sans 0 initial (perdu par Sheets) : 0 rétabli
+  // - 10 chiffres : groupés par paires (07 00 00 00 00)
+  function fmtPhone(t) {
+    const s = String(t == null ? '' : t).trim();
+    if (!s) return '';
+    if (s.includes('•')) return s;
+    let digits = s.replace(/\D/g, '');
+    if (digits.length === 9 && digits[0] !== '0') digits = '0' + digits;
+    if (digits.length === 10) return digits.replace(/(\d{2})(?=\d)/g, '$1 ');
+    return s;
   }
 
   // Génère et télécharge le reçu en PDF (client-side)
@@ -518,23 +534,53 @@
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
+    const restoreUI = () => {
       if (actions) actions.style.display = '';
       if (footer) footer.style.display = '';
       if (grain) grain.style.display = '';
-      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>&nbsp;Téléchargé !';
-      setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
-      }, 1800);
-    }).catch(err => {
-      console.error(err);
-      alert('Erreur lors de la génération du PDF. Utilise le bouton "Imprimer" en attendant.');
-      if (actions) actions.style.display = '';
-      if (footer) footer.style.display = '';
-      if (grain) grain.style.display = '';
+    };
+    const resetBtn = () => {
       btn.innerHTML = originalHTML;
       btn.disabled = false;
+    };
+    const showDone = () => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>&nbsp;Téléchargé !';
+      setTimeout(resetBtn, 1800);
+    };
+
+    html2pdf().set(opt).from(element).outputPdf('blob').then(async blob => {
+      restoreUI();
+      const filename = `Recu-${orderId}.pdf`;
+      const file = new File([blob], filename, { type: 'application/pdf' });
+
+      // Feuille de partage native (iOS/Android) : seule méthode fiable dans
+      // les navigateurs intégrés WhatsApp/Instagram qui bloquent les downloads.
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: filename });
+          showDone();
+          return;
+        } catch (e) {
+          if (e && e.name === 'AbortError') { resetBtn(); return; } // l'utilisateur a annulé
+          // sinon on tente le téléchargement classique ci-dessous
+        }
+      }
+
+      // Téléchargement classique (desktop, navigateurs standards)
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      showDone();
+    }).catch(err => {
+      console.error(err);
+      restoreUI();
+      alert('Erreur lors de la génération du PDF. Utilise le bouton "Imprimer" : il permet aussi d\'enregistrer en PDF.');
+      resetBtn();
     });
   }
 </script>
