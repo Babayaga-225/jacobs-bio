@@ -306,7 +306,36 @@
     .actions { display: none; }
     footer { display: none; }
     .grain { display: none; }
+    header { padding: 24px 32px 14px; }
+    .receipt-header { padding: 16px 32px 8px; }
+    .receipt-number { font-size: 36px; }
+    .info { padding: 14px 32px; gap: 10px 30px; }
+    .articles { padding: 14px 32px; }
+    .article { padding: 6px 0; font-size: 13px; }
+    .totals { padding: 14px 32px; }
+    .thanks { padding: 16px 32px; }
   }
+
+  /* Mode compact appliqué pendant la génération du PDF :
+     réduit paddings et typo pour tenir sur une seule page A4 */
+  .pdf-compact header { padding: 24px 32px 14px; }
+  .pdf-compact .brand img { width: 34px; height: 34px; }
+  .pdf-compact .brand-name { font-size: 21px; }
+  .pdf-compact .receipt-header { padding: 16px 32px 8px; }
+  .pdf-compact .receipt-number { font-size: 36px; margin-bottom: 4px; }
+  .pdf-compact .receipt-date { font-size: 14px; }
+  .pdf-compact .statut-badge { margin-top: 8px; padding: 4px 12px; font-size: 10px; }
+  .pdf-compact .info { padding: 14px 32px; gap: 10px 30px; grid-template-columns: 1fr 1fr; }
+  .pdf-compact .info-item .value { font-size: 15px; }
+  .pdf-compact .articles { padding: 14px 32px; }
+  .pdf-compact .articles-title { margin-bottom: 8px; }
+  .pdf-compact .article { padding: 6px 0; font-size: 13px; }
+  .pdf-compact .totals { padding: 14px 32px; }
+  .pdf-compact .total-row { padding: 5px 0; font-size: 13px; }
+  .pdf-compact .total-row.big { font-size: 22px; padding-top: 10px; margin-top: 6px; }
+  .pdf-compact .thanks { padding: 16px 32px; }
+  .pdf-compact .thanks-quote { font-size: 17px; margin-bottom: 4px; }
+  .pdf-compact .thanks-signature { font-size: 13px; }
 </style>
 </head>
 <body>
@@ -525,16 +554,26 @@
     if (grain) grain.style.display = 'none';
 
     const element = document.getElementById('receipt');
+    element.classList.add('pdf-compact');
+
+    // Garantie une seule page : si malgré le mode compact le contenu
+    // dépasse une A4 (commande très longue), on génère une page unique
+    // à hauteur sur mesure plutôt qu'une page 2.
+    const ratio = element.scrollHeight / element.offsetWidth;
+    const A4_RATIO = 297 / 210;
+    const pageFormat = ratio <= A4_RATIO ? 'a4' : [210, Math.ceil(210 * ratio) + 4];
+
     const opt = {
       margin: 0,
       filename: `Recu-${orderId}.pdf`,
       image: { type: 'jpeg', quality: 0.95 },
       html2canvas: { scale: 2, backgroundColor: '#FAF6EC', useCORS: true, logging: false },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      jsPDF: { unit: 'mm', format: pageFormat, orientation: 'portrait' },
+      pagebreak: { avoid: ['.article', '.total-row'] }
     };
 
     const restoreUI = () => {
+      element.classList.remove('pdf-compact');
       if (actions) actions.style.display = '';
       if (footer) footer.style.display = '';
       if (grain) grain.style.display = '';
