@@ -559,9 +559,10 @@
     // Garantie une seule page : si malgré le mode compact le contenu
     // dépasse une A4 (commande très longue), on génère une page unique
     // à hauteur sur mesure plutôt qu'une page 2.
+    // Page à la taille exacte du contenu (format e-reçu) :
+    // aucune zone blanche sous le reçu, une seule page garantie.
     const ratio = element.scrollHeight / element.offsetWidth;
-    const A4_RATIO = 297 / 210;
-    const pageFormat = ratio <= A4_RATIO ? 'a4' : [210, Math.ceil(210 * ratio) + 4];
+    const pageFormat = [210, Math.ceil(210 * ratio) + 2];
 
     const opt = {
       margin: 0,
