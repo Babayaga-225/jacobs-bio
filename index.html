@@ -1512,6 +1512,40 @@
   .checkout-form-group textarea:focus { border-color: var(--gold); }
   .checkout-form-group textarea { resize: vertical; min-height: 70px; }
 
+  /* ═══ Choix mode de paiement ═══ */
+  .payment-mode-block { display: flex; flex-direction: column; gap: 10px; }
+  .payment-mode-radio {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+    background: white;
+  }
+  .payment-mode-radio:hover { border-color: var(--gold-light); }
+  .payment-mode-radio input[type="radio"] {
+    margin: 3px 0 0 0; flex-shrink: 0;
+    width: 18px; height: 18px;
+    accent-color: var(--gold);
+  }
+  .payment-mode-radio:has(input:checked) {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(212,167,68,0.06) 0%, rgba(212,167,68,0.02) 100%);
+  }
+  .payment-mode-body { flex: 1; min-width: 0; }
+  .payment-mode-title {
+    font-family: var(--display); font-size: 17px; font-weight: 500;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .payment-mode-sub { font-size: 13px; color: var(--text-soft); line-height: 1.4; }
+  .payment-mode-test {
+    display: inline-block; margin-top: 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    background: #FEF3C7; color: #B45309;
+    padding: 3px 8px; border-radius: 4px;
+  }
+
   /* ─────────── FICHE PRODUIT (modale premium) ─────────── */
   .pdp-overlay {
     position: fixed; inset: 0; z-index: 110;
@@ -3014,6 +3048,24 @@
           <label for="co-notes">Notes (facultatif)</label>
           <textarea id="co-notes" placeholder="Préférences, instructions..." rows="2"></textarea>
         </div>
+        <div class="checkout-form-group payment-mode-block">
+          <label style="margin-bottom:10px;">Comment souhaitez-vous payer ?</label>
+          <label class="payment-mode-radio">
+            <input type="radio" name="payment-mode" value="cash" checked>
+            <div class="payment-mode-body">
+              <div class="payment-mode-title">Cash à la livraison</div>
+              <div class="payment-mode-sub">Payez au moment de recevoir votre colis.</div>
+            </div>
+          </label>
+          <label class="payment-mode-radio">
+            <input type="radio" name="payment-mode" value="online">
+            <div class="payment-mode-body">
+              <div class="payment-mode-title">Payer en ligne maintenant</div>
+              <div class="payment-mode-sub">Wave · Orange Money · MTN Money · Moov · Carte bancaire</div>
+              <div class="payment-mode-test">MODE TEST — GeniusPay Sandbox (aucun argent débité)</div>
+            </div>
+          </label>
+        </div>
         <button type="submit" class="cart-checkout-btn" id="checkoutSubmitBtn" style="margin-top:8px;">
           Confirmer ma commande
         </button>
@@ -3815,6 +3867,7 @@
     const city = $('co-city').value;
     const address = $('co-address').value.trim();
     const notes = $('co-notes').value.trim();
+    const paymentMode = (document.querySelector('input[name="payment-mode"]:checked') || {}).value || 'cash';
 
     const subtotal = getSubtotal();
     const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (SHIPPING[city] || 0);
@@ -3823,13 +3876,15 @@
     // ───── 1. Envoi au CRM (Google Sheet + email auto) ─────
     let orderId = '';
     let crmOK = false;
+    let checkoutUrl = '';
     try {
       const payload = {
         secret: CRM_SECRET,
         name, phone, email, city, address, notes,
         items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price, cat: i.cat })),
         subtotal, shipping, total,
-        payment: 'Mobile Money (à confirmer WhatsApp)',
+        payment: paymentMode === 'online' ? 'GeniusPay (en ligne)' : 'Mobile Money (à confirmer WhatsApp)',
+        paymentMode,
         source: 'Site vitrine'
       };
       const res = await fetch(CRM_API_URL, { method: 'POST', body: JSON.stringify(payload) });
@@ -3837,11 +3892,29 @@
       if (result.success) {
         orderId = result.orderId || '';
         crmOK = true;
+        checkoutUrl = result.checkoutUrl || '';
       } else {
         console.warn('CRM responded with error:', result.error);
       }
     } catch (err) {
       console.warn('CRM unreachable, fallback WhatsApp only:', err);
+    }
+
+    // ───── 1bis. Paiement en ligne → redirection immédiate GeniusPay ─────
+    if (paymentMode === 'online') {
+      if (checkoutUrl) {
+        // Vide le panier local avant la redirection (la commande est sauvée serveur)
+        cart = [];
+        saveCart();
+        window.location.href = checkoutUrl;
+        return;
+      }
+      // Échec de création de la session paiement → on affiche l'erreur et on laisse le user changer d'avis
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '';
+      submitBtn.innerHTML = originalHTML;
+      alert('Impossible de préparer le paiement en ligne pour le moment. Vous pouvez réessayer ou choisir « Cash à la livraison ».');
+      return;
     }
 
     // ───── 2. Construction du message WhatsApp de confirmation ─────
