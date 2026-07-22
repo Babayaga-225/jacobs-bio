@@ -3851,8 +3851,15 @@
   cartCheckoutBtn.addEventListener('click', showCheckout);
   checkoutBack.addEventListener('click', hideCheckout);
 
+  let _isSubmittingCheckout = false;
   checkoutForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Anti double-submit — flag persistant qui bloque toute nouvelle soumission
+    // tant que la précédente n'a pas fini (bouton désactivé ne suffit pas car
+    // Entrée + double-tap iOS peuvent déclencher un 2e submit avant que le
+    // disabled prenne effet).
+    if (_isSubmittingCheckout) return;
+    _isSubmittingCheckout = true;
 
     const submitBtn = checkoutForm.querySelector('button[type="submit"]');
     const originalHTML = submitBtn.innerHTML;
@@ -3860,6 +3867,7 @@
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Enregistrement…';
     submitBtn.style.opacity = '0.7';
+    submitBtn.style.pointerEvents = 'none';
 
     const name = $('co-name').value.trim();
     const phone = $('co-phone').value.trim();
@@ -3912,7 +3920,9 @@
       // Échec de création de la session paiement → on affiche l'erreur et on laisse le user changer d'avis
       submitBtn.disabled = false;
       submitBtn.style.opacity = '';
+      submitBtn.style.pointerEvents = '';
       submitBtn.innerHTML = originalHTML;
+      _isSubmittingCheckout = false;
       alert('Impossible de préparer le paiement en ligne pour le moment. Vous pouvez réessayer ou choisir « Cash à la livraison ».');
       return;
     }
@@ -3963,6 +3973,8 @@
       submitBtn.style.color = '';
       submitBtn.style.cursor = '';
       submitBtn.style.opacity = '';
+      submitBtn.style.pointerEvents = '';
+      _isSubmittingCheckout = false;
       waLink.style.display = 'none';
       if (footerText) footerText.innerHTML = 'Votre commande sera transmise par WhatsApp.<br>Réponse de notre équipe sous 1h en journée.';
     };
