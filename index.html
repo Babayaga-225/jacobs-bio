@@ -3520,9 +3520,14 @@
     document.body.style.overflow = '';
   }
 
+  let _checkoutSessionId = null;
   function showCheckout() {
     cartDrawer.classList.add('checkout-mode');
     cartTitle.textContent = 'Vos coordonnées';
+    // Génère un ID de session UNIQUE à l'ouverture du checkout — utilisé
+    // comme idempotency key par le backend pour bloquer les doublons.
+    // Reset à chaque re-ouverture pour permettre une nouvelle commande.
+    _checkoutSessionId = 'req-' + Date.now() + '-' + Math.random().toString(36).substring(2, 10);
     // Build summary
     const subtotal = getSubtotal();
     let lines = cart.map(i => `<div class="checkout-summary-row"><span>${i.name} ×${i.qty}</span><span>${fmtPrice(i.price * i.qty)}</span></div>`);
@@ -3888,6 +3893,7 @@
     try {
       const payload = {
         secret: CRM_SECRET,
+        clientRequestId: _checkoutSessionId,
         name, phone, email, city, address, notes,
         items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price, cat: i.cat })),
         subtotal, shipping, total,
