@@ -3415,6 +3415,99 @@
   const CRM_API_URL = 'https://script.google.com/macros/s/AKfycbzhIM4WNYJNnqr3XamM0bDoWi_Ze-zIDJI4S2mm097S58m_Osn4YzY97A41-Q-nerQN/exec';
   const CRM_SECRET  = 'jbc_2026_K9pX2vQ7';
 
+  /* ═══════════════ SITE CONFIG (via Sheet, cache 5 min) ═══════════════ */
+  // Charge la config dès le début du script pour que le popup et les prix
+  // crèmes soient synchronisés avec ce que Mlle Kouassi a défini dans le
+  // Google Sheet (onglet Config). Résout dans window.__siteConfigPromise.
+  window.__siteConfigPromise = (async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
+      const r = await fetch(CRM_API_URL + '?action=siteConfig', { signal: controller.signal, cache: 'no-cache' });
+      clearTimeout(timeoutId);
+      const d = await r.json();
+      return d && d.success ? (d.config || {}) : null;
+    } catch (e) { return null; }
+  })();
+
+  function _fmtPriceFCFA(n) {
+    return (Number(n) || 0).toLocaleString('fr-FR').replace(/,/g, ' ') + ' FCFA';
+  }
+  function _fmtPriceShort(n) {
+    return (Number(n) || 0).toLocaleString('fr-FR').replace(/,/g, ' ');
+  }
+
+  // Applique la config aux cartes crèmes (prix + classe on-promo + badge)
+  function applyCremePricesFromConfig(config) {
+    if (!config) return; // Silence, HTML par défaut
+    const cremes = [
+      { id: 'creme-vitesse-300', priceKey: 'promo_creme_300_prix', barrKey: 'promo_creme_300_prix_barre', defaultPrice: 10000 },
+      { id: 'creme-vitesse-150', priceKey: 'promo_creme_150_prix', barrKey: 'promo_creme_150_prix_barre', defaultPrice: 6000 }
+    ];
+    cremes.forEach(c => {
+      const card = document.querySelector('.prod-card[data-id="' + c.id + '"]');
+      if (!card) return;
+      const priceEl = card.querySelector('.prod-price');
+      const img = card.querySelector('.prod-img');
+      const oldBadge = card.querySelector('.prod-badge.promo-50');
+      if (config.promo_active === true) {
+        const promoPrice = Number(config[c.priceKey]) || 0;
+        const barrPrice = Number(config[c.barrKey]) || c.defaultPrice;
+        if (promoPrice <= 0 || barrPrice <= 0 || promoPrice >= barrPrice) return;
+        card.classList.add('on-promo');
+        card.dataset.price = promoPrice;
+        card.dataset.priceOld = barrPrice;
+        if (priceEl) priceEl.innerHTML = '<span class="prod-price-old">' + _fmtPriceFCFA(barrPrice) + '</span><span class="prod-price-new">' + _fmtPriceShort(promoPrice) + '<small>FCFA</small></span>';
+        const pct = Math.round((1 - promoPrice / barrPrice) * 100);
+        if (oldBadge) oldBadge.textContent = '-' + pct + '%';
+        else if (img) { const b = document.createElement('span'); b.className = 'prod-badge promo-50'; b.textContent = '-' + pct + '%'; img.insertBefore(b, img.firstChild); }
+      } else {
+        // Promo désactivée : retour au prix normal
+        card.classList.remove('on-promo');
+        const normalPrice = Number(config[c.barrKey]) || c.defaultPrice;
+        card.dataset.price = normalPrice;
+        delete card.dataset.priceOld;
+        if (priceEl) priceEl.innerHTML = _fmtPriceShort(normalPrice) + '<small>FCFA</small>';
+        if (oldBadge) oldBadge.remove();
+      }
+    });
+  }
+
+  // Applique config au contenu du popup (textes + prix)
+  function applyPopupTextsFromConfig(config) {
+    if (!config || config.promo_active !== true) return;
+    const titleEl = document.getElementById('promoTitle');
+    if (titleEl && config.promo_titre) {
+      const m = String(config.promo_titre).match(/^(-?\d+%?)\s*(.*)$/);
+      if (m) titleEl.innerHTML = '<strong>' + m[1] + '</strong> ' + m[2];
+      else titleEl.textContent = config.promo_titre;
+    }
+    const subEl = document.querySelector('.promo-sub');
+    if (subEl && config.promo_sous_titre) subEl.textContent = config.promo_sous_titre;
+    const datesEl = document.querySelector('.promo-dates');
+    if (datesEl && config.promo_date_debut && config.promo_date_fin) {
+      const fmtDate = d => { try { const dt = new Date(d); if (!isNaN(dt)) return dt.toLocaleDateString('fr-FR', { day:'numeric', month:'long' }); } catch(e){} return d; };
+      datesEl.innerHTML = 'Valable du <strong>' + fmtDate(config.promo_date_debut) + '</strong> au <strong>' + fmtDate(config.promo_date_fin) + ' 2026</strong>';
+    }
+    const items = document.querySelectorAll('.promo-product-item');
+    if (items.length >= 1) {
+      const oldE = items[0].querySelector('.promo-product-old');
+      const newE = items[0].querySelector('.promo-product-new');
+      if (oldE && config.promo_creme_300_prix_barre) oldE.textContent = _fmtPriceFCFA(config.promo_creme_300_prix_barre);
+      if (newE && config.promo_creme_300_prix) newE.textContent = _fmtPriceFCFA(config.promo_creme_300_prix);
+    }
+    if (items.length >= 2) {
+      const oldE = items[1].querySelector('.promo-product-old');
+      const newE = items[1].querySelector('.promo-product-new');
+      if (oldE && config.promo_creme_150_prix_barre) oldE.textContent = _fmtPriceFCFA(config.promo_creme_150_prix_barre);
+      if (newE && config.promo_creme_150_prix) newE.textContent = _fmtPriceFCFA(config.promo_creme_150_prix);
+    }
+  }
+
+  // Applique tout dès que la config arrive
+  window.__siteConfigPromise.then(applyCremePricesFromConfig);
+  window.__siteConfigPromise.then(applyPopupTextsFromConfig);
+
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
 
@@ -3614,47 +3707,53 @@
     start();
   })();
 
-  // ─── POP-UP PROMO 50% CRÈMES (semaine du 04 au 11 juillet 2026) ───
+  // ─── POP-UP PROMO (piloté par le Sheet Config — promo_active) ───
   (function initPromoPopup() {
-    const PROMO_KEY = 'jbc_promo_cremes_2026_07';
-    const PROMO_END = new Date('2026-07-12T00:00:00');
-    if (new Date() >= PROMO_END) return; // La promo est terminée, on n'affiche rien
-
     const overlay = document.getElementById('promoOverlay');
     const popup = document.getElementById('promoPopup');
     if (!overlay || !popup) return;
 
-    const closeBtn = document.getElementById('promoClose');
-    const declineBtn = document.getElementById('promoDecline');
-    const ctaBtn = document.getElementById('promoCta');
+    // Le popup n'est affiché QUE si :
+    //  1. La config est chargée avec promo_active === true
+    //  2. La cliente ne l'a pas déjà vu dans cette session
+    // Si la config est indisponible ou promo_active === false → jamais affiché.
+    // La clé sessionStorage inclut le titre du popup pour qu'un nouveau
+    // titre (nouvelle campagne) le ré-affiche.
+    (window.__siteConfigPromise || Promise.resolve(null)).then(config => {
+      if (!config || config.promo_active !== true) return;
 
-    const alreadySeen = sessionStorage.getItem(PROMO_KEY);
-    if (alreadySeen) return;
+      const PROMO_KEY = 'jbc_promo_' + btoa(String(config.promo_titre || 'default')).slice(0, 16);
+      if (sessionStorage.getItem(PROMO_KEY)) return;
 
-    // Affiche après 2 secondes (le temps de voir le hero)
-    setTimeout(() => {
-      overlay.classList.add('open');
-      popup.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
-      popup.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }, 2000);
+      const closeBtn = document.getElementById('promoClose');
+      const declineBtn = document.getElementById('promoDecline');
+      const ctaBtn = document.getElementById('promoCta');
 
-    function closePromo(source) {
-      overlay.classList.remove('open');
-      popup.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      popup.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      sessionStorage.setItem(PROMO_KEY, source || '1');
-    }
+      // Affiche après 2 secondes (le temps de voir le hero)
+      setTimeout(() => {
+        overlay.classList.add('open');
+        popup.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        popup.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }, 2000);
 
-    closeBtn.addEventListener('click', () => closePromo('close'));
-    declineBtn.addEventListener('click', () => closePromo('decline'));
-    overlay.addEventListener('click', () => closePromo('overlay'));
-    ctaBtn.addEventListener('click', () => closePromo('cta'));
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popup.classList.contains('open')) closePromo('esc');
+      function closePromo(source) {
+        overlay.classList.remove('open');
+        popup.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        sessionStorage.setItem(PROMO_KEY, source || '1');
+      }
+
+      closeBtn?.addEventListener('click', () => closePromo('close'));
+      declineBtn?.addEventListener('click', () => closePromo('decline'));
+      overlay.addEventListener('click', () => closePromo('overlay'));
+      ctaBtn?.addEventListener('click', () => closePromo('cta'));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popup.classList.contains('open')) closePromo('esc');
+      });
     });
   })();
 
