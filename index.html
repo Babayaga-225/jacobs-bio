@@ -3415,10 +3415,25 @@
   const CRM_API_URL = 'https://script.google.com/macros/s/AKfycbzhIM4WNYJNnqr3XamM0bDoWi_Ze-zIDJI4S2mm097S58m_Osn4YzY97A41-Q-nerQN/exec';
   const CRM_SECRET  = 'jbc_2026_K9pX2vQ7';
 
-  /* ═══════════════ SITE CONFIG (via Sheet, cache 5 min) ═══════════════ */
-  // Charge la config dès le début du script pour que le popup et les prix
-  // crèmes soient synchronisés avec ce que Mlle Kouassi a défini dans le
-  // Google Sheet (onglet Config). Résout dans window.__siteConfigPromise.
+  /* ═══════════════ SITE CONFIG (via Sheet, cache localStorage + réseau) ═══════════════ */
+  // Stratégie :
+  //   1. Lire immédiatement le cache localStorage (max 1h) → application SANS délai
+  //   2. Fetch la config fraîche en parallèle
+  //   3. Si la config fraîche diffère, réappliquer + mettre à jour le cache
+  // Résultat : 0 flash pour les visiteurs récurrents, mise à jour transparente.
+  const SITE_CONFIG_LS_KEY = 'jbc_site_config_v1';
+  const SITE_CONFIG_LS_TTL_MS = 60 * 60 * 1000; // 1 heure
+
+  window.__cachedSiteConfig = (() => {
+    try {
+      const raw = localStorage.getItem(SITE_CONFIG_LS_KEY);
+      if (!raw) return null;
+      const { t, c } = JSON.parse(raw);
+      if (!t || !c || Date.now() - t > SITE_CONFIG_LS_TTL_MS) return null;
+      return c;
+    } catch (e) { return null; }
+  })();
+
   window.__siteConfigPromise = (async () => {
     try {
       const controller = new AbortController();
@@ -3426,8 +3441,12 @@
       const r = await fetch(CRM_API_URL + '?action=siteConfig', { signal: controller.signal, cache: 'no-cache' });
       clearTimeout(timeoutId);
       const d = await r.json();
-      return d && d.success ? (d.config || {}) : null;
-    } catch (e) { return null; }
+      if (d && d.success && d.config) {
+        try { localStorage.setItem(SITE_CONFIG_LS_KEY, JSON.stringify({ t: Date.now(), c: d.config })); } catch (e) {}
+        return d.config;
+      }
+    } catch (e) {}
+    return window.__cachedSiteConfig; // fallback sur cache local si fetch échoue
   })();
 
   function _fmtPriceFCFA(n) {
@@ -3504,9 +3523,22 @@
     }
   }
 
-  // Applique tout dès que la config arrive
-  window.__siteConfigPromise.then(applyCremePricesFromConfig);
-  window.__siteConfigPromise.then(applyPopupTextsFromConfig);
+  // 1. Applique IMMÉDIATEMENT la config depuis le cache localStorage (0 délai)
+  if (window.__cachedSiteConfig) {
+    applyCremePricesFromConfig(window.__cachedSiteConfig);
+    applyPopupTextsFromConfig(window.__cachedSiteConfig);
+  }
+
+  // 2. Puis réapplique avec la config fraîche du réseau (met à jour si différent)
+  window.__siteConfigPromise.then(config => {
+    if (!config) return;
+    const cachedStr = JSON.stringify(window.__cachedSiteConfig || {});
+    const freshStr = JSON.stringify(config);
+    if (cachedStr !== freshStr) {
+      applyCremePricesFromConfig(config);
+      applyPopupTextsFromConfig(config);
+    }
+  });
 
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
