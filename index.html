@@ -1614,6 +1614,79 @@
     background: linear-gradient(180deg, transparent 60%, rgba(11, 8, 5, 0.20) 100%);
     pointer-events: none;
   }
+  /* Galerie multi-images */
+  .pdp-gallery {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+  .pdp-gallery-track {
+    display: flex; width: 100%; height: 100%;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pdp-gallery-slide {
+    min-width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cream-warm);
+  }
+  .pdp-gallery-slide img {
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+    object-fit: contain;
+  }
+  .pdp-gal-btn {
+    position: absolute; top: 50%; z-index: 4;
+    transform: translateY(-50%);
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    background: rgba(255, 252, 244, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(212, 167, 68, 0.45);
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--gold-deep);
+  }
+  .pdp-gal-btn:hover { background: var(--gold); color: var(--text); transform: translateY(-50%) scale(1.08); }
+  .pdp-gal-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .pdp-gal-prev { left: 14px; }
+  .pdp-gal-next { right: 14px; }
+  .pdp-gal-dots {
+    position: absolute; bottom: 18px; left: 50%; z-index: 4;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    background: rgba(11, 8, 5, 0.35);
+    padding: 8px 12px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .pdp-gal-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    border: 0; padding: 0;
+    background: rgba(255, 252, 244, 0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .pdp-gal-dot.active {
+    background: var(--gold-bright);
+    width: 26px;
+  }
+  .pdp-gal-caption {
+    position: absolute; top: 20px; right: 20px; z-index: 3;
+    background: rgba(11, 8, 5, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--gold-bright);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 600;
+  }
+  .pdp-gal-caption:empty { display: none; }
   .pdp-img-badge {
     position: absolute; top: 20px; left: 20px; z-index: 2;
     background: var(--gold-gradient);
@@ -1733,7 +1806,11 @@
   .pdp-actions {
     display: flex; gap: 12px;
     margin-top: auto;
-    padding-top: 6px;
+    padding: 16px 0 4px;
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, var(--ivory) 22%, var(--ivory) 100%);
+    z-index: 2;
   }
   .pdp-actions .btn { flex: 1; justify-content: center; }
   .pdp-actions .btn-whatsapp { flex: 0 0 auto; padding: 16px 24px; }
@@ -3323,7 +3400,17 @@
     <div class="pdp-img">
       <span class="pdp-img-badge" id="pdpBadge"></span>
       <span class="pdp-img-tag">Jacob's Bio · Bouaké</span>
-      <img id="pdpImg" src="" alt="" width="600" height="750" loading="lazy" decoding="async">
+      <span class="pdp-gal-caption" id="pdpGalCaption"></span>
+      <div class="pdp-gallery" id="pdpGallery">
+        <div class="pdp-gallery-track" id="pdpGalTrack"></div>
+      </div>
+      <button type="button" class="pdp-gal-btn pdp-gal-prev" id="pdpGalPrev" aria-label="Image précédente">
+        <svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg>
+      </button>
+      <button type="button" class="pdp-gal-btn pdp-gal-next" id="pdpGalNext" aria-label="Image suivante">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+      <div class="pdp-gal-dots" id="pdpGalDots"></div>
     </div>
     <div class="pdp-body">
       <div class="pdp-cat" id="pdpCat"></div>
@@ -4226,7 +4313,11 @@
     'kit-antitache': {
       format: '3 produits — Crème visage + Savon visage + Masque au choix (Nila ou Quasil)', badge: 'Nouveau',
       benefits: ['Rituel complet anti-taches et anti-acné', 'Crème hydratante nourrissante', 'Savon nettoyant doux', 'Masque purifiant (Nila ou Quasil au choix)'],
-      usage: 'Précisez à la commande votre choix de masque. Utilisation quotidienne matin et soir, masque 1 à 2 fois par semaine.'
+      usage: 'Précisez à la commande votre choix de masque. Utilisation quotidienne matin et soir, masque 1 à 2 fois par semaine.',
+      images: [
+        { src: 'assets/photos/25b_kit-antitache-quasil.jpeg', caption: 'Au Quasil · Recommandé' },
+        { src: 'assets/photos/25_kit-antitache-nila.jpeg',    caption: 'Au Nila' }
+      ]
     }
   };
 
@@ -4234,10 +4325,71 @@
   const pdpOverlay = document.getElementById('pdpOverlay');
   let currentPdpProduct = null;
 
+  // ─── Galerie PDP (multi-images avec flèches + dots + swipe) ───
+  let _pdpGalIdx = 0;
+  let _pdpGalCount = 1;
+  let _pdpGalCaptions = [];
+  function renderPdpGallery(p, d) {
+    const track = document.getElementById('pdpGalTrack');
+    const dots  = document.getElementById('pdpGalDots');
+    const prev  = document.getElementById('pdpGalPrev');
+    const next  = document.getElementById('pdpGalNext');
+    const cap   = document.getElementById('pdpGalCaption');
+    // Source images : soit d.images (array), soit fallback p.image
+    const items = (d.images && d.images.length)
+      ? d.images.map(x => typeof x === 'string' ? { src: x, caption: '' } : x)
+      : [{ src: p.image, caption: '' }];
+    _pdpGalCount = items.length;
+    _pdpGalCaptions = items.map(it => it.caption || '');
+    track.innerHTML = items.map((it, i) => (
+      '<div class="pdp-gallery-slide">'
+      + '<img src="' + it.src + '" alt="' + p.name + (items.length > 1 ? ' — vue ' + (i+1) : '') + '" loading="lazy" decoding="async">'
+      + '</div>'
+    )).join('');
+    // Dots
+    const showNav = items.length > 1;
+    dots.style.display = showNav ? '' : 'none';
+    prev.style.display = showNav ? '' : 'none';
+    next.style.display = showNav ? '' : 'none';
+    dots.innerHTML = showNav
+      ? items.map((_, i) => '<button type="button" class="pdp-gal-dot' + (i===0?' active':'') + '" data-idx="' + i + '" aria-label="Image ' + (i+1) + '"></button>').join('')
+      : '';
+    _pdpGalIdx = 0;
+    updatePdpGal();
+    dots.querySelectorAll('.pdp-gal-dot').forEach(b => {
+      b.addEventListener('click', () => { _pdpGalIdx = +b.dataset.idx; updatePdpGal(); });
+    });
+  }
+  function updatePdpGal() {
+    const track = document.getElementById('pdpGalTrack');
+    const dots  = document.getElementById('pdpGalDots');
+    const cap   = document.getElementById('pdpGalCaption');
+    if (track) track.style.transform = 'translateX(-' + (_pdpGalIdx * 100) + '%)';
+    dots.querySelectorAll('.pdp-gal-dot').forEach((d, i) => d.classList.toggle('active', i === _pdpGalIdx));
+    cap.textContent = _pdpGalCaptions[_pdpGalIdx] || '';
+  }
+  function pdpGalStep(delta) {
+    if (_pdpGalCount <= 1) return;
+    _pdpGalIdx = (_pdpGalIdx + delta + _pdpGalCount) % _pdpGalCount;
+    updatePdpGal();
+  }
+  document.getElementById('pdpGalPrev').addEventListener('click', () => pdpGalStep(-1));
+  document.getElementById('pdpGalNext').addEventListener('click', () => pdpGalStep(1));
+  // Swipe tactile
+  (function() {
+    const gal = document.getElementById('pdpGallery');
+    let startX = 0, dx = 0, tracking = false;
+    gal.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dx = 0; tracking = true; }, { passive: true });
+    gal.addEventListener('touchmove', e => { if (tracking) dx = e.touches[0].clientX - startX; }, { passive: true });
+    gal.addEventListener('touchend', () => {
+      if (tracking && Math.abs(dx) > 40) pdpGalStep(dx < 0 ? 1 : -1);
+      tracking = false;
+    });
+  })();
+
   function openPdp(p) {
     const d = PRODUCT_DETAILS[p.id] || { format: '', badge: p.cat, benefits: [], usage: '' };
-    document.getElementById('pdpImg').src = p.image;
-    document.getElementById('pdpImg').alt = p.name;
+    renderPdpGallery(p, d);
     document.getElementById('pdpBadge').textContent = d.badge;
     document.getElementById('pdpCat').textContent = p.cat;
     document.getElementById('pdpName').textContent = p.name;
@@ -4282,7 +4434,10 @@
   document.getElementById('pdpClose').addEventListener('click', closePdp);
   pdpOverlay.addEventListener('click', closePdp);
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && pdp.classList.contains('open')) closePdp();
+    if (!pdp.classList.contains('open')) return;
+    if (e.key === 'Escape')     closePdp();
+    if (e.key === 'ArrowLeft')  pdpGalStep(-1);
+    if (e.key === 'ArrowRight') pdpGalStep(1);
   });
   document.getElementById('pdpAdd').addEventListener('click', () => {
     if (!currentPdpProduct) return;
