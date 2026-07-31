@@ -3414,23 +3414,70 @@
     return (Number(n) || 0).toLocaleString('fr-FR').replace(/,/g, ' ');
   }
 
-  // Applique la config aux cartes crèmes (prix + classe on-promo + badge)
+  // ─── Planification promo par dates ───
+  // Résout l'état "actif" à partir de :
+  //   - promo_mode : 'auto' | 'on' | 'off' (Sheet Config)
+  //     - 'on'   : force actif
+  //     - 'off'  : force inactif
+  //     - 'auto' (défaut) : actif si aujourd'hui ∈ [promo_date_debut, promo_date_fin]
+  //   - promo_active (legacy booléen) : utilisé si promo_mode absent, comme avant
+  //
+  // Ainsi Mlle Kouassi renseigne juste une fois les 2 dates et le mode
+  // 'auto' — la promo démarre et s'arrête toute seule aux dates prévues.
+  function _isPromoActive(config) {
+    if (!config) return false;
+    const mode = String(config.promo_mode || '').toLowerCase().trim();
+    if (mode === 'on')  return true;
+    if (mode === 'off') return false;
+    if (mode === 'auto') {
+      return _isTodayInRange(config.promo_date_debut, config.promo_date_fin);
+    }
+    // Fallback : ancien booléen promo_active
+    return config.promo_active === true;
+  }
+
+  // Vrai si aujourd'hui (00h00 à 23h59) est dans [debut, fin] inclusifs.
+  // Accepte 'YYYY-MM-DD', Date, ou timestamp. Une borne vide = pas de limite.
+  function _isTodayInRange(debut, fin) {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const parse = d => {
+      if (!d && d !== 0) return null;
+      const dt = new Date(d);
+      if (isNaN(dt)) return null;
+      dt.setHours(0, 0, 0, 0);
+      return dt;
+    };
+    const d1 = parse(debut);
+    const d2 = parse(fin);
+    if (d1 && today < d1) return false;
+    if (d2 && today > d2) return false;
+    return !!(d1 || d2); // il faut au moins une borne
+  }
+
+  // Applique la config aux cartes crèmes ET suppos (prix + classe on-promo + badge %)
   function applyCremePricesFromConfig(config) {
     if (!config) return; // Silence, HTML par défaut
-    const cremes = [
+    const promoOn = _isPromoActive(config);
+    const items = [
+      // Crèmes (promo -50% typique)
       { id: 'creme-vitesse-300', priceKey: 'promo_creme_300_prix', barrKey: 'promo_creme_300_prix_barre', defaultPrice: 10000 },
-      { id: 'creme-vitesse-150', priceKey: 'promo_creme_150_prix', barrKey: 'promo_creme_150_prix_barre', defaultPrice: 6000 }
+      { id: 'creme-vitesse-150', priceKey: 'promo_creme_150_prix', barrKey: 'promo_creme_150_prix_barre', defaultPrice: 6000  },
+      // Suppositoires (promo -10% typique — nouveaux keys)
+      { id: 'suppo-150',         priceKey: 'promo_suppo_150_prix', barrKey: 'promo_suppo_150_prix_barre', defaultPrice: 5000  },
+      { id: 'suppo-250',         priceKey: 'promo_suppo_250_prix', barrKey: 'promo_suppo_250_prix_barre', defaultPrice: 10000 }
     ];
-    cremes.forEach(c => {
+    items.forEach(c => {
       const card = document.querySelector('.prod-card[data-id="' + c.id + '"]');
       if (!card) return;
       const priceEl = card.querySelector('.prod-price');
       const img = card.querySelector('.prod-img');
       const oldBadge = card.querySelector('.prod-badge.promo-50');
-      if (config.promo_active === true) {
-        const promoPrice = Number(config[c.priceKey]) || 0;
-        const barrPrice = Number(config[c.barrKey]) || c.defaultPrice;
-        if (promoPrice <= 0 || barrPrice <= 0 || promoPrice >= barrPrice) return;
+      const promoPrice = Number(config[c.priceKey]) || 0;
+      const barrPrice  = Number(config[c.barrKey])  || c.defaultPrice;
+      // Si aucun prix promo n'est renseigné pour ce produit, on ne touche pas à sa carte
+      // (permet une promo qui ne cible qu'une partie des produits ci-dessus).
+      const hasPromoPrice = promoPrice > 0 && promoPrice < barrPrice;
+      if (promoOn && hasPromoPrice) {
         card.classList.add('on-promo');
         card.dataset.price = promoPrice;
         card.dataset.priceOld = barrPrice;
@@ -3439,7 +3486,7 @@
         if (oldBadge) oldBadge.textContent = '-' + pct + '%';
         else if (img) { const b = document.createElement('span'); b.className = 'prod-badge promo-50'; b.textContent = '-' + pct + '%'; img.insertBefore(b, img.firstChild); }
       } else {
-        // Promo désactivée : retour au prix normal
+        // Promo inactive OU pas de prix promo pour ce produit : retour au prix normal
         card.classList.remove('on-promo');
         const normalPrice = Number(config[c.barrKey]) || c.defaultPrice;
         card.dataset.price = normalPrice;
@@ -3450,9 +3497,25 @@
     });
   }
 
+  // ─── Retrait auto du badge "Nouveau" après la date new_products_until ───
+  // Clé Sheet Config : new_products_until (ex: 2026-08-14)
+  // Si aujourd'hui > cette date, tous les badges "Nouveau" (span.prod-badge dont
+  // le texte est "Nouveau") sont retirés du DOM. Aucune modif produit par produit :
+  // il suffit qu'un badge porte le texte "Nouveau" pour être concerné.
+  function applyNewBadgeExpiryFromConfig(config) {
+    if (!config || !config.new_products_until) return;
+    const until = new Date(config.new_products_until);
+    if (isNaN(until)) return;
+    until.setHours(23, 59, 59, 999);
+    if (Date.now() <= until.getTime()) return; // encore valide
+    document.querySelectorAll('.prod-card .prod-badge').forEach(b => {
+      if (b.textContent.trim().toLowerCase() === 'nouveau') b.remove();
+    });
+  }
+
   // Applique config au contenu du popup (textes + prix)
   function applyPopupTextsFromConfig(config) {
-    if (!config || config.promo_active !== true) return;
+    if (!config || !_isPromoActive(config)) return;
     const titleEl = document.getElementById('promoTitle');
     if (titleEl && config.promo_titre) {
       const m = String(config.promo_titre).match(/^(-?\d+%?)\s*(.*)$/);
@@ -3485,6 +3548,7 @@
   if (window.__cachedSiteConfig) {
     applyCremePricesFromConfig(window.__cachedSiteConfig);
     applyPopupTextsFromConfig(window.__cachedSiteConfig);
+    applyNewBadgeExpiryFromConfig(window.__cachedSiteConfig);
   }
 
   // 2. Puis réapplique avec la config fraîche du réseau (met à jour si différent)
@@ -3495,6 +3559,7 @@
     if (cachedStr !== freshStr) {
       applyCremePricesFromConfig(config);
       applyPopupTextsFromConfig(config);
+      applyNewBadgeExpiryFromConfig(config);
     }
   });
 
@@ -3697,20 +3762,20 @@
     start();
   })();
 
-  // ─── POP-UP PROMO (piloté par le Sheet Config — promo_active) ───
+  // ─── POP-UP PROMO (piloté par le Sheet Config — promo_mode auto/on/off + dates) ───
   (function initPromoPopup() {
     const overlay = document.getElementById('promoOverlay');
     const popup = document.getElementById('promoPopup');
     if (!overlay || !popup) return;
 
     // Le popup n'est affiché QUE si :
-    //  1. La config est chargée avec promo_active === true
+    //  1. La config est chargée et la promo est considérée active (mode auto/on
+    //     + fenêtre de dates OK, cf. _isPromoActive)
     //  2. La cliente ne l'a pas déjà vu dans cette session
-    // Si la config est indisponible ou promo_active === false → jamais affiché.
     // La clé sessionStorage inclut le titre du popup pour qu'un nouveau
     // titre (nouvelle campagne) le ré-affiche.
     (window.__siteConfigPromise || Promise.resolve(null)).then(config => {
-      if (!config || config.promo_active !== true) return;
+      if (!config || !_isPromoActive(config)) return;
 
       const PROMO_KEY = 'jbc_promo_' + btoa(String(config.promo_titre || 'default')).slice(0, 16);
       if (sessionStorage.getItem(PROMO_KEY)) return;
