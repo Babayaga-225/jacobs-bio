@@ -2073,6 +2073,38 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.06); }
   }
+
+  /* ─────────── PRODUIT EN RUPTURE ─────────── */
+  .prod-card.is-out-of-stock { cursor: default; }
+  .prod-card.is-out-of-stock:hover { transform: none; box-shadow: none; }
+  .prod-card.is-out-of-stock .prod-img img {
+    filter: grayscale(80%) brightness(0.85);
+    opacity: 0.6;
+    transition: none;
+  }
+  .prod-card.is-out-of-stock:hover .prod-img img { transform: none; }
+  .prod-card.is-out-of-stock .prod-title,
+  .prod-card.is-out-of-stock .prod-price,
+  .prod-card.is-out-of-stock .prod-cat { opacity: 0.55; }
+  .prod-badge.rupture {
+    background: linear-gradient(135deg, #6b7280, #374151);
+    color: white;
+    letter-spacing: 0.14em;
+    box-shadow: 0 6px 16px -4px rgba(55, 65, 81, 0.4);
+  }
+  .prod-card.is-out-of-stock .prod-add {
+    background: #E5E1D6;
+    color: var(--text-soft);
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: auto;
+  }
+  .prod-card.is-out-of-stock .prod-add:hover {
+    background: #E5E1D6;
+    color: var(--text-soft);
+    transform: none;
+  }
+  .prod-card.is-out-of-stock .prod-add svg { display: none; }
   /* Prix promo dans la modale */
   .pdp-price.promo { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .pdp-price-old {
@@ -2722,7 +2754,7 @@
         <div class="story-quote">
           « Si un savon est éclaircissant, on le marque. S'il ne l'est pas, on le marque aussi. Vous achetez exactement ce qui est annoncé. »
         </div>
-        <p>On vous livre partout en Côte d'Ivoire. Bouaké en 24h, Yamoussoukro en 24-48h, Abidjan en deux à trois jours. Une question avant d'acheter ou un doute après usage ? Écrivez sur WhatsApp. On répond vite et on prend le temps d'expliquer.</p>
+        <p>On vous livre partout en Côte d'Ivoire. Bouaké en 24h, autres villes de Côte d'Ivoire en 24 à 72h. Une question avant d'acheter ou un doute après usage ? Écrivez sur WhatsApp. On répond vite et on prend le temps d'expliquer.</p>
         <div class="story-signature">Marie-Jacob</div>
       </div>
     </div>
@@ -2810,13 +2842,13 @@
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="sirop-shape" data-name="Sirop Shape Plus+ 300ml" data-cat="Sirops" data-price="10000" data-image="assets/photos/03_sirop-shape-plus.jpeg">
-        <div class="prod-img"><img src="assets/photos/03_sirop-shape-plus.jpeg" alt="Sirop Shape Plus+"></div>
+      <div class="prod-card reveal is-out-of-stock" data-id="sirop-shape" data-name="Sirop Shape Plus+ 300ml" data-cat="Sirops" data-price="10000" data-image="assets/photos/03_sirop-shape-plus.jpeg" data-out-of-stock="1">
+        <div class="prod-img"><span class="prod-badge rupture">Rupture</span><img src="assets/photos/03_sirop-shape-plus.jpeg" alt="Sirop Shape Plus+"></div>
         <div class="prod-body">
           <div class="prod-cat">Sirops</div>
           <div class="prod-title">Sirop Shape Plus+ 300ml</div>
           <div class="prod-price">10 000<small>FCFA</small></div>
-          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+          <button class="prod-add" type="button" disabled>Bientôt de retour</button>
         </div>
       </div>
       <div class="prod-card reveal on-promo" data-id="creme-vitesse-300" data-name="Crème Vitesse 300g" data-cat="Crèmes" data-price="5000" data-price-old="10000" data-image="assets/photos/05_creme-vitesse-300g.jpeg">
@@ -2864,13 +2896,13 @@
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="sirop-sublime" data-name="Sirop Sublime Courbes" data-cat="Sirops" data-price="10000" data-image="assets/photos/04_sirop-sublime-courbes.jpeg">
-        <div class="prod-img"><span class="prod-badge">Nouveau</span><img src="assets/photos/04_sirop-sublime-courbes.jpeg" alt="Sirop Sublime Courbes"></div>
+      <div class="prod-card reveal is-out-of-stock" data-id="sirop-sublime" data-name="Sirop Sublime Courbes" data-cat="Sirops" data-price="10000" data-image="assets/photos/04_sirop-sublime-courbes.jpeg" data-out-of-stock="1">
+        <div class="prod-img"><span class="prod-badge rupture">Rupture</span><img src="assets/photos/04_sirop-sublime-courbes.jpeg" alt="Sirop Sublime Courbes"></div>
         <div class="prod-body">
           <div class="prod-cat">Sirops</div>
           <div class="prod-title">Sirop Sublime Courbes</div>
           <div class="prod-price">10 000<small>FCFA</small></div>
-          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+          <button class="prod-add" type="button" disabled>Bientôt de retour</button>
         </div>
       </div>
       <div class="prod-card reveal on-promo" data-id="creme-vitesse-150" data-name="Crème Vitesse 150g" data-cat="Crèmes" data-price="3000" data-price-old="6000" data-image="assets/photos/06_creme-vitesse-150g.jpeg">
@@ -2918,22 +2950,22 @@
           <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="kit-vitesse-mini" data-name="Kit Vitesse Mini" data-cat="Kits" data-price="17000" data-image="assets/photos/16_kit-vitesse-mini.jpeg">
-        <div class="prod-img"><img src="assets/photos/16_kit-vitesse-mini.jpeg" alt="Kit Vitesse Mini"></div>
+      <div class="prod-card reveal is-out-of-stock" data-id="kit-vitesse-mini" data-name="Kit Vitesse Mini" data-cat="Kits" data-price="17000" data-image="assets/photos/16_kit-vitesse-mini.jpeg" data-out-of-stock="1">
+        <div class="prod-img"><span class="prod-badge rupture">Rupture</span><img src="assets/photos/16_kit-vitesse-mini.jpeg" alt="Kit Vitesse Mini"></div>
         <div class="prod-body">
           <div class="prod-cat">Kits</div>
           <div class="prod-title">Kit Vitesse Mini</div>
           <div class="prod-price">17 000<small>FCFA</small></div>
-          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+          <button class="prod-add" type="button" disabled>Bientôt de retour</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-id="kit-vitesse" data-name="Kit Vitesse" data-cat="Kits" data-price="21000" data-image="assets/photos/17_kit-vitesse.jpeg">
-        <div class="prod-img"><span class="prod-badge">Résultats rapides</span><img src="assets/photos/17_kit-vitesse.jpeg" alt="Kit Vitesse"></div>
+      <div class="prod-card reveal is-out-of-stock" data-id="kit-vitesse" data-name="Kit Vitesse" data-cat="Kits" data-price="21000" data-image="assets/photos/17_kit-vitesse.jpeg" data-out-of-stock="1">
+        <div class="prod-img"><span class="prod-badge rupture">Rupture</span><img src="assets/photos/17_kit-vitesse.jpeg" alt="Kit Vitesse"></div>
         <div class="prod-body">
           <div class="prod-cat">Kits</div>
           <div class="prod-title">Kit Vitesse</div>
           <div class="prod-price">21 000<small>FCFA</small></div>
-          <button class="prod-add" type="button"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Ajouter au panier</button>
+          <button class="prod-add" type="button" disabled>Bientôt de retour</button>
         </div>
       </div>
 
@@ -3067,7 +3099,7 @@
       <div class="promesse-item reveal-up">
         <div class="promesse-num">04</div>
         <div class="promesse-title">Livré partout en CI</div>
-        <div class="promesse-desc">Bouaké en 24h, Yamoussoukro en 24-48h, Abidjan en deux à trois jours.</div>
+        <div class="promesse-desc">Bouaké en 24h, autres villes de Côte d'Ivoire en 24 à 72h.</div>
       </div>
     </div>
   </div>
@@ -3313,9 +3345,9 @@
           <select id="co-city" required>
             <option value="">— Choisir une ville —</option>
             <option value="Bouaké">Bouaké · dès 700 FCFA · 24h</option>
-            <option value="Yamoussoukro">Yamoussoukro · 1 500 FCFA · 24-48h</option>
-            <option value="Abidjan">Abidjan · 2 500 FCFA · 2-3 jours</option>
-            <option value="Autre">Autre ville en CI · dès 2 500 FCFA · 3-6 jours</option>
+            <option value="Yamoussoukro">Yamoussoukro · 1 500 FCFA · 24 à 72h</option>
+            <option value="Abidjan">Abidjan · 2 500 FCFA · 24 à 72h</option>
+            <option value="Autre">Autre ville en CI · dès 2 500 FCFA · 24 à 72h</option>
           </select>
         </div>
         <div class="checkout-form-group">
@@ -4021,6 +4053,8 @@
       e.preventDefault();
       e.stopPropagation();
       const card = btn.closest('.prod-card');
+      // Bloque l'ajout au panier si le produit est en rupture
+      if (card.dataset.outOfStock === '1') return;
       const p = {
         id: card.dataset.id,
         name: card.dataset.name,
@@ -4360,7 +4394,24 @@
       </li>`).join('');
     document.getElementById('pdpUsage').innerHTML = `<span>${d.usage}</span>`;
 
-    const waMsg = encodeURIComponent(`Bonjour Jacob's Bio !\n\nJe suis intéressée par : ${p.name} (${(+p.price).toLocaleString('fr-FR').replace(/,/g, ' ')} FCFA).\n\nPouvez-vous me donner plus d'informations ?`);
+    // Rupture de stock : desactive l'ajout au panier + adapte le WhatsApp
+    const pdpAdd = document.getElementById('pdpAdd');
+    if (p.outOfStock) {
+      pdpAdd.disabled = true;
+      pdpAdd.innerHTML = 'Bientôt de retour';
+      pdpAdd.style.background = '#E5E1D6';
+      pdpAdd.style.color = 'var(--text-soft)';
+      pdpAdd.style.cursor = 'not-allowed';
+    } else {
+      pdpAdd.disabled = false;
+      pdpAdd.innerHTML = 'Ajouter au panier <span class="arrow"></span>';
+      pdpAdd.style.background = '';
+      pdpAdd.style.color = '';
+      pdpAdd.style.cursor = '';
+    }
+    const waMsg = p.outOfStock
+      ? encodeURIComponent(`Bonjour Jacob's Bio !\n\nJe voudrais être prévenue quand ${p.name} sera de nouveau disponible.`)
+      : encodeURIComponent(`Bonjour Jacob's Bio !\n\nJe suis intéressée par : ${p.name} (${(+p.price).toLocaleString('fr-FR').replace(/,/g, ' ')} FCFA).\n\nPouvez-vous me donner plus d'informations ?`);
     document.getElementById('pdpWa').href = `https://wa.me/2250777362923?text=${waMsg}`;
 
     currentPdpProduct = p;
@@ -4387,7 +4438,7 @@
     if (e.key === 'ArrowRight') pdpGalStep(1);
   });
   document.getElementById('pdpAdd').addEventListener('click', () => {
-    if (!currentPdpProduct) return;
+    if (!currentPdpProduct || currentPdpProduct.outOfStock) return;
     addItem(currentPdpProduct);
     closePdp();
   });
@@ -4400,7 +4451,8 @@
       cat: card.dataset.cat,
       price: parseInt(card.dataset.price),
       priceOld: card.dataset.priceOld ? parseInt(card.dataset.priceOld) : null,
-      image: card.dataset.image
+      image: card.dataset.image,
+      outOfStock: card.dataset.outOfStock === '1'
     };
   }
   document.querySelectorAll('.prod-card').forEach(card => {
