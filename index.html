@@ -1545,6 +1545,25 @@
     background: #FEF3C7; color: #B45309;
     padding: 3px 8px; border-radius: 4px;
   }
+  .payment-mode-info {
+    padding: 14px 16px;
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(212,167,68,0.06) 0%, rgba(212,167,68,0.02) 100%);
+  }
+  .payment-mode-info .payment-mode-title {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .payment-mode-info .payment-mode-title::before {
+    content: ''; display: inline-block;
+    width: 18px; height: 18px;
+    background: var(--gold);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    flex-shrink: 0;
+  }
 
   /* ─────────── FICHE PRODUIT (modale premium) ─────────── */
   .pdp-overlay {
@@ -3154,9 +3173,9 @@
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <div class="eyebrow">Nous joindre</div>
-        <h2>Une <em>question ?</em></h2>
-        <p class="lead">Le plus rapide, c'est WhatsApp. On répond du lundi au samedi, entre 8h et 18h. Souvent dans l'heure.</p>
+        <div class="eyebrow">Service client</div>
+        <h2>Besoin d'un <em>conseil ?</em></h2>
+        <p class="lead">Question sur un produit, conseil personnalisé ou suivi de commande ? Écrivez-nous. Le plus rapide, c'est WhatsApp — réponse dans l'heure en journée, du lundi au samedi (8h-18h).</p>
 
         <div class="contact-channels">
           <a href="https://wa.me/2250777362923" target="_blank" rel="noopener" class="contact-channel">
@@ -3351,25 +3370,14 @@
           <textarea id="co-notes" placeholder="Préférences, instructions..." rows="2"></textarea>
         </div>
         <div class="checkout-form-group payment-mode-block">
-          <label style="margin-bottom:10px;">Comment souhaitez-vous payer ?</label>
-          <label class="payment-mode-radio">
-            <input type="radio" name="payment-mode" value="cash" checked>
-            <div class="payment-mode-body">
-              <div class="payment-mode-title">Cash à la livraison</div>
-              <div class="payment-mode-sub">Payez au moment de recevoir votre colis.</div>
-            </div>
-          </label>
-          <label class="payment-mode-radio">
-            <input type="radio" name="payment-mode" value="online">
-            <div class="payment-mode-body">
-              <div class="payment-mode-title">Payer en ligne maintenant</div>
-              <div class="payment-mode-sub">Wave · Orange Money · MTN Money · Moov · Carte bancaire</div>
-              <div class="payment-mode-test">MODE TEST — GeniusPay Sandbox (aucun argent débité)</div>
-            </div>
-          </label>
+          <div class="payment-mode-info">
+            <div class="payment-mode-title">Paiement 100 % sécurisé</div>
+            <div class="payment-mode-sub">Wave · Orange Money · MTN Money · Moov Money · Carte bancaire</div>
+            <div class="payment-mode-test">MODE TEST — GeniusPay Sandbox (aucun argent débité pour l'instant)</div>
+          </div>
         </div>
         <button type="submit" class="cart-checkout-btn" id="checkoutSubmitBtn" style="margin-top:8px;">
-          Confirmer ma commande
+          Payer maintenant
         </button>
         <a id="waContinueLink" href="#" target="_blank" rel="noopener" class="cart-checkout-btn" style="margin-top:8px;display:none;background:#25D366;color:white;text-decoration:none;align-items:center;justify-content:center;gap:10px;">
           <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
@@ -4517,7 +4525,10 @@
     const city = $('co-city').value;
     const address = $('co-address').value.trim();
     const notes = $('co-notes').value.trim();
-    const paymentMode = (document.querySelector('input[name="payment-mode"]:checked') || {}).value || 'cash';
+    // Mode de paiement fixe : plus qu'une option (GeniusPay en ligne).
+    // Si GeniusPay ne repond pas, on retombe automatiquement sur WhatsApp
+    // pour que la cliente puisse finaliser sans se retrouver bloquee.
+    const paymentMode = 'online';
 
     const subtotal = getSubtotal();
     const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (SHIPPING[city] || 0);
@@ -4552,21 +4563,15 @@
     }
 
     // ───── 1bis. Paiement en ligne → redirection immédiate GeniusPay ─────
-    if (paymentMode === 'online') {
-      if (checkoutUrl) {
-        // Vide le panier local avant la redirection (la commande est sauvée serveur)
-        cart = [];
-        saveCart();
-        window.location.href = checkoutUrl;
-        return;
-      }
-      // Échec de création de la session paiement → on affiche l'erreur et on laisse le user changer d'avis
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '';
-      submitBtn.style.pointerEvents = '';
-      submitBtn.innerHTML = originalHTML;
-      _isSubmittingCheckout = false;
-      alert('Impossible de préparer le paiement en ligne pour le moment. Vous pouvez réessayer ou choisir « Cash à la livraison ».');
+    // Si GeniusPay a bien renvoye une checkoutUrl, on redirige.
+    // Sinon (API indisponible), on continue vers le fallback WhatsApp
+    // pour que la cliente puisse finaliser sa commande manuellement
+    // au lieu d'etre bloquee.
+    if (checkoutUrl) {
+      // Vide le panier local avant la redirection (la commande est sauvée serveur)
+      cart = [];
+      saveCart();
+      window.location.href = checkoutUrl;
       return;
     }
 
