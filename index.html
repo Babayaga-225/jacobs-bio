@@ -1710,10 +1710,18 @@
   .pdp-img-tag::before {
     content: ''; display: block; width: 22px; height: 1px; background: var(--gold-light);
   }
+  .pdp-content-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
   .pdp-body {
-    padding: 50px 44px;
+    padding: 50px 44px 30px;
     overflow-y: auto;
-    display: flex; flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    min-height: 0;
   }
   .pdp-cat {
     display: inline-flex; align-items: center; gap: 12px;
@@ -1805,12 +1813,11 @@
   }
   .pdp-actions {
     display: flex; gap: 12px;
-    margin-top: auto;
-    padding: 16px 0 4px;
-    position: sticky;
-    bottom: 0;
-    background: linear-gradient(180deg, transparent 0%, var(--ivory) 22%, var(--ivory) 100%);
-    z-index: 2;
+    flex-shrink: 0;
+    padding: 18px 44px 24px;
+    background: var(--ivory);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 20px -12px rgba(11, 8, 5, 0.10);
   }
   .pdp-actions .btn { flex: 1; justify-content: center; }
   .pdp-actions .btn-whatsapp { flex: 0 0 auto; padding: 16px 24px; }
@@ -1830,25 +1837,20 @@
     }
     .pdp.open .pdp-card { transform: translateY(0); }
     .pdp-img { aspect-ratio: 4 / 3; flex-shrink: 0; }
-    .pdp-body {
-      padding: 28px 24px 32px;
+    .pdp-content-col {
       flex: 1;
       min-height: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+    }
+    .pdp-body {
+      padding: 24px 24px 20px;
     }
     .pdp-actions {
-      position: sticky;
-      bottom: -32px;
-      background: var(--ivory);
-      padding: 14px 0 0;
-      margin: auto -24px -32px;
-      padding-left: 24px;
-      padding-right: 24px;
-      padding-bottom: 16px;
-      border-top: 1px solid rgba(212, 167, 68, 0.18);
-      box-shadow: 0 -8px 20px -8px rgba(0,0,0,0.06);
+      padding: 14px 24px 20px;
     }
+    .pdp-gal-btn { width: 38px; height: 38px; }
+    .pdp-gal-prev { left: 10px; }
+    .pdp-gal-next { right: 10px; }
   }
 
   /* ─────────── COMING SOON — 4 NOUVEAUX SAVONS ─────────── */
@@ -3412,15 +3414,17 @@
       </button>
       <div class="pdp-gal-dots" id="pdpGalDots"></div>
     </div>
-    <div class="pdp-body">
-      <div class="pdp-cat" id="pdpCat"></div>
-      <h2 class="pdp-name" id="pdpName"></h2>
-      <div class="pdp-format" id="pdpFormat"></div>
-      <div class="pdp-price" id="pdpPrice"></div>
-      <div class="pdp-divider"></div>
-      <div class="pdp-section-title">Bienfaits</div>
-      <ul class="pdp-benefits" id="pdpBenefits"></ul>
-      <div class="pdp-usage" id="pdpUsage"></div>
+    <div class="pdp-content-col">
+      <div class="pdp-body">
+        <div class="pdp-cat" id="pdpCat"></div>
+        <h2 class="pdp-name" id="pdpName"></h2>
+        <div class="pdp-format" id="pdpFormat"></div>
+        <div class="pdp-price" id="pdpPrice"></div>
+        <div class="pdp-divider"></div>
+        <div class="pdp-section-title">Bienfaits</div>
+        <ul class="pdp-benefits" id="pdpBenefits"></ul>
+        <div class="pdp-usage" id="pdpUsage"></div>
+      </div>
       <div class="pdp-actions">
         <button class="btn btn-primary" id="pdpAdd">
           Ajouter au panier <span class="arrow"></span>
