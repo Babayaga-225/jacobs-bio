@@ -2074,6 +2074,68 @@
     50% { transform: scale(1.06); }
   }
 
+  /* ─────────── FILTRE PAR CATÉGORIE ─────────── */
+  .prod-card.is-hidden-by-filter { display: none !important; }
+  .filter-bar {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, rgba(212,167,68,0.14) 0%, rgba(212,167,68,0.04) 100%);
+    border: 1px solid rgba(212,167,68,0.4);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  .filter-bar.active { display: flex; }
+  .filter-bar-label {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text);
+  }
+  .filter-bar-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 16px;
+    background: var(--gold);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M22 3H2l8 9.46V19l4 2v-8.54L22 3z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='black'%3E%3Cpath d='M22 3H2l8 9.46V19l4 2v-8.54L22 3z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain; mask-size: contain;
+  }
+  .filter-bar-cat {
+    font-weight: 600;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .filter-bar-count { color: var(--text-soft); font-size: 13px; }
+  .filter-bar-clear {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px;
+    background: var(--text);
+    color: var(--cream);
+    border: 0; border-radius: 999px;
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .filter-bar-clear:hover { background: var(--gold-deep); }
+  .filter-bar-clear svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+  .filter-empty {
+    display: none;
+    padding: 60px 20px; text-align: center;
+    color: var(--text-soft); font-family: var(--display); font-style: italic;
+    font-size: 17px;
+  }
+  .filter-empty.active { display: block; }
+  @media (max-width: 640px) {
+    .filter-bar { flex-direction: column; align-items: stretch; text-align: center; gap: 10px; }
+    .filter-bar-clear { justify-content: center; }
+  }
+
   /* ─────────── PRODUIT EN RUPTURE ─────────── */
   .prod-card.is-out-of-stock { cursor: default; }
   .prod-card.is-out-of-stock:hover { transform: none; box-shadow: none; }
@@ -2691,7 +2753,7 @@
       </a>
       <a href="#produits" class="hero-cat" data-cat="Savons">
         <div class="hero-cat-title">Savons<br><em>artisanaux</em></div>
-        <div class="hero-cat-img"><img src="assets/photos/08_savon-noir-magic-black.jpeg" alt="Savons artisanaux"></div>
+        <div class="hero-cat-img"><img src="assets/photos/19_savon-aka-fassi.jpeg" alt="Savons artisanaux"></div>
         <div class="hero-cat-corner"><span class="hero-cat-corner-btn">
           <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
         </span></div>
@@ -2832,6 +2894,17 @@
       </div>
       <p class="lead reveal">Tout le catalogue, les plus demandés en premier.</p>
     </div>
+    <div class="filter-bar" id="filterBar" role="status" aria-live="polite">
+      <div class="filter-bar-label">
+        Filtre actif :&nbsp;<span class="filter-bar-cat" id="filterBarCat"></span>
+        <span class="filter-bar-count" id="filterBarCount"></span>
+      </div>
+      <button type="button" class="filter-bar-clear" id="filterBarClear" aria-label="Voir tous les produits">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        Voir tout
+      </button>
+    </div>
+    <div class="filter-empty" id="filterEmpty">Aucun produit dans cette catégorie pour l'instant.</div>
     <div class="products-grid">
       <div class="prod-card reveal" data-id="suppo-150" data-name="Suppositoire Bobaraba 150g" data-cat="Suppositoires" data-price="5000" data-image="assets/photos/01_suppositoire-bobaraba-150g.jpeg">
         <div class="prod-img"><span class="prod-badge">Bestseller</span><img src="assets/photos/01_suppositoire-bobaraba-150g.jpeg" alt="Suppositoire Bobaraba 150g"></div>
@@ -4646,6 +4719,83 @@
   });
 
   renderCart();
+
+  // ─── FILTRE PAR CATEGORIE (hero-cats + col-cards → grille produits) ───
+  // Un data-cat peut correspondre a plusieurs categories de produits
+  // (ex: la carte "Cremes & Huiles" inclut les 2 types dans la meme filtre).
+  const CATEGORY_FILTER_MAP = {
+    'suppositoires': ['Suppositoires'],
+    'sirops':        ['Sirops'],
+    'cremes':        ['Crèmes', 'Huiles'],
+    'crèmes':        ['Crèmes', 'Huiles'],
+    'savons':        ['Savons'],
+    'kits':          ['Kits'],
+    'soins':         ['Soins']
+  };
+  const CATEGORY_DISPLAY_NAMES = {
+    'suppositoires': 'Suppositoires Bobaraba',
+    'sirops':        'Sirops naturels',
+    'cremes':        'Crèmes & Huiles',
+    'crèmes':        'Crèmes & Huiles',
+    'savons':        'Savons artisanaux',
+    'kits':          'Kits complets',
+    'soins':         'Soins naturels'
+  };
+  const _filterBar = document.getElementById('filterBar');
+  const _filterBarCat = document.getElementById('filterBarCat');
+  const _filterBarCount = document.getElementById('filterBarCount');
+  const _filterBarClear = document.getElementById('filterBarClear');
+  const _filterEmpty = document.getElementById('filterEmpty');
+
+  function _normalizeCategoryKey(raw) {
+    // Extrait la cle canonique depuis un data-cat (peut etre encodee URL,
+    // contenir des prefixes "les ", suffixes " naturels", "s complets", etc.).
+    let s = decodeURIComponent(String(raw || '')).toLowerCase().trim();
+    s = s.replace(/^les\s+/, '').replace(/[.·]/g, '').trim();
+    s = s.replace(/\s+(naturels?|artisanaux|complets?|bobaraba|&.*|et.*|\(.*\))$/, '').trim();
+    return s;
+  }
+  function applyCategoryFilter(rawCat) {
+    const key = _normalizeCategoryKey(rawCat);
+    const targetCats = CATEGORY_FILTER_MAP[key];
+    if (!targetCats) { clearCategoryFilter(); return; }
+    let visible = 0;
+    document.querySelectorAll('.prod-card').forEach(card => {
+      const match = targetCats.indexOf(card.dataset.cat) !== -1;
+      card.classList.toggle('is-hidden-by-filter', !match);
+      if (match) visible++;
+    });
+    _filterBarCat.textContent = CATEGORY_DISPLAY_NAMES[key] || rawCat;
+    _filterBarCount.textContent = visible > 0
+      ? '· ' + visible + ' produit' + (visible > 1 ? 's' : '')
+      : '';
+    _filterBar.classList.add('active');
+    _filterEmpty.classList.toggle('active', visible === 0);
+  }
+  function clearCategoryFilter() {
+    document.querySelectorAll('.prod-card.is-hidden-by-filter').forEach(c => c.classList.remove('is-hidden-by-filter'));
+    _filterBar.classList.remove('active');
+    _filterEmpty.classList.remove('active');
+  }
+  _filterBarClear.addEventListener('click', clearCategoryFilter);
+
+  // Intercepte les clics sur les 4 hero-cats (data-cat)
+  document.querySelectorAll('.hero-cat[data-cat]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      applyCategoryFilter(el.dataset.cat);
+      document.getElementById('produits').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  // Intercepte les clics sur les 6 col-cards de la section Collections
+  document.querySelectorAll('.col-card[data-cat]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyCategoryFilter(el.dataset.cat);
+      document.getElementById('produits').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
   // ─── RDV DIAGNOSTIC (creneaux + reservation) ───
   (function initRdv() {
