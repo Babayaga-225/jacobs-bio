@@ -3772,6 +3772,20 @@
   const CART_KEY = 'jacobsbio_cart_v1';
   const SHIPPING = { 'Bouaké': 700, 'Yamoussoukro': 1500, 'Abidjan': 2500, 'Autre': 2500 };
   const FREE_SHIPPING_THRESHOLD = 20000;
+  // Frais de traitement GeniusPay repercutes sur la cliente (defaut 7%, safe
+  // margin par rapport aux ~6.2% observes). Modifiable via Sheet Config
+  // → genius_fee_percent. Arrondi a la centaine superieure via genius_fee_arrondi.
+  const GENIUS_FEE_PERCENT_DEFAULT = 7;
+  const GENIUS_FEE_ARRONDI_DEFAULT = 100;
+  function computeGeniusFees(baseAmount) {
+    const cfg = window.__cachedSiteConfig || {};
+    const percent = Number(cfg.genius_fee_percent);
+    const arrondi = Number(cfg.genius_fee_arrondi);
+    const pct = isFinite(percent) && percent > 0 ? percent : GENIUS_FEE_PERCENT_DEFAULT;
+    const arr = isFinite(arrondi) && arrondi > 0 ? arrondi : GENIUS_FEE_ARRONDI_DEFAULT;
+    const raw = baseAmount * pct / 100;
+    return Math.ceil(raw / arr) * arr;
+  }
   /* CRM Backend (Google Apps Script Web App) */
   const CRM_API_URL = 'https://script.google.com/macros/s/AKfycbzhIM4WNYJNnqr3XamM0bDoWi_Ze-zIDJI4S2mm097S58m_Osn4YzY97A41-Q-nerQN/exec';
   const CRM_SECRET  = 'jbc_2026_K9pX2vQ7';
@@ -4010,6 +4024,10 @@
   const checkoutForm = $('checkoutForm');
   const cartTitle = $('cartTitle');
 
+  // Le select ville change → on rafraichit le recap (livraison + frais paiement)
+  const _coCityEl = document.getElementById('co-city');
+  if (_coCityEl) _coCityEl.addEventListener('change', renderCheckoutSummary);
+
   function saveCart() {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
     renderCart();
@@ -4102,10 +4120,25 @@
     // comme idempotency key par le backend pour bloquer les doublons.
     // Reset à chaque re-ouverture pour permettre une nouvelle commande.
     _checkoutSessionId = 'req-' + Date.now() + '-' + Math.random().toString(36).substring(2, 10);
-    // Build summary
+    renderCheckoutSummary();
+  }
+  function renderCheckoutSummary() {
     const subtotal = getSubtotal();
+    // Frais de traitement paiement en ligne (repercuts sur le total client
+    // pour que Jacob's Bio recoive bien le sous-total + livraison nets).
+    // Calcul base sur sous-total + livraison estimee (Bouake par defaut ici,
+    // la vraie livraison est prise en compte a l'envoi de la commande).
+    const cityInput = document.getElementById('co-city');
+    const city = cityInput ? cityInput.value : 'Bouaké';
+    const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (SHIPPING[city] || SHIPPING['Bouaké']);
+    const fees = computeGeniusFees(subtotal + shipping);
+    const totalDu = subtotal + shipping + fees;
+
     let lines = cart.map(i => `<div class="checkout-summary-row"><span>${i.name} ×${i.qty}</span><span>${fmtPrice(i.price * i.qty)}</span></div>`);
     lines.push(`<div class="checkout-summary-row total"><span>Sous-total</span><span>${fmtPrice(subtotal)}</span></div>`);
+    lines.push(`<div class="checkout-summary-row"><span>Livraison ${city}</span><span>${shipping === 0 ? 'OFFERTE' : fmtPrice(shipping)}</span></div>`);
+    lines.push(`<div class="checkout-summary-row" title="Frais de traitement paiement en ligne repercutes sur le total (Wave, Orange Money, carte bancaire...)"><span>Frais de traitement paiement</span><span>${fmtPrice(fees)}</span></div>`);
+    lines.push(`<div class="checkout-summary-row total" style="border-top:1px solid var(--border);padding-top:8px;margin-top:6px;font-weight:600;"><span>Total à payer</span><span>${fmtPrice(totalDu)}</span></div>`);
     if (subtotal < FREE_SHIPPING_THRESHOLD) {
       lines.push(`<div class="checkout-summary-row" style="font-size:11px;color:var(--gold-deep);margin-top:6px;">+${fmtPrice(FREE_SHIPPING_THRESHOLD - subtotal)} pour la livraison offerte</div>`);
     } else {
@@ -4591,7 +4624,10 @@
 
     const subtotal = getSubtotal();
     const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (SHIPPING[city] || 0);
-    const total = subtotal + shipping;
+    // Frais GeniusPay repercutes sur le total client (voir computeGeniusFees).
+    // Jacob's Bio recoit ainsi le subtotal + shipping nets apres prelevement.
+    const fees = computeGeniusFees(subtotal + shipping);
+    const total = subtotal + shipping + fees;
 
     // ───── 1. Envoi au CRM (Google Sheet + email auto) ─────
     let orderId = '';
@@ -4603,7 +4639,7 @@
         clientRequestId: _checkoutSessionId,
         name, phone, email, city, address, notes,
         items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price, cat: i.cat })),
-        subtotal, shipping, total,
+        subtotal, shipping, fees, total,
         payment: paymentMode === 'online' ? 'GeniusPay (en ligne)' : 'Mobile Money (à confirmer WhatsApp)',
         paymentMode,
         source: 'Site vitrine'
@@ -4649,6 +4685,7 @@
     lines.push('', '═══ TOTAL ═══');
     lines.push(`Sous-total : ${fmtPrice(subtotal)}`);
     lines.push(`Livraison ${city} : ${shipping === 0 ? 'OFFERTE' : fmtPrice(shipping)}`);
+    if (fees > 0) lines.push(`Frais paiement en ligne : ${fmtPrice(fees)}`);
     lines.push(`Total à régler : ${fmtPrice(total)}`);
     lines.push('', '═══ MES COORDONNÉES ═══');
     lines.push(`Nom : ${name}`);
