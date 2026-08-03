@@ -3416,8 +3416,12 @@
         <div class="checkout-form-group">
           <label for="co-city">Ville de livraison *</label>
           <select id="co-city" required>
-            <option value="">— Choisir une ville —</option>
-            <option value="Bouaké">Bouaké · dès 700 FCFA · 24h</option>
+            <option value="">— Choisir une zone —</option>
+            <optgroup label="Bouaké">
+              <option value="Bouaké centre">Bouaké centre · 700 FCFA · 24h — Commerce, N'Gattakro, Ahougnanssou…</option>
+              <option value="Bouaké extension">Bouaké extension · 1 000 FCFA · 24h — Kennedy, Air France 3, Soukoura…</option>
+              <option value="Bouaké alentours">Bouaké alentours · 1 500 FCFA · 48h — Béoumi, Botro, Diabo…</option>
+            </optgroup>
             <option value="Yamoussoukro">Yamoussoukro · 1 500 FCFA · 24 à 72h</option>
             <option value="Abidjan">Abidjan · 2 500 FCFA · 24 à 72h</option>
             <option value="Autre">Autre ville en CI · dès 2 500 FCFA · 24 à 72h</option>
@@ -3770,7 +3774,14 @@
 
   /* ═══════════════ PANIER ═══════════════ */
   const CART_KEY = 'jacobsbio_cart_v1';
-  const SHIPPING = { 'Bouaké': 700, 'Yamoussoukro': 1500, 'Abidjan': 2500, 'Autre': 2500 };
+  const SHIPPING = {
+    'Bouaké centre': 700,
+    'Bouaké extension': 1000,
+    'Bouaké alentours': 1500,
+    'Yamoussoukro': 1500,
+    'Abidjan': 2500,
+    'Autre': 2500
+  };
   const FREE_SHIPPING_THRESHOLD = 20000;
   // Frais de traitement GeniusPay repercutes sur la cliente (defaut 7%, safe
   // margin par rapport aux ~6.2% observes). Modifiable via Sheet Config
