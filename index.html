@@ -3555,6 +3555,34 @@
             <span class="promo-product-new">9 000 FCFA</span>
           </span>
         </div>
+        <div class="promo-product-item">
+          <span class="promo-product-name">Mini Kit Botchor</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">12 000 FCFA</span>
+            <span class="promo-product-new">9 500 FCFA</span>
+          </span>
+        </div>
+        <div class="promo-product-item">
+          <span class="promo-product-name">Kit Botchor Moyen</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">17 000 FCFA</span>
+            <span class="promo-product-new">14 000 FCFA</span>
+          </span>
+        </div>
+        <div class="promo-product-item">
+          <span class="promo-product-name">Kit Botchor Premium</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">21 000 FCFA</span>
+            <span class="promo-product-new">16 000 FCFA</span>
+          </span>
+        </div>
+        <div class="promo-product-item">
+          <span class="promo-product-name">Kit Raffermissant</span>
+          <span class="promo-product-prices">
+            <span class="promo-product-old">11 500 FCFA</span>
+            <span class="promo-product-new">7 000 FCFA</span>
+          </span>
+        </div>
       </div>
       <p class="promo-dates">Valable du <strong>4 juillet</strong> au <strong>11 juillet 2026</strong></p>
     </div>
@@ -3929,7 +3957,12 @@
       { id: 'creme-vitesse-150', priceKey: 'promo_creme_150_prix', barrKey: 'promo_creme_150_prix_barre', defaultPrice: 6000  },
       // Suppositoires (promo -10% typique — nouveaux keys)
       { id: 'suppo-150',         priceKey: 'promo_suppo_150_prix', barrKey: 'promo_suppo_150_prix_barre', defaultPrice: 5000  },
-      { id: 'suppo-250',         priceKey: 'promo_suppo_250_prix', barrKey: 'promo_suppo_250_prix_barre', defaultPrice: 10000 }
+      { id: 'suppo-250',         priceKey: 'promo_suppo_250_prix', barrKey: 'promo_suppo_250_prix_barre', defaultPrice: 10000 },
+      // Kits en promo temporaire jusqu'au 7 août 2026 (prix hardcodés — a retirer apres)
+      { id: 'mini-kit-botchor',    defaultPrice: 12000, promoHardcoded: 9500  },
+      { id: 'kit-botchor-moyen',   defaultPrice: 17000, promoHardcoded: 14000 },
+      { id: 'kit-botchor-premium', defaultPrice: 21000, promoHardcoded: 16000 },
+      { id: 'kit-raffermissant',   defaultPrice: 11500, promoHardcoded: 7000  }
     ];
     items.forEach(c => {
       const card = document.querySelector('.prod-card[data-id="' + c.id + '"]');
@@ -3937,7 +3970,7 @@
       const priceEl = card.querySelector('.prod-price');
       const img = card.querySelector('.prod-img');
       const oldBadge = card.querySelector('.prod-badge.promo-50');
-      const promoPrice = Number(config[c.priceKey]) || 0;
+      const promoPrice = Number(config[c.priceKey]) || c.promoHardcoded || 0;
       const barrPrice  = Number(config[c.barrKey])  || c.defaultPrice;
       // Si aucun prix promo n'est renseigné pour ce produit, on ne touche pas à sa carte
       // (permet une promo qui ne cible qu'une partie des produits ci-dessus).
