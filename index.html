@@ -3921,7 +3921,7 @@
 
   // Applique la config aux cartes crèmes ET suppos (prix + classe on-promo + badge %)
   function applyCremePricesFromConfig(config) {
-    if (!config) return; // Silence, HTML par défaut
+    if (!config) config = { promo_mode: 'off' }; // Fallback : promo off si config non chargée
     const promoOn = _isPromoActive(config);
     const items = [
       // Crèmes (promo -50% typique)
