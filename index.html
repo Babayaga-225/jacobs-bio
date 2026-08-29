@@ -3839,7 +3839,7 @@
   window.__siteConfigPromise = (async () => {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500);
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
       const r = await fetch(CRM_API_URL + '?action=siteConfig', { signal: controller.signal, cache: 'no-cache' });
       clearTimeout(timeoutId);
       const d = await r.json();
@@ -3921,7 +3921,15 @@
 
   // Applique la config aux cartes crèmes ET suppos (prix + classe on-promo + badge %)
   function applyCremePricesFromConfig(config) {
-    if (!config) config = { promo_mode: 'off' }; // Fallback : promo off si config non chargée
+    // PATCH 25/08/2026 — ne PAS éteindre la promo si la config n'est pas chargée.
+    // Le HTML statique reflète l'état voulu (promo hardcodée si active).
+    // On attend d'avoir la vraie config avant de modifier l'état visuel,
+    // sinon le client voit un flash apparition/disparition de la promo
+    // à chaque refresh selon la vitesse du réseau.
+    if (!config) {
+      console.log('[promo] config non chargée — état HTML statique conservé');
+      return;
+    }
     const promoOn = _isPromoActive(config);
     const items = [
       // Crèmes (promo -50% typique)
