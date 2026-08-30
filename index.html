@@ -4283,30 +4283,28 @@
     const popup = document.getElementById('promoPopup');
     if (!overlay || !popup) return;
 
-    // Le popup n'est affiché QUE si :
-    //  1. La config est chargée et la promo est considérée active (mode auto/on
-    //     + fenêtre de dates OK, cf. _isPromoActive)
-    //  2. La cliente ne l'a pas déjà vu dans cette session
-    // La clé sessionStorage inclut le titre du popup pour qu'un nouveau
-    // titre (nouvelle campagne) le ré-affiche.
-    (window.__siteConfigPromise || Promise.resolve(null)).then(config => {
+    const POPUP_DELAY_MS = 1500; // délai UX après config disponible
+    let _shown = false;          // évite double affichage cache + fetch
+
+    function showPopup(config) {
+      if (_shown) return;
       if (!config || !_isPromoActive(config)) return;
 
       const PROMO_KEY = 'jbc_promo_' + btoa(String(config.promo_titre || 'default')).slice(0, 16);
       if (sessionStorage.getItem(PROMO_KEY)) return;
+      _shown = true;
 
       const closeBtn = document.getElementById('promoClose');
       const declineBtn = document.getElementById('promoDecline');
       const ctaBtn = document.getElementById('promoCta');
 
-      // Affiche après 2 secondes (le temps de voir le hero)
       setTimeout(() => {
         overlay.classList.add('open');
         popup.classList.add('open');
         overlay.setAttribute('aria-hidden', 'false');
         popup.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-      }, 2000);
+      }, POPUP_DELAY_MS);
 
       function closePromo(source) {
         overlay.classList.remove('open');
@@ -4324,6 +4322,18 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && popup.classList.contains('open')) closePromo('esc');
       });
+    }
+
+    // 1. Chemin rapide : cache localStorage disponible → affichage en ~1.5s (même sur 3G)
+    const cached = window.__cachedSiteConfig;
+    if (cached && _isPromoActive(cached)) {
+      showPopup(cached);
+      return;
+    }
+
+    // 2. 1re visite (cache vide) : attendre le fetch réseau puis afficher
+    (window.__siteConfigPromise || Promise.resolve(null)).then(config => {
+      showPopup(config);
     });
   })();
 
