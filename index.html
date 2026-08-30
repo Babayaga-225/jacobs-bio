@@ -2265,10 +2265,10 @@
   @keyframes promoBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   .promo-title {
     font-family: var(--display);
-    font-size: clamp(44px, 6.5vw, 64px);
+    font-size: clamp(26px, 3.6vw, 38px);
     font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
     color: var(--text);
     margin-bottom: 10px;
   }
@@ -2365,7 +2365,7 @@
     .promo-header { padding: 32px 24px 16px; }
     .promo-body { padding: 0 24px 22px; }
     .promo-actions { padding: 0 24px 30px; }
-    .promo-title { font-size: 32px; }
+    .promo-title { font-size: 24px; }
     .promo-products { padding: 16px; }
   }
 
@@ -3987,9 +3987,11 @@
     if (!config || !_isPromoActive(config)) return;
     const titleEl = document.getElementById('promoTitle');
     if (titleEl && config.promo_titre) {
-      const m = String(config.promo_titre).match(/^(-?\d+%?)\s*(.*)$/);
-      if (m) titleEl.innerHTML = '<strong>' + m[1] + '</strong> ' + m[2];
-      else titleEl.textContent = config.promo_titre;
+      // Sécurité XSS d'abord (le titre vient de l'admin, mais on ne prend pas de risque),
+      // puis on met en rouge tous les pourcentages : -50%, 45%, -30%, etc.
+      const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+      const html = esc(String(config.promo_titre)).replace(/(-?\d+\s?%)/g, '<strong>$1</strong>');
+      titleEl.innerHTML = html;
     }
     const subEl = document.querySelector('.promo-sub');
     if (subEl && config.promo_sous_titre) subEl.textContent = config.promo_sous_titre;
